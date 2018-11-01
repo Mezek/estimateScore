@@ -1,12 +1,17 @@
- <!DOCTYPE html>
-<html lang="en-US">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
 <body>
-
-<div ng-app="">
-  <p>Name : <input type="text" ng-model="name"></p>
-  <h1>Hello {{name}}</h1>
-</div>
-
+	<div ng-app="">
+		<p>Name : <input type="text" ng-model="name"></p>
+		<h1>Hello {{name}}</h1>
+		{{ content }}
+	</div>
 </body>
 </html> 
