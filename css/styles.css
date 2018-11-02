@@ -1,6 +1,7 @@
 #main-container {
 	margin: 0 auto;
 	width: 1024px;
+	min-height: 300px;
 }
 
 p {
