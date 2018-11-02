@@ -9,13 +9,15 @@ description: ToDo
 	</div>
 	<div id="test">
 		<h2>Test</h2>
-		<div class="well">
-			<h2 translate="TITLE">Hello</h2>
-			<p translate="FOO">This is a paragraph</p>
-		</div>
-		<div ng-controller="Ctrl">
-			<button class="btn" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope">english</button>
-			<button class="btn" ng-click="changeLanguage('de')" translate="BUTTON_LANG_DE" class="ng-scope">german</button>
+		<div class="span4">
+			<div class="well">
+				<h2 translate="TITLE">Hello</h2>
+				<p translate="FOO">This is a paragraph</p>
+			</div>
+			<div ng-controller="Ctrl">
+				<button class="btn" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope">english</button>
+				<button class="btn" ng-click="changeLanguage('de')" translate="BUTTON_LANG_DE" class="ng-scope">german</button>
+			</div>
 		</div>
 	</div>	
 </div>
