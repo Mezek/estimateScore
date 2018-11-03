@@ -38,6 +38,28 @@ h2, h1 {
   min-height: 300px;
 }
 
+.panel-heading {
+	padding: 4px;
+}
+
+.tablecontainer table td, .tablecontainer table th {
+	padding: 2px;
+}
+
+.tablecontainer .btn {
+	padding: 2px 5px;
+}
+
+.tablecontainer tr.team-unset {
+	background-color: white;
+	font-weight: normal;
+}
+
+.tablecontainer tr.team-set, .testClass {
+	background-color: #ccc;
+	font-weight: bold;
+}
+
 .footer {
   text-align: center;
   border-top: 1px solid rgb(212, 212, 212);

@@ -24,6 +24,14 @@ app.controller('Ctrl', function ($scope, $translate) {
 	};
 });
 
+app.controller('Click', function($scope) {
+	$scope.class_status = 0;
+	$scope.setClass = function() {
+		$scope.class_status = !$scope.class_status;
+		$scope.single_message = "Class is toggle";
+	};
+});	
+
 app.controller('TableController', ['$scope', function($scope) {
 	var self = this;
 	self.user={id:null,username:'',address:'',email:''};
@@ -47,7 +55,34 @@ app.controller('TableController', ['$scope', function($scope) {
 		{tid:7, club: 'FK Senica', z: '9', v: '2', r: '0', p: '7', sda: '6', sdo: '60'},
 		{tid:8, club: 'NMŠK 1922 Bratislava', z: '9', v: '0', r: '0', p: '9', sda: '0', sdo: '69'},
 	];
-	 
+	
+	self.setNotWorking = function(tID) {
+		for(var i = 0; i < self.teams.length; i++){
+			if (self.teams[i].tid === tID)
+				alert(self.teams[i].tid);
+				//self.team-set = "1";
+		}
+	};
+	
+	self.setN = function(tID) {
+		for(var i = 0; i < self.teams.length; i++){
+			if (self.teams[i].tid === tID)
+				alert(self.teams[i].tid);
+				//self.team-set = "1";
+		}
+	};
+	
+	self.selectedRow = null;
+	self.setHomeTeam = function(tID) {
+		self.selectedRow = tID - 1;
+	};
+	
+	self.unsetHomeTeam = function(tID) {
+		if (self.selectedRow === tID - 1)
+			self.selectedRow = null;
+	};
+	
+	
 	self.submit = function() {
 		if(self.user.id === null){
 			self.user.id = self.id++;

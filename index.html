@@ -28,16 +28,11 @@
 		</div>
 	</div>
 
-	<div class="container">
-		<div id="test" class="row">
+	<div class="container" >
+		<div id="test" class="row" ng-controller="Click">
 			<div class="col-sm-6">
-				<h2>Test</h2>
-				<div class="span4">
-					<div>
-						<h2 translate="TITLE">Hello</h2>
-						<p translate="FOO">This is a paragraph</p>
-					</div>
-				</div>
+				<div class="alert" ng-class="{'testClass':class_status }">{{single_message}}</div>
+					<a class="btn btn-info" ng-click="setClass()">Click Class</a>
 			</div>
 			<div class="col-sm-6">
 			</div>
@@ -48,7 +43,7 @@
 				<div ng-controller="TableController as Tbl">
 					<h3>Subheader</h3>
 					<div class="panel panel-default">
-						<div class="panel-heading"><span class="lead">List of Users </span></div>
+						<div class="panel-heading"><span class="lead">WU15</span></div>
 						<div class="tablecontainer">
 							<table class="table table-condensed table-hover">
 								<thead>
@@ -62,11 +57,11 @@
 										<th>F:A</th><!-- For --> <!-- Against -->
 										<th>GD</th><!-- Goal Difference --> 
 										<th>P</th><!-- Points -->
-										<th width="250">
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="u in Tbl.teams">
+									<tr ng-repeat="u in Tbl.teams" ng-class="{'team-set': $index == Tbl.selectedRow}">
 										<td><span ng-bind="u.tid"></span></td>
 										<td><span ng-bind="u.club"></span></td>
 										<td><span ng-bind="u.z"></span></td>
@@ -77,8 +72,8 @@
 										<td>{{ u.sda - u.sdo }}</td>
 										<td>{{ u.v * 3 -- u.r }}</td>
 										<td>
-											<button type="button" ng-click="Tbl.edit(u.tid)" class="btn btn-success custom-width">Edit</button>
-											<button type="button" ng-click="Tbl.remove(u.tid)" class="btn btn-danger custom-width">Remove</button>
+											<button type="button" ng-click="Tbl.setHomeTeam(u.tid)" class="btn btn-success custom-width">Set</button>
+											<button type="button" ng-click="Tbl.unsetHomeTeam(u.tid)" class="btn btn-danger custom-width">Unset</button>
 										</td>
 									</tr>
 								</tbody>
@@ -106,7 +101,7 @@
 	
 	<div class="jumbotron text-center">
 		<div class="container">
-			<p>Footer</p>
+			<p>&copy; 2018</p>
 		</div>
 	</div>
 
