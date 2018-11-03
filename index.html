@@ -18,11 +18,13 @@
 <body ng-app="estimate">
 			
 	<div class="jumbotron">
-		<h1>Estimate Score</h1>
-		<p translate="HEADER_DESCRIPTION">Developing version</p>
-		<div ng-controller="Ctrl" class="float-right">
-			<button class="btn btn-primary" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope">english</button>
-			<button class="btn btn-primary" ng-click="changeLanguage('sk')" translate="BUTTON_LANG_SK" class="ng-scope">slovak</button>
+		<div class="container">
+			<h1>Estimate Score</h1>
+			<p translate="HEADER_DESCRIPTION">Developing version</p>
+			<div ng-controller="Ctrl" class="float-right">
+				<button class="btn btn-primary" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope">english</button>
+				<button class="btn btn-primary" ng-click="changeLanguage('sk')" translate="BUTTON_LANG_SK" class="ng-scope">slovak</button>
+			</div>
 		</div>
 	</div>
 
@@ -48,25 +50,35 @@
 					<div class="panel panel-default">
 						<div class="panel-heading"><span class="lead">List of Users </span></div>
 						<div class="tablecontainer">
-							<table class="table table-hover">
+							<table class="table table-condensed table-hover">
 								<thead>
 									<tr>
-										<th>ID.</th>
-										<th>Name</th>
-										<th>Address</th>
-										<th>Email</th>
-										<th width="100">
+										<th>P</th>
+										<th>Team</th>
+										<th>GP</th><!-- Played -->
+										<th>W</th><!-- Won -->
+										<th>D</th><!-- Drawn -->
+										<th>L</th><!-- Lost -->
+										<th>F:A</th><!-- For --> <!-- Against -->
+										<th>GD</th><!-- Goal Difference --> 
+										<th>P</th><!-- Points -->
+										<th width="250">
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="u in Tbl.users">
-										<td><span ng-bind="u.id"></span></td>
-										<td><span ng-bind="u.username"></span></td>
-										<td><span ng-bind="u.address"></span></td>
-										<td><span ng-bind="u.email"></span></td>
+									<tr ng-repeat="u in Tbl.teams">
+										<td><span ng-bind="u.tid"></span></td>
+										<td><span ng-bind="u.club"></span></td>
+										<td><span ng-bind="u.z"></span></td>
+										<td><span ng-bind="u.v"></span></td>
+										<td><span ng-bind="u.r"></span></td>
+										<td><span ng-bind="u.p"></span></td>
+										<td>{{ u.sda }} : {{ u.sdo }}</td>
+										<td>{{ u.sda - u.sdo }}</td>
+										<td>{{ u.v * 3 -- u.r }}</td>
 										<td>
-											<button type="button" ng-click="Tbl.edit(u.id)" class="btn btn-success custom-width">Edit</button>
-											<button type="button" ng-click="Tbl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
+											<button type="button" ng-click="Tbl.edit(u.tid)" class="btn btn-success custom-width">Edit</button>
+											<button type="button" ng-click="Tbl.remove(u.tid)" class="btn btn-danger custom-width">Remove</button>
 										</td>
 									</tr>
 								</tbody>
@@ -76,10 +88,26 @@
 				</div>
 			</div>
 		</div>
+		
+		<div id="test" class="row">
+			<div class="col-sm-6">
+				<h2>Test</h2>
+				<div class="span4">
+					<div>
+						<h2 translate="TITLE">Hello</h2>
+						<p translate="FOO">This is a paragraph</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+			</div>
+		</div>
 	</div>
 	
 	<div class="jumbotron text-center">
-		<p>Footer</p>
+		<div class="container">
+			<p>Footer</p>
+		</div>
 	</div>
 
 </body>
