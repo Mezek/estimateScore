@@ -3,15 +3,17 @@ var app = angular.module('estimate', ['pascalprecht.translate']);
 app.config(function ($translateProvider) {
 	$translateProvider.translations('en', {
 		TITLE: 'Hello',
+		HEADER_DESCRIPTION: 'Developing version',
 		FOO: 'This is a paragraph.',
 		BUTTON_LANG_EN: 'english',
-		BUTTON_LANG_DE: 'german'
+		BUTTON_LANG_SK: 'slovak'
 	});
-	$translateProvider.translations('de', {
-		TITLE: 'Hallo',
-		FOO: 'Dies ist ein Paragraph.',
-		BUTTON_LANG_EN: 'englisch',
-		BUTTON_LANG_DE: 'deutsch'
+	$translateProvider.translations('sk', {
+		TITLE: 'Ahoj',
+		HEADER_DESCRIPTION: 'Pracovná verzia',
+		FOO: 'Toto je paragraf.',
+		BUTTON_LANG_EN: 'anglicky',
+		BUTTON_LANG_SK: 'slovensky'
 	});
   $translateProvider.preferredLanguage('en');
 });

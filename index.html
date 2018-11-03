@@ -2,42 +2,47 @@
 <html lang="en-US">
 
 <head>
-	<meta charset='utf-8'>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Estimate Score</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.6.1/angular-translate.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<script src="scripts/estimate.js"></script>
-	
-	<!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
-	<div id="main-container">
-
-		<div ng-app="estimate">
+<body ng-app="estimate">
 			
-			<div id="header">
-				<h1>Estimate Score</h1>
-			</div>
+	<div class="jumbotron">
+		<h1>Estimate Score</h1>
+		<p translate="HEADER_DESCRIPTION">Developing version</p>
+		<div ng-controller="Ctrl" class="float-right">
+			<button class="btn btn-primary" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope">english</button>
+			<button class="btn btn-primary" ng-click="changeLanguage('sk')" translate="BUTTON_LANG_SK" class="ng-scope">slovak</button>
+		</div>
+	</div>
 
-			<div id="test">
+	<div class="container">
+		<div id="test" class="row">
+			<div class="col-sm-6">
 				<h2>Test</h2>
 				<div class="span4">
-					<div class="well">
+					<div>
 						<h2 translate="TITLE">Hello</h2>
 						<p translate="FOO">This is a paragraph</p>
 					</div>
-					<div ng-controller="Ctrl">
-						<button class="btn btn-primary" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope">english</button>
-						<button class="btn btn-primary" ng-click="changeLanguage('de')" translate="BUTTON_LANG_DE" class="ng-scope">german</button>
-					</div>
 				</div>
 			</div>
+			<div class="col-sm-6">
+			</div>
+		</div>
 
-			<div id="scoreTable">
+		<div id="scoreTable" class="row">
+			<div class="col">
 				<div ng-controller="TableController as Tbl">
 					<h3>Subheader</h3>
 					<div class="panel panel-default">
@@ -70,11 +75,12 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
-
 	</div>
+	
+	<div class="jumbotron text-center">
+		<p>Footer</p>
+	</div>
+
 </body>
 </html> 
-
----
