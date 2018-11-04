@@ -34,12 +34,10 @@ app.controller('Click', function ($scope, $http) {
 	$scope.tnames = [];
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
-			//$scope.jnames = jsonData.data.teams;
-			$scope.jnames = JSON.stringify(jsonData.data.teams); //JSON.stringify($scope.jnames);
-			
-			var tlenght = jsonData.data.teams.length;
-			for(var i = 0; i < tlenght; i++){
-				$scope.tnames.push(jsonData.data.teams[i].name);
+			//$scope.jnames = JSON.stringify(jsonData.data.teams);
+			var jd = jsonData.data.teams;
+			for(var i = 0; i < jd.length; i++){
+				$scope.tnames.push(jd[i].name);
 			}
 		}, function (data) {
 			console.log("There was an error");
