@@ -24,19 +24,34 @@ app.controller('Ctrl', function ($scope, $translate) {
 	};
 });
 
-app.controller('Click', function($scope) {
+app.controller('Click', function ($scope, $http) {
 	$scope.class_status = 0;
 	$scope.setClass = function() {
 		$scope.class_status = !$scope.class_status;
 		$scope.single_message = "Class is toggle";
 	};
+	
+	$scope.tnames = [];
+	$http.get("scripts/results.json")
+		.then(function (jsonData) {
+			//$scope.jnames = jsonData.data.teams;
+			$scope.jnames = JSON.stringify(jsonData.data.teams); //JSON.stringify($scope.jnames);
+			
+			var tlenght = jsonData.data.teams.length;
+			for(var i = 0; i < tlenght; i++){
+				$scope.tnames.push(jsonData.data.teams[i].name);
+			}
+		}, function (data) {
+			console.log("There was an error");
+		});
 });	
 
 app.controller('TableController', ['$scope', function($scope) {
 	var self = this;
+	
 	self.user={id:null,username:'',address:'',email:''};
 	self.id = 4;
-	self.team={tid:null,club:'',z:'',v:'',r:'',p:'',sda:'',sdo:''};
+	self.scoreRow={tid:null,club:'',z:'',v:'',r:'',p:'',sda:'',sdo:''};
 	self.tid = 9;
 	 
 	self.users = [// In future posts, we will get it from server using service
@@ -45,7 +60,7 @@ app.controller('TableController', ['$scope', function($scope) {
 			{id:3, username: 'kelly', address: 'NEBRASKA', email: 'kelly@abc.com'}
 	];
 	
-	self.teams = [
+	self.scoreData = [
 		{tid:1, club: 'ŠK Slovan Bratislava futbal', z: '9', v: '9', r: '0', p: '0', sda: '84', sdo: '7'},
 		{tid:2, club: 'FC Union Nové Zámky', z: '9', v: '7', r: '1', p: '1', sda: '64', sdo: '8'},
 		{tid:3, club: 'Spartak Myjava', z: '9', v: '6', r: '1', p: '2', sda: '40', sdo: '11'},
@@ -57,17 +72,17 @@ app.controller('TableController', ['$scope', function($scope) {
 	];
 	
 	self.setNotWorking = function(tID) {
-		for(var i = 0; i < self.teams.length; i++){
-			if (self.teams[i].tid === tID)
-				alert(self.teams[i].tid);
+		for(var i = 0; i < self.scoreData.length; i++){
+			if (self.scoreData[i].tid === tID)
+				alert(self.scoreData[i].tid);
 				//self.team-set = "1";
 		}
 	};
 	
 	self.setN = function(tID) {
-		for(var i = 0; i < self.teams.length; i++){
-			if (self.teams[i].tid === tID)
-				alert(self.teams[i].tid);
+		for(var i = 0; i < self.scoreData.length; i++){
+			if (self.scoreData[i].tid === tID)
+				alert(self.scoreData[i].tid);
 				//self.team-set = "1";
 		}
 	};

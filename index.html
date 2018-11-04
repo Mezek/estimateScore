@@ -35,6 +35,8 @@
 					<a class="btn btn-info" ng-click="setClass()">Click Class</a>
 			</div>
 			<div class="col-sm-6">
+				{{ jnames }} </br>
+				{{ tnames }}
 			</div>
 		</div>
 
@@ -61,7 +63,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="u in Tbl.teams" ng-class="{'team-set': $index == Tbl.selectedRow}">
+									<tr ng-repeat="u in Tbl.scoreData" ng-class="{'team-set': $index == Tbl.selectedRow}">
 										<td><span ng-bind="u.tid"></span></td>
 										<td><span ng-bind="u.club"></span></td>
 										<td><span ng-bind="u.z"></span></td>
