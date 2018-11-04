@@ -1,30 +1,43 @@
 {
-    "cars": {
-        "Nissan": [
-            {"model":"Sentra", "doors":4},
-            {"model":"Maxima", "doors":4},
-            {"model":"Skyline", "doors":2}
-        ],
-        "Ford": [
-            {"model":"Taurus", "doors":4},
-            {"model":"Escort", "doors":4}
-        ]
-    },
-	
 	"teams": [{
 			"id": 1,
-			"name": "X",
-			"nick": "xx"
+			"name": "ŠK Slovan Bratislava futbal",
+			"city": "Bratislava"
 		},
 		{
 			"id": 2,
-			"name": "Y",
-			"nick": "yy"
+			"name": "FC Union Nové Zámky",
+			"city": "Nové Zámky"
 		},
 		{
 			"id": 3,
-			"name": "Z",
-			"nick": "zz"
+			"name": "Spartak Myjava",
+			"city": "Myjava"
+		},
+		{
+			"id": 4,
+			"name": "FC Spartak Trnava",
+			"city": "Trnava"
+		},
+		{
+			"id": 5,
+			"name": "FC Nitra",
+			"city": "Nitra"
+		},
+		{
+			"id": 6,
+			"name": "FK DAC 1904 Dunajská Streda",
+			"city": "Dunajská Streda"
+		},
+		{
+			"id": 7,
+			"name": "FK Senica",
+			"city": "Senica"
+		},
+		{
+			"id": 8,
+			"name": "NMŠK 1922 Bratislava",
+			"city": "Bratislavas"
 		}
 	],
 

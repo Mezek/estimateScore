@@ -1,4 +1,4 @@
-var app = angular.module('estimate', ['pascalprecht.translate']);
+var app = angular.module('estimate', ['pascalprecht.translate', 'ngRoute']);
 
 app.config(function ($translateProvider) {
 	$translateProvider.translations('en', {
@@ -16,6 +16,26 @@ app.config(function ($translateProvider) {
 		BUTTON_LANG_SK: 'slovensky'
 	});
   $translateProvider.preferredLanguage('en');
+});
+
+app.config(function($routeProvider) {
+    $routeProvider
+    .when('/', {
+        templateUrl : 'pages/main.html',
+		controller  : 'mainCtrl'
+    })
+    .when('/next', {
+        templateUrl : 'pages/next.html',
+        controller  : 'nextCtrl'
+    });
+});
+
+app.controller('mainCtrl', function ($scope) {
+    $scope.msg = 'Main Tab message';
+});
+
+app.controller('nextCtrl', function ($scope) {
+    $scope.msg = 'Next Tab message';
 });
 
 app.controller('Ctrl', function ($scope, $translate) {

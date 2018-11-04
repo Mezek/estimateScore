@@ -6,6 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.6.1/angular-translate.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -27,20 +28,16 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="container" >
-		<div id="test" class="row" ng-controller="Click">
-			<div class="col-sm-6">
-				<div class="alert" ng-class="{'testClass':class_status }">{{single_message}}</div>
-					<a class="btn btn-info" ng-click="setClass()">Click Class</a>
-			</div>
-			<div class="col-sm-6">
-				<ul>
-					<li ng-repeat="x in tnames">{{ x }}</li>
-				</ul>
-			</div>
+	
+	<div class="container">
+		<div id="possible-navigator">
+			<a href="#/!">Main</a>
+			<a href="#!next">Next</a>
 		</div>
 
+		<!-- insert subpages -->
+		<div ng-view></div>
+		
 		<div id="scoreTable" class="row">
 			<div class="col">
 				<div ng-controller="TableController as Tbl">
