@@ -77,6 +77,11 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 		}, function (data) {
 			console.log("There was an error");
 		});
+	self tableData = {};
+	// for loop with:
+	//for (var i = 0; i < 100; i++) {
+	//  tableData[x] = {name: etc, surname: atd};
+}
 	
 });
 
