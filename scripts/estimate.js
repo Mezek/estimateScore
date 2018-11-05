@@ -52,10 +52,11 @@ app.controller('Click', function ($scope, $http) {
 	};
 	
 	$scope.tnames = [];
+	$scope.jd = [];
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			//$scope.jnames = JSON.stringify(jsonData.data.teams);
-			var jd = jsonData.data.teams;
+			jd = jsonData.data.teams;
 			for(var i = 0; i < jd.length; i++){
 				$scope.tnames.push(jd[i].name);
 			}
@@ -68,21 +69,21 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 	var self = this;
 
 	self.tName = [];
+	self.jdTeams = [];
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
-			var jd = jsonData.data.teams;
-			for(var i = 0; i < jd.length; i++){
-				self.tName.push(jd[i].name);
-			}
+			self.jdTeams = jsonData.data.teams;
+			self.jdMtchs = jsonData.data.matches;
 		}, function (data) {
-			console.log("There was an error");
+			console.log("Error with reading of data file");
 		});
-	self tableData = {};
+	self.tableData = {};
 	// for loop with:
 	//for (var i = 0; i < 100; i++) {
 	//  tableData[x] = {name: etc, surname: atd};
-}
-	
+	for(var i = 0; i < 8; i++){
+		self.tName[i] = {a:1};
+	}
 });
 
 app.controller('tableCtrl', ['$scope', function($scope) {
