@@ -64,7 +64,23 @@ app.controller('Click', function ($scope, $http) {
 		});
 });	
 
-app.controller('TableController', ['$scope', function($scope) {
+app.controller('tableOrderCtrl', function($scope, $http) {
+	var self = this;
+
+	self.tName = [];
+	$http.get("scripts/results.json")
+		.then(function (jsonData) {
+			var jd = jsonData.data.teams;
+			for(var i = 0; i < jd.length; i++){
+				self.tName.push(jd[i].name);
+			}
+		}, function (data) {
+			console.log("There was an error");
+		});
+	
+});
+
+app.controller('tableCtrl', ['$scope', function($scope) {
 	var self = this;
 	
 	self.user={id:null,username:'',address:'',email:''};

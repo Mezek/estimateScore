@@ -37,21 +37,209 @@
 		{
 			"id": 8,
 			"name": "NMŠK 1922 Bratislava",
-			"city": "Bratislavas"
+			"city": "Bratislava"
 		}
 	],
 
-	"matches": [{
+	"scores": [{
 			"round": 1,
-			"teamD": 1,
-			"teamH": 2,
-			"score": [1, 3]
+			"match": [1, 4],
+			"score": [4, 0]
+		},
+		{
+			"round": 1,
+			"match": [2, 7],
+			"score": [23, 0]
+		},
+		{
+			"round": 1,
+			"match": [8, 3],
+			"score": [0, 8]
+		},
+		{
+			"round": 1,
+			"match": [6, 5],
+			"score": [4, 1]
 		},
 		{
 			"round": 2,
-			"teamD": 2,
-			"teamH": 1,
+			"match": [5, 2],
+			"score": [3, 4]
+		},
+		{
+			"round": 2,
+			"match": [8, 1],
+			"score": [0, 10]
+		},
+		{
+			"round": 2,
+			"match": [3, 6],
+			"score": [9, 1]
+		},
+		{
+			"round": 2,
+			"match": [7, 4],
+			"score": [0, 6]
+		},
+		{
+			"round": 3,
+			"match": [2, 3],
+			"score": [0, 0]
+		},
+		{
+			"round": 3,
+			"match": [6, 8],
+			"score": [10, 0]
+		},
+		{
+			"round": 3,
+			"match": [1, 7],
+			"score": [10, 1]
+		},
+		{
+			"round": 3,
+			"match": [4, 5],
+			"score": [5, 0]
+		},
+		{
+			"round": 4,
+			"match": [5, 7],
+			"score": [6, 0]
+		},
+		{
+			"round": 4,
+			"match": [8, 2],
+			"score": [0, 6]
+		},
+		{
+			"round": 4,
+			"match": [3, 4],
+			"score": [3, 0]
+		},
+		{
+			"round": 4,
+			"match": [6, 1],
+			"score": [0, 16]
+		},
+		{
+			"round": 5,
+			"match": [1, 5],
+			"score": [14, 4]
+		},
+		{
+			"round": 5,
+			"match": [2, 6],
+			"score": [15, 0]
+		},
+		{
+			"round": 5,
+			"match": [4, 8],
+			"score": [7, 0]
+		},
+		{
+			"round": 5,
+			"match": [7, 3],
+			"score": [0, 2]
+		},
+		{
+			"round": 6,
+			"match": [6, 4],
+			"score": [2, 2]
+		},
+		{
+			"round": 6,
+			"match": [7, 8],
+			"score": [2, 0]
+		},
+		{
+			"round": 6,
+			"match": [3, 5],
+			"score": [2, 3]
+		},
+		{
+			"round": 6,
+			"match": [8, 1],
+			"score": [0, 4]
+		},
+		{
+			"round": 7,
+			"match": [5, 8],
+			"score": [4, 0]
+		},
+		{
+			"round": 7,
+			"match": [4, 2],
+			"score": [0, 5]
+		},
+		{
+			"round": 7,
+			"match": [1, 3],
+			"score": [7, 0]
+		},
+		{
+			"round": 7,
+			"match": [7, 6],
 			"score": [3, 2]
+		},
+		{
+			"round": 8,
+			"match": [5, 6],
+			"score": [7, 1]
+		},
+		{
+			"round": 8,
+			"match": [7, 2],
+			"score": [0, 8]
+		},
+		{
+			"round": 8,
+			"match": [3, 8],
+			"score": [8, 0]
+		},
+		{
+			"round": 8,
+			"match": [4, 1],
+			"score": [2, 5]
+		},
+		{
+			"round": 9,
+			"match": [1, 8],
+			"score": [14, 0]
+		},
+		{
+			"round": 9,
+			"match": [6, 3],
+			"score": [0, 8]
+		},
+		{
+			"round": 9,
+			"match": [2, 5],
+			"score": [3, 1]
+		},
+		{
+			"round": 9,
+			"match": [4, 7],
+			"score": [3, 0]
+		},
+		{
+			"round": 10,
+			"match": [7, 1],
+			"score": [0, 11]
+		},
+		{
+			"round": 10,
+			"match": [5, 4],
+			"score": [2, 7]
+		},
+		{
+			"round": 10,
+			"match": [3, 2],
+			"score": [2, 2]
+		},
+		{
+			"round": 10,
+			"match": [8, 6],
+			"score": [0, 6]
 		}
 	],
 
