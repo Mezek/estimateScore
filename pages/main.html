@@ -6,9 +6,10 @@
 		{{msg}}
 	</div>
 	<div class="col-sm-6">
-		<ul>
-			<li ng-repeat="x in tnames">{{ x }}</li>
-		</ul>
+		<!-- content -->
+	</div>
+	<div class="col-sm-12">
+		<p>&nbsp;</p>		
 	</div>
 </div>
 
@@ -32,10 +33,11 @@
 								<th>GD</th><!-- Goal Difference --> 
 								<th>P</th><!-- Points -->
 								<th>+/-</th>
+								<th>Home team</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="row in Tbl.tableData"> <!-- | orderBy:'p':true">-->
+							<tr ng-repeat="row in Tbl.tableData" ng-class="{'team-set': $index == Tbl.selectedRow}"> <!-- | orderBy:'p':true">-->
 								<td>{{ $index+1 }}</td>
 								<td>{{row.club}}</td>
 								<td>{{row.gp}}</td>
@@ -46,23 +48,11 @@
 								<td>{{row.gd}}</td>
 								<td>{{row.p}}</td>
 								<td>{{row.pm}}</td>
-							</tr>
-
-<!--							<tr ng-repeat="u in Tbl.scoreData" ng-class="{'team-set': $index == Tbl.selectedRow}">
-								<td><span ng-bind="u.tid"></span></td>
-								<td><span ng-bind="u.club"></span></td>
-								<td><span ng-bind="u.z"></span></td>
-								<td><span ng-bind="u.v"></span></td>
-								<td><span ng-bind="u.r"></span></td>
-								<td><span ng-bind="u.p"></span></td>
-								<td>{{ u.sda }} : {{ u.sdo }}</td>
-								<td>{{ u.sda - u.sdo }}</td>
-								<td>{{ u.v * 3 -- u.r }}</td>
 								<td>
-									<button type="button" ng-click="Tbl.setHomeTeam(u.tid)" class="btn btn-success custom-width">Set</button>
-									<button type="button" ng-click="Tbl.unsetHomeTeam(u.tid)" class="btn btn-danger custom-width">Unset</button>
-								</td>
-							</tr> -->
+									<button type="button" ng-click="Tbl.setHomeTeam($index)" class="btn btn-success custom-width">Set</button>
+									<button type="button" ng-click="Tbl.unsetHomeTeam($index)" class="btn btn-danger custom-width">Unset</button>
+								</td>								
+							</tr>
 						</tbody>
 					</table>
 				</div>

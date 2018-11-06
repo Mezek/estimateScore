@@ -63,7 +63,15 @@ app.controller('Click', function ($scope, $http) {
 		}, function (data) {
 			console.log("There was an error");
 		});
-});	
+});
+
+function compare(a,b) {
+	if (a.p < b.p)
+		return +1;
+	if (a.p > b.p)
+		return -1;
+	return 0;
+};
 
 app.controller('tableOrderCtrl', function($scope, $http) {
 	var self = this;
@@ -146,17 +154,22 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 					w: nWin[i], d: nDrawn[i], l: nLost[i], f: nFor[i], a: nAst[i],
 					gd: nGD[i], p: nPts[i], pm: nPM[i]};
 			}
-			function compare(a,b) {
-				if (a.pm < b.pm)
-					return +1;
-				if (a.pm > b.pm)
-					return -1;
-				return 0;
-			}
+			// prepared for more sophisticated score sort
 			self.tableData.sort(compare);
+
+			self.selectedRow = null;
+			self.setHomeTeam = function(tID) {
+				self.selectedRow = tID;
+			};
+			
+			self.unsetHomeTeam = function(tID) {
+				if (self.selectedRow === tID)
+					self.selectedRow = null;
+			};
+
 		}, function (data) {
 			console.log("Error with reading of data file");
-		})
+		});
 });
 
 app.controller('tableCtrl', ['$scope', function($scope) {
@@ -183,14 +196,6 @@ app.controller('tableCtrl', ['$scope', function($scope) {
 		{tid:7, club: 'FK Senica', z: '10', v: '2', r: '0', p: '8', sda: '6', sdo: '71'},
 		{tid:8, club: 'NMŠK 1922 Bratislava', z: '10', v: '0', r: '0', p: '10', sda: '0', sdo: '75'},
 	];
-	
-	self.setNotWorking = function(tID) {
-		for(var i = 0; i < self.scoreData.length; i++){
-			if (self.scoreData[i].tid === tID)
-				alert(self.scoreData[i].tid);
-				//self.team-set = "1";
-		}
-	};
 	
 	self.setN = function(tID) {
 		for(var i = 0; i < self.scoreData.length; i++){
