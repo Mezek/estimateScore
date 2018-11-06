@@ -15,8 +15,9 @@
 <div id="scoreTable" class="row" ng-controller="tableOrderCtrl as Tbl">
 	<div class="col">
 		<div>
+			<h3>{{ Tbl.years }}</h3>
 			<div class="panel panel-default">
-				<div class="panel-heading"><span class="lead">WU15</span></div>
+				<div class="panel-heading"><span class="lead">{{ Tbl.category }}</span></div>
 				<div class="tablecontainer">
 					<table class="table table-condensed table-hover">
 						<thead>
@@ -34,14 +35,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="row in Tbl.tableData"">
-								<td>{{row.tid}}</td>
+							<tr ng-repeat="row in Tbl.tableData"> <!-- | orderBy:'p':true">-->
+								<td>{{ $index+1 }}</td>
 								<td>{{row.club}}</td>
 								<td>{{row.gp}}</td>
 								<td>{{row.w}}</td>
 								<td>{{row.d}}</td>
 								<td>{{row.l}}</td>
-								<td>{{row.f}}:{{row.a}}</td>
+								<td>{{row.f}} : {{row.a}}</td>
 								<td>{{row.gd}}</td>
 								<td>{{row.p}}</td>
 								<td>{{row.pm}}</td>

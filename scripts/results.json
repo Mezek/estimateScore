@@ -1,4 +1,7 @@
 {
+	"authors"  : "mezek",
+	"years"    : "2018/19",
+	"category" : "WU15",
 	"teams": [{
 			"id": 1,
 			"name": "ŠK Slovan Bratislava futbal",
@@ -241,7 +244,5 @@
 			"match": [8, 6],
 			"score": [0, 6]
 		}
-	],
-
-	"authors": "mezek"
+	]
 }

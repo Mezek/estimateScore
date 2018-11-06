@@ -70,9 +70,11 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 
 	self.tName = [];
 	self.jdTeams = [];
-    self.tableData = {};
+    self.tableData = [];
     $http.get("scripts/results.json")
 		.then(function (jsonData) {
+			self.category = jsonData.data.category;
+			self.years = jsonData.data.years;
 			self.jdTeams = jsonData.data.teams;
 			self.jdMtchs = jsonData.data.scores;
 			let nTeam = self.jdTeams.length;
@@ -132,11 +134,9 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 							nPM[i] += 0;
 						}
 					}
-
-					//if(self.jdMtchs[j].round === 1){
-					//	nRound++;
-					//}
 				}
+				if (nFor[i] < 10) nFor[i] = "\xa0\xa0" + nFor[i];
+				if (nAst[i] < 10) nAst[i] = "\xa0\xa0" + nAst[i];
 				nGD[i] = nFor[i] - nAst[i];
 				nPts[i] = 3*nWin[i] + nDrawn[i];
 			}
@@ -146,6 +146,14 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 					w: nWin[i], d: nDrawn[i], l: nLost[i], f: nFor[i], a: nAst[i],
 					gd: nGD[i], p: nPts[i], pm: nPM[i]};
 			}
+			function compare(a,b) {
+				if (a.pm < b.pm)
+					return +1;
+				if (a.pm > b.pm)
+					return -1;
+				return 0;
+			}
+			self.tableData.sort(compare);
 		}, function (data) {
 			console.log("Error with reading of data file");
 		})
