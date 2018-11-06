@@ -21,7 +21,7 @@
 					<table class="table table-condensed table-hover">
 						<thead>
 							<tr>
-								<th>P</th>
+								<th>N</th>
 								<th>Team</th>
 								<th>GP</th><!-- Played -->
 								<th>W</th><!-- Won -->
@@ -30,21 +30,21 @@
 								<th>F:A</th><!-- For --> <!-- Against -->
 								<th>GD</th><!-- Goal Difference --> 
 								<th>P</th><!-- Points -->
-								<th></th>
+								<th>+/-</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="row in Tbl.tName"">
-								<td>1</td>
-								<td>2</td>
-								<td>{{row.a}}</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+							<tr ng-repeat="row in Tbl.tableData"">
+								<td>{{row.tid}}</td>
+								<td>{{row.club}}</td>
+								<td>{{row.gp}}</td>
+								<td>{{row.w}}</td>
+								<td>{{row.d}}</td>
+								<td>{{row.l}}</td>
+								<td>{{row.f}}:{{row.a}}</td>
+								<td>{{row.gd}}</td>
+								<td>{{row.p}}</td>
+								<td>{{row.pm}}</td>
 							</tr>
 
 <!--							<tr ng-repeat="u in Tbl.scoreData" ng-class="{'team-set': $index == Tbl.selectedRow}">

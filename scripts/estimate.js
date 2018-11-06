@@ -70,20 +70,85 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 
 	self.tName = [];
 	self.jdTeams = [];
-	$http.get("scripts/results.json")
+    self.tableData = {};
+    $http.get("scripts/results.json")
 		.then(function (jsonData) {
 			self.jdTeams = jsonData.data.teams;
-			self.jdMtchs = jsonData.data.matches;
+			self.jdMtchs = jsonData.data.scores;
+			let nTeam = self.jdTeams.length;
+			let nRound = [];
+			let nWin = [];
+			let nLost = [];
+			let nDrawn = [];
+			let nFor = [];
+			let nAst = [];
+			let nGD = [];
+			let nPts = [];
+			let nPM = [];
+			for (let i = 0; i < nTeam; i++) {
+				nRound[i] = 0;
+				nWin[i] = 0;
+				nLost[i] = 0;
+				nDrawn[i] = 0;
+				nFor[i] = 0;
+				nAst[i] = 0;
+				nPM[i] = 0;
+				for (let j = 0; j < self.jdMtchs.length; j++) {
+					if (self.jdMtchs[j].match[0] === self.jdTeams[i].id) {
+						nRound[i] = nRound[i] + 1;
+						let doma = self.jdMtchs[j].score[0];
+						let host = self.jdMtchs[j].score[1];
+						nFor[i] += doma;
+						nAst[i] += host;
+						if ( doma > host ) {
+							nWin[i] = nWin[i] + 1;
+							nPM[i] += 0;
+						}
+						if ( doma === host ) {
+							nDrawn[i] = nDrawn[i] + 1;
+							nPM[i] -= 2;
+						}
+						if ( doma < host ) {
+							nLost[i] = nLost[i] + 1;
+							nPM[i] -= 3;
+						}
+					}
+					if (self.jdMtchs[j].match[1] === self.jdTeams[i].id) {
+						nRound[i] = nRound[i] + 1;
+						let doma = self.jdMtchs[j].score[1];
+						let host = self.jdMtchs[j].score[0];
+						nFor[i] += doma;
+						nAst[i] += host;
+						if ( doma > host ) {
+							nWin[i] = nWin[i] + 1;
+							nPM[i] += 3;
+						}
+						if ( doma === host ) {
+							nDrawn[i] = nDrawn[i] + 1;
+							nPM[i] += 1;
+						}
+						if ( doma < host ) {
+							nLost[i] = nLost[i] + 1;
+							nPM[i] += 0;
+						}
+					}
+
+					//if(self.jdMtchs[j].round === 1){
+					//	nRound++;
+					//}
+				}
+				nGD[i] = nFor[i] - nAst[i];
+				nPts[i] = 3*nWin[i] + nDrawn[i];
+			}
+
+			for (let i = 0; i < nTeam; i++) {
+				self.tableData[i] = {tid: self.jdTeams[i].id, club: self.jdTeams[i].name, gp: nRound[i],
+					w: nWin[i], d: nDrawn[i], l: nLost[i], f: nFor[i], a: nAst[i],
+					gd: nGD[i], p: nPts[i], pm: nPM[i]};
+			}
 		}, function (data) {
 			console.log("Error with reading of data file");
-		});
-	self.tableData = {};
-	// for loop with:
-	//for (var i = 0; i < 100; i++) {
-	//  tableData[x] = {name: etc, surname: atd};
-	for(var i = 0; i < 8; i++){
-		self.tName[i] = {a:1};
-	}
+		})
 });
 
 app.controller('tableCtrl', ['$scope', function($scope) {
@@ -101,14 +166,14 @@ app.controller('tableCtrl', ['$scope', function($scope) {
 	];
 	
 	self.scoreData = [
-		{tid:1, club: 'ŠK Slovan Bratislava futbal', z: '9', v: '9', r: '0', p: '0', sda: '84', sdo: '7'},
-		{tid:2, club: 'FC Union Nové Zámky', z: '9', v: '7', r: '1', p: '1', sda: '64', sdo: '8'},
-		{tid:3, club: 'Spartak Myjava', z: '9', v: '6', r: '1', p: '2', sda: '40', sdo: '11'},
-		{tid:4, club: 'FC Spartak Trnava', z: '9', v: '4', r: '1', p: '4', sda: '25', sdo: '19'},
-		{tid:5, club: 'FC Nitra', z: '9', v: '4', r: '0', p: '5', sda: '29', sdo: '33'},
-		{tid:6, club: 'FK DAC 1904 Dunajská Streda', z: '9', v: '2', r: '1', p: '6', sda: '20', sdo: '61'},
-		{tid:7, club: 'FK Senica', z: '9', v: '2', r: '0', p: '7', sda: '6', sdo: '60'},
-		{tid:8, club: 'NMŠK 1922 Bratislava', z: '9', v: '0', r: '0', p: '9', sda: '0', sdo: '69'},
+		{tid:1, club: 'ŠK Slovan Bratislava futbal', z: '10', v: '10', r: '0', p: '0', sda: '95', sdo: '7'},
+		{tid:2, club: 'FC Union Nové Zámky', z: '10', v: '7', r: '2', p: '1', sda: '66', sdo: '10'},
+		{tid:3, club: 'Spartak Myjava', z: '10', v: '6', r: '2', p: '2', sda: '42', sdo: '13'},
+		{tid:4, club: 'FC Spartak Trnava', z: '10', v: '5', r: '1', p: '4', sda: '32', sdo: '21'},
+		{tid:5, club: 'FC Nitra', z: '10', v: '4', r: '0', p: '6', sda: '31', sdo: '40'},
+		{tid:6, club: 'FK DAC 1904 Dunajská Streda', z: '10', v: '3', r: '1', p: '6', sda: '26', sdo: '61'},
+		{tid:7, club: 'FK Senica', z: '10', v: '2', r: '0', p: '8', sda: '6', sdo: '71'},
+		{tid:8, club: 'NMŠK 1922 Bratislava', z: '10', v: '0', r: '0', p: '10', sda: '0', sdo: '75'},
 	];
 	
 	self.setNotWorking = function(tID) {
