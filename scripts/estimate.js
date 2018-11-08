@@ -157,7 +157,7 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 			// prepared for more sophisticated score sort
 			self.tableData.sort(compare);
 			$.getScript("scripts/todos.js", function() {
-				alert(sayit(createAllMatches(2, 4)));
+				createAllMatches(2, 5);
 			});
 
 

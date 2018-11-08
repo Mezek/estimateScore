@@ -1,7 +1,21 @@
 // Get all matches
-function createAllMatches (cycle, teams) {
+function createAllMatches (cycle = 2, teams = 4) {
 	const nRounds = cycle*teams*(teams-1)/2;
-	return nRounds;
+	allMatches = new Map();
+	let nKey = 0;
+	for(let k = 0; k < cycle; k++) {
+		for(let i = 1; i < cycle+1; i++) {
+			for(let j = 1; j < teams; j++) {
+				for(let l = j+1; l < teams+1; l++) {
+					allMatches.set(nKey, [i, j, l]);
+					console.log(k, nKey, i, j, l);
+					nKey++;
+				}
+			}
+		}
+	}
+	//console.log (allMatches);
+	//return allMatches;
 }
 // Get unfinished matches
 function getUnfinishedMatches (data) {
@@ -24,7 +38,3 @@ function getUserRouteHandler (req, res) {
 	User.getOne(userId)
 		.then((user) => res.json(user))
 }
-
-sayit = function(text) {
-	return "Sophisticated comparison" + text;
-};
