@@ -51,14 +51,14 @@ app.controller('Click', function ($scope, $http) {
 		$scope.single_message = "Class is toggle";
 	};
 	
-	$scope.tnames = [];
+	$scope.teamNames = [];
 	$scope.jd = [];
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			//$scope.jnames = JSON.stringify(jsonData.data.teams);
 			jd = jsonData.data.teams;
 			for(var i = 0; i < jd.length; i++){
-				$scope.tnames.push(jd[i].name);
+				$scope.teamNames.push(jd[i].name);
 			}
 		}, function (data) {
 			console.log("There was an error");
@@ -156,6 +156,10 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 			}
 			// prepared for more sophisticated score sort
 			self.tableData.sort(compare);
+			$.getScript("scripts/todos.js", function() {
+				alert(sayit(createAllMatches(2, 4)));
+			});
+
 
 			self.selectedRow = null;
 			self.setHomeTeam = function(tID) {
