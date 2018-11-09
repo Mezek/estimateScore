@@ -30,23 +30,52 @@ function getFinishedMatches (data, teams) {
 			team1: regTeams.get(data[i].match[0]),
 			team2: regTeams.get(data[i].match[1]),
 			score1: data[i].score[0],
-			score2: data[i].score[1]};
+			score2: data[i].score[1]
+		};
 	}
-	let testFinished = new Map ();
+	return finishedMatches;
+}
+
+function getAlreadyPlayed (data) {
+	let alreadyPlayed = new Map();
 	for (let i = 0; i < data.length; i++) {
-		testFinished.set(i, [data[i].cycle, data[i].match[0], data[i].match[1]]);
+		alreadyPlayed.set(i, [data[i].cycle, data[i].match[0], data[i].match[1]]);
 	}
-	return testFinished;
-//	return finishedMatches;
+	return alreadyPlayed;
+}
+
+function getFuturePlayed (allMatches, alreadyPlayed) {
+	let futurePlayed = new Map(allMatches);
+	for (const [key,value] of alreadyPlayed) {
+		let comparedValue = value;
+		if (value[1] > value[2]) {
+			comparedValue = [value[0], value[2], value[1]];
+		}
+		for (const [key2,value2] of futurePlayed) {
+			if (value2.every(function(value, index) { return value === comparedValue[index]})) {
+				futurePlayed.delete(key2);
+				break;
+			}
+		}
+	}
+	return futurePlayed;
 }
 
 // Get unfinished matches
-function getUnfinishedMatches (nCycle, nTeams, finishedMatches, teams) {
+function getUnfinishedMatches (nCycle, nTeams, data, teams) {
 	let allMatches = createAllMatches(nCycle, nTeams);
-	let unfinishedMatches = new Map();
-	for (const [key,value] of finishedMatches){
-		//for if break
-		console.log(`key: ${key}, value: ${value}`);
+	let alreadyPlayed = getAlreadyPlayed(data);
+	let futurePlayed = getFuturePlayed(allMatches, alreadyPlayed);
+	let regTeams = new Map();
+	for(let i = 0; i < teams.length; i++) {
+		regTeams.set(teams[i].id, teams[i].city);
+	}
+	let unfinishedMatches = [];
+	for (const [key,value] of futurePlayed.entries()) {
+		unfinishedMatches.push({
+			team1: regTeams.get(value[1]),
+			team2: regTeams.get(value[2])
+		});
 	}
 	return unfinishedMatches;
 }

@@ -32,7 +32,7 @@ app.config(function($routeProvider) {
 
 app.controller('mainCtrl', function ($scope, $http) {
 	let self = this;
-    $scope.msg = 'Main Tab message';
+    $scope.msg = 'Building main tab...';
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;
@@ -40,7 +40,7 @@ app.controller('mainCtrl', function ($scope, $http) {
 			self.jdTeams = jsonData.data.teams;
 			self.jdMatches = jsonData.data.scores;
 			$scope.finishedMatches = getFinishedMatches(self.jdMatches, self.jdTeams);
-			$scope.unFinishedMatches = getUnfinishedMatches(3, 8, $scope.finishedMatches, self.jdTeams);
+			$scope.plannedMatches = getUnfinishedMatches(3, 8, self.jdMatches, self.jdTeams);
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");
 		});
