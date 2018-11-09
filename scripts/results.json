@@ -5,7 +5,7 @@
 	"teams": [{
 			"id": 1,
 			"name": "ŠK Slovan Bratislava futbal",
-			"city": "Bratislava"
+			"city": "Slovan"
 		},
 		{
 			"id": 2,
@@ -40,7 +40,7 @@
 		{
 			"id": 8,
 			"name": "NMŠK 1922 Bratislava",
-			"city": "Bratislava"
+			"city": "NMŠK"
 		}
 	],
 

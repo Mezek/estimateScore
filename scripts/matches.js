@@ -16,12 +16,30 @@ function createAllMatches (cycle = 1, teams = 2) {
 	}
 	return allMatches;
 }
+
+// Get finished matches
+function getFinishedMatches (data, teams) {
+	let regTeams = new Map();
+	for(let i = 0; i < teams.length; i++) {
+		regTeams.set(teams[i].id, teams[i].city);
+	}
+	let mat = [];
+	for (let i = 0; i < data.length; i++) {
+		mat[i] = {r: data[i].round,
+			t1: regTeams.get(data[i].match[0]),
+			t2: regTeams.get(data[i].match[1]),
+			s1: data[i].score[0],
+			s2: data[i].score[1]};
+	}
+	return mat;
+}
+
 // Get unfinished matches
 function getUnfinishedMatches (data) {
 	const unfinishedMatches = new Map(data);
 	return " yes";
 }
-
+/**
 const tableName = 'user'
 const User = {
 	getOne (userId) {
@@ -37,3 +55,4 @@ function getUserRouteHandler (req, res) {
 	User.getOne(userId)
 		.then((user) => res.json(user))
 }
+**/

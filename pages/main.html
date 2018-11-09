@@ -16,9 +16,9 @@
 <div id="scoreTable" class="row" ng-controller="tableOrderCtrl as Tbl">
 	<div class="col">
 		<div>
-			<h3>{{ Tbl.years }}</h3>
+			<h3>{{ jdYears }}</h3>
 			<div class="panel panel-default">
-				<div class="panel-heading"><span class="lead">{{ Tbl.category }}</span></div>
+				<div class="panel-heading"><span class="lead">{{ jdCategory }}</span></div>
 				<div class="tablecontainer">
 					<table class="table table-condensed table-hover">
 						<thead>
@@ -58,5 +58,22 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
+<div class="row" ng-controller="mainMatches">
+	<div class="col-sm-6">
+		<div class="switches">
+			<b>Finished matches</b>&nbsp; <button type="button" ng-click="showFinished = ! showFinished" class="btn btn-success custom-width">On/Off</button>
+		</div>
+		<div ng-repeat="m in finishedMatches"  class="row font-smaller80" ng-show="! showFinished">
+			<div class="col text-right">{{m.t1}}</div>
+			<div class="col-md-auto text-center">{{m.s1}} : {{m.s2}} </div>
+			<div class="col text-left">{{m.t2}}</div>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<b>Planned matches</b><br />
+		{{msg}}
 	</div>
 </div>

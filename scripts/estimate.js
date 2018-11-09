@@ -30,9 +30,26 @@ app.config(function($routeProvider) {
     });
 });
 
-app.controller('mainCtrl', function ($scope) {
+app.controller('mainCtrl', function ($scope, $http) {
+	let self = this;
     $scope.msg = 'Main Tab message';
+	$http.get("scripts/results.json")
+		.then(function (jsonData) {
+			$scope.jdCategory = jsonData.data.category;
+			$scope.jdYears = jsonData.data.years;
+			self.jdTeams = jsonData.data.teams;
+			self.jdMatches = jsonData.data.scores;
+			$scope.finishedMatches = getFinishedMatches(self.jdMatches, self.jdTeams);
+		}, function (jsonData) {
+			console.warn("Error with reading of data file");
+		});
 });
+
+app.controller('mainMatches', function ($scope) {
+	let self = this;
+	$scope.msg = 'Building matches';
+});
+
 
 app.controller('nextCtrl', function ($scope) {
     $scope.msg = 'Next Tab message';
@@ -60,7 +77,7 @@ app.controller('Click', function ($scope, $http) {
 			for(var i = 0; i < jd.length; i++){
 				$scope.teamNames.push(jd[i].name);
 			}
-		}, function (data) {
+		}, function () {
 			console.log("There was an error");
 		});
 });
@@ -76,13 +93,10 @@ function compare(a,b) {
 app.controller('tableOrderCtrl', function($scope, $http) {
 	var self = this;
 
-	self.tName = [];
 	self.jdTeams = [];
     self.tableData = [];
     $http.get("scripts/results.json")
 		.then(function (jsonData) {
-			self.category = jsonData.data.category;
-			self.years = jsonData.data.years;
 			self.jdTeams = jsonData.data.teams;
 			self.jdMtchs = jsonData.data.scores;
 			let nTeam = self.jdTeams.length;
@@ -156,9 +170,9 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 			}
 			// prepared for more sophisticated score sort
 			self.tableData.sort(compare);
-			$.getScript("scripts/matches.js", function() {
-				console.log(createAllMatches(2, 5));
-			});
+			//$.getScript("scripts/matches.js", function() {
+			//	console.log(createAllMatches(2, 5));
+			//});
 
 
 			self.selectedRow = null;
@@ -171,7 +185,7 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 					self.selectedRow = null;
 			};
 
-		}, function (data) {
+		}, function () {
 			console.warn("Error with reading of data file");
 		});
 });

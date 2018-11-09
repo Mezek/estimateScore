@@ -33,6 +33,15 @@ h2, h1 {
 .content h2, .content h3, .content h4, .content h5 {
   margin-top: 0.5em;
 }
+
+.font-smaller90 {
+    font-size: 90%;
+}
+
+.font-smaller80 {
+    font-size: 80%;
+}
+
 .container.main {
   border-top: 1px solid rbg(212, 212, 212);
   min-height: 300px;
@@ -46,7 +55,7 @@ h2, h1 {
 	padding: 2px;
 }
 
-.tablecontainer .btn {
+.tablecontainer .btn, .switches .btn {
 	padding: 2px 5px;
 }
 
