@@ -156,8 +156,8 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 			}
 			// prepared for more sophisticated score sort
 			self.tableData.sort(compare);
-			$.getScript("scripts/todos.js", function() {
-				createAllMatches(2, 5);
+			$.getScript("scripts/matches.js", function() {
+				console.log(createAllMatches(2, 5));
 			});
 
 
@@ -172,7 +172,7 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 			};
 
 		}, function (data) {
-			console.log("Error with reading of data file");
+			console.warn("Error with reading of data file");
 		});
 });
 
