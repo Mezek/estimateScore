@@ -40,6 +40,7 @@ app.controller('mainCtrl', function ($scope, $http) {
 			self.jdTeams = jsonData.data.teams;
 			self.jdMatches = jsonData.data.scores;
 			$scope.finishedMatches = getFinishedMatches(self.jdMatches, self.jdTeams);
+			$scope.unFinishedMatches = getUnfinishedMatches(3, 8, $scope.finishedMatches, self.jdTeams);
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");
 		});
