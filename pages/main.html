@@ -61,6 +61,20 @@
 	</div>
 </div>
 
+<div class="row justify-content-md-center">
+	<div class="col col-lg-2" ng-class="className">
+		<p>Test <button type="button" ng-click="changeClass()" class="btn btn-success custom-width">Click</button></p>
+	</div>
+	<div class="col-md-auto">
+		{{ msg }}
+	</div>
+	<div class="col col-lg-2" ng-class="{'clicked': clicked,'not-clicked': !clicked}">
+		<p>Test <button type="button" ng-click="changeClass2()" class="btn btn-success custom-width">Click</button></p>
+	</div>
+	<div class="col col-lg-2"></div>
+</div>
+
+	
 <div class="row" ng-controller="mainMatches">
 	<div class="col-sm-6">
 		<div class="switches">
@@ -77,18 +91,9 @@
 			<b>Planned matches</b>&nbsp; <button type="button" ng-click="showPlanned = ! showPlanned" class="btn btn-success custom-width">On/Off</button>
 		</div>
 		<div ng-repeat="n in plannedMatches"  class="row font-smaller80" ng-show="! showPlanned">
-			<div class="col text-right">{{n.team1}}</div>
+			<div class="col text-right" ng-click="changeClass()"><span>{{n.team1}}</span></div>
 			<div class="col-md-auto text-center">&infin; : &infin; </div>
 			<div class="col text-left">{{n.team2}}</div>
 		</div>
 	</div>
 </div>
-
-<div class="row justify-content-md-center">
-	<div class="col col-lg-2"></div>
-	<div class="col-md-auto">
-		{{ msg }}
-	</div>
-	<div class="col col-lg-2"></div>
-</div>
-

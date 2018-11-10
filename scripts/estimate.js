@@ -44,6 +44,18 @@ app.controller('mainCtrl', function ($scope, $http) {
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");
 		});
+	$scope.changeClass = function() {
+		$scope.className = "not-clicked";
+		$scope.changeClass = function(){
+		  if ($scope.className === "not-clicked")
+			$scope.className = "clicked";
+		  else
+			$scope.className = "not-clicked";
+		};
+	};
+	$scope.changeClass2 = function() {	
+		$scope.clicked = ! $scope.clicked;
+	};
 });
 
 app.controller('mainMatches', function ($scope) {

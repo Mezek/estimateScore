@@ -88,6 +88,16 @@ h2, h1 {
     background-color: #ff9900;
 }
 
+.clicked {
+  background-color: brown;
+  font-weight: bold;
+}
+
+.not-clicked {
+  background-color: blue;
+  font-weight: normal;
+}
+
 .footer {
   text-align: center;
   border-top: 1px solid rgb(212, 212, 212);
