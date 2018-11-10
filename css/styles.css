@@ -59,42 +59,42 @@ h2, h1 {
 	padding: 2px 5px;
 }
 
-.tablecontainer tr.team-unset {
+.tablecontainer .team-unset {
 	background-color: white;
 	font-weight: normal;
 }
 
-.tablecontainer tr.team-set, .testClass {
+.tablecontainer .team-set, .testClass {
 	background-color: #ccc;
 	font-weight: bold;
 }
 
 .tablecontainer tr.team-win {
-    background-color: #ff9900;
-    font-weight: normal;
+  background-color: #ff9900;
+  font-weight: normal;
 }
 
 .tablecontainer tr.team-lost {
-    background-color: #0066ff;
-    font-weight: normal;
+  background-color: #0066ff;
+  font-weight: normal;
 }
 
 .tablecontainer tr.team-deuce {
-    background-color: #ff66cc;
-    font-weight: normal;
+  background-color: #ff66cc;
+  font-weight: normal;
 }
 
 .table-hover tbody tr:hover {
-    background-color: #ff9900;
+  background-color: #ff9900;
 }
 
 .clicked {
-  background-color: brown;
+  background-color: #ccc;
   font-weight: bold;
 }
 
 .not-clicked {
-  background-color: blue;
+  background-color: white;
   font-weight: normal;
 }
 

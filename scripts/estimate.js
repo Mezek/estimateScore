@@ -44,14 +44,13 @@ app.controller('mainCtrl', function ($scope, $http) {
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");
 		});
-	$scope.changeClass = function() {
-		$scope.className = "not-clicked";
-		$scope.changeClass = function(){
-		  if ($scope.className === "not-clicked")
-			$scope.className = "clicked";
-		  else
-			$scope.className = "not-clicked";
-		};
+
+	//$scope.clickTeam = '1';
+	$scope.toggleTeam = function() {
+		if ($scope.clickTeam === 'team1')
+			$scope.clickTeam = 'team2';
+		else
+			$scope.clickTeam = 'team1';
 	};
 	$scope.changeClass2 = function() {	
 		$scope.clicked = ! $scope.clicked;
@@ -177,9 +176,9 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 			}
 
 			for (let i = 0; i < nTeam; i++) {
-				self.tableData[i] = {tid: self.jdTeams[i].id, club: self.jdTeams[i].name, gp: nRound[i],
-					w: nWin[i], d: nDrawn[i], l: nLost[i], f: nFor[i], a: nAst[i],
-					gd: nGD[i], p: nPts[i], pm: nPM[i]};
+				self.tableData[i] = {tid: self.jdTeams[i].id, cs: 'team' + self.jdTeams[i].id,
+					club: self.jdTeams[i].name, gp: nRound[i], w: nWin[i], d: nDrawn[i],
+					l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i]};
 			}
 			// prepared for more sophisticated score sort
 			self.tableData.sort(compare);

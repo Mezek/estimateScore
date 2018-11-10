@@ -30,7 +30,9 @@ function getFinishedMatches (data, teams) {
 			team1: regTeams.get(data[i].match[0]),
 			team2: regTeams.get(data[i].match[1]),
 			score1: data[i].score[0],
-			score2: data[i].score[1]
+			score2: data[i].score[1],
+			teamClass1: 'team' + data[i].match[0],
+			teamClass2: 'team' + data[i].match[1]
 		};
 	}
 	return finishedMatches;
@@ -74,7 +76,9 @@ function getUnfinishedMatches (nCycle, nTeams, data, teams) {
 	for (const [key,value] of futurePlayed.entries()) {
 		unfinishedMatches.push({
 			team1: regTeams.get(value[1]),
-			team2: regTeams.get(value[2])
+			team2: regTeams.get(value[2]),
+			teamClass1: 'team' + value[1],
+			teamClass2: 'team' + value[2]
 		});
 	}
 	return unfinishedMatches;
