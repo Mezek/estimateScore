@@ -283,6 +283,30 @@
 			"round": 10,
 			"match": [8, 6],
 			"score": [0, 6]
+		},
+		{
+			"cycle": 2,
+			"round": 11,
+			"match": [2, 8],
+			"score": [8, 0]
+		},
+		{
+			"cycle": 2,
+			"round": 11,
+			"match": [4, 3],
+			"score": [2, 1]
+		},
+		{
+			"cycle": 2,
+			"round": 11,
+			"match": [7, 5],
+			"score": [2, 0]
+		},
+		{
+			"cycle": 2,
+			"round": 11,
+			"match": [1, 6],
+			"score": [7, 0]
 		}
 	]
 }

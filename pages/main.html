@@ -50,8 +50,8 @@
 								<td>{{row.p}}</td>
 								<td>{{row.pm}}</td>
 								<td>
-									<button type="button" ng-click="Tbl.setHomeTeam($index)" class="btn btn-success custom-width">Set</button>
-									<button type="button" ng-click="Tbl.unsetHomeTeam($index)" class="btn btn-danger custom-width">Unset</button>
+									<button type="button" ng-click="toggleTeam(row.cs)" class="btn btn-success custom-width">Set</button>
+									<button type="button" ng-click="unsetTeam(row.cs)" class="btn btn-danger custom-width">Unset</button>
 								</td>								
 							</tr>
 						</tbody>
@@ -86,14 +86,14 @@
 </div>
 
 <div class="row justify-content-md-center">
-	<div class="col col-lg-2" ng-class="{'clicked': (clickTeam == 'team1'), 'not-clicked': (clickTeam == 'team2')}">
-		<p>Test <button type="button" ng-click="toggleTeam()" class="btn btn-success custom-width">Click</button></p>
+	<div class="col col-lg-2">
+		<p>Test <button type="button" class="btn btn-success custom-width">Click</button></p>
 	</div>
 	<div class="col-md-auto">
 		{{ msg }}
 	</div>
 	<div class="col col-lg-2" ng-class="{'clicked': clicked, 'not-clicked': !clicked}">
-		<p>Test <button type="button" ng-click="changeClass2()" class="btn btn-success custom-width">Click</button></p>
+		<p>Test <button type="button" class="btn btn-success custom-width">Click</button></p>
 	</div>
 	<div class="col col-lg-2"></div>
 </div>

@@ -46,14 +46,17 @@ app.controller('mainCtrl', function ($scope, $http) {
 		});
 
 	//$scope.clickTeam = '1';
-	$scope.toggleTeam = function() {
-		if ($scope.clickTeam === 'team1')
-			$scope.clickTeam = 'team2';
-		else
-			$scope.clickTeam = 'team1';
+	$scope.toggleTeam = function(clickParameter) {
+		$scope.clickTeam = '';
+		for (let i = 0; i < self.jdTeams.length; i++) {
+			let teamcs = 'team' + self.jdTeams[i].id;
+			if (clickParameter === teamcs)
+				$scope.clickTeam = teamcs;
+		}
 	};
-	$scope.changeClass2 = function() {	
-		$scope.clicked = ! $scope.clicked;
+	$scope.unsetTeam = function(clickParameter) {
+		if (clickParameter === $scope.clickTeam)
+			$scope.clickTeam = '';
 	};
 });
 
@@ -169,8 +172,8 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 						}
 					}
 				}
-				if (nFor[i] < 10) nFor[i] = "\xa0\xa0" + nFor[i];
-				if (nAst[i] < 10) nAst[i] = "\xa0\xa0" + nAst[i];
+				//if (nFor[i] < 10) nFor[i] = "\xa0\xa0" + nFor[i];
+				//if (nAst[i] < 10) nAst[i] = "\xa0\xa0" + nAst[i];
 				nGD[i] = nFor[i] - nAst[i];
 				nPts[i] = 3*nWin[i] + nDrawn[i];
 			}
@@ -185,17 +188,6 @@ app.controller('tableOrderCtrl', function($scope, $http) {
 			//$.getScript("scripts/matches.js", function() {
 			//	console.log(createAllMatches(2, 5));
 			//});
-
-
-			self.selectedRow = null;
-			self.setHomeTeam = function(tID) {
-				self.selectedRow = tID;
-			};
-			
-			self.unsetHomeTeam = function(tID) {
-				if (self.selectedRow === tID)
-					self.selectedRow = null;
-			};
 
 		}, function () {
 			console.warn("Error with reading of data file");
