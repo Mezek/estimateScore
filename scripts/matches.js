@@ -39,9 +39,90 @@ function getFinishedMatches (data, teams) {
 }
 
 function getScoreTable (data, teams) {
+	let dataDone = data;
 	let scoreTable = [];
+	let nRound = [];
+	let nWin = [];
+	let nLost = [];
+	let nDrawn = [];
+	let nFor = [];
+	let nAst = [];
+	let nGD = [];
+	let nPts = [];
+	let nPM = [];
+	for (let i = 0; i < teams.length; i++) {
+		nRound[i] = 0;
+		nWin[i] = 0;
+		nLost[i] = 0;
+		nDrawn[i] = 0;
+		nFor[i] = 0;
+		nAst[i] = 0;
+		nPM[i] = 0;
+		for (let j = 0; j < dataDone.length; j++) {
+			if (dataDone[j].match[0] === teams[i].id) {
+				nRound[i] = nRound[i] + 1;
+				let doma = dataDone[j].score[0];
+				let host = dataDone[j].score[1];
+				nFor[i] += doma;
+				nAst[i] += host;
+				if ( doma > host ) {
+					nWin[i] = nWin[i] + 1;
+					nPM[i] += 0;
+				}
+				if ( doma === host ) {
+					nDrawn[i] = nDrawn[i] + 1;
+					nPM[i] -= 2;
+				}
+				if ( doma < host ) {
+					nLost[i] = nLost[i] + 1;
+					nPM[i] -= 3;
+				}
+			}
+			if (dataDone[j].match[1] === teams[i].id) {
+				nRound[i] = nRound[i] + 1;
+				let doma = dataDone[j].score[1];
+				let host = dataDone[j].score[0];
+				nFor[i] += doma;
+				nAst[i] += host;
+				if ( doma > host ) {
+					nWin[i] = nWin[i] + 1;
+					nPM[i] += 3;
+				}
+				if ( doma === host ) {
+					nDrawn[i] = nDrawn[i] + 1;
+					nPM[i] += 1;
+				}
+				if ( doma < host ) {
+					nLost[i] = nLost[i] + 1;
+					nPM[i] += 0;
+				}
+			}
+		}
+		//if (nFor[i] < 10) nFor[i] = "\xa0\xa0" + nFor[i];
+		//if (nAst[i] < 10) nAst[i] = "\xa0\xa0" + nAst[i];
+		nGD[i] = nFor[i] - nAst[i];
+		nPts[i] = 3*nWin[i] + nDrawn[i];
+	}	
+	for (let i = 0; i < teams.length; i++) {
+		scoreTable[i] = {tid: teams[i].id, cs: 'team' + teams[i].id,
+			club: teams[i].name, gp: nRound[i], w: nWin[i], d: nDrawn[i],
+			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i]};
+	}
+	// prepared for more sophisticated score sort
+	scoreTable.sort(compare);
+	//$.getScript("scripts/matches.js", function() {
+	//	console.log(createAllMatches(2, 5));
+	//});
 	return scoreTable;
 }
+
+function compare(a,b) {
+	if (a.p < b.p)
+		return +1;
+	if (a.p > b.p)
+		return -1;
+	return 0;
+};
 
 function getAlreadyPlayed (data) {
 	let alreadyPlayed = new Map();
