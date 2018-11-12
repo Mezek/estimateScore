@@ -31,8 +31,8 @@
 								<th>L</th><!-- Lost -->
 								<th>F:A</th><!-- For --> <!-- Against -->
 								<th>GD</th><!-- Goal Difference --> 
-								<th>P</th><!-- Points -->
 								<th>+/-</th>
+								<th>P</th><!-- Points -->
 								<th>Home team</th>
 							</tr>
 						</thead>
@@ -47,13 +47,62 @@
 								<td>{{row.l}}</td>
 								<td>{{row.f}} : {{row.a}}</td>
 								<td>{{row.gd}}</td>
-								<td>{{row.p}}</td>
 								<td>{{row.pm}}</td>
+								<td>{{row.p}}</td>
 								<td>
 									<button type="button" ng-click="toggleTeam(row.cs)" class="btn btn-success custom-width">Set</button>
 									<button type="button" ng-click="unsetTeam(row.cs)" class="btn btn-danger custom-width">Unset</button>
 								</td>
 							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row" ng-controller="tableOrderCtrl as Tbl">
+	<div class="col">
+		<div>
+			<h3>{{ jdYears }}</h3>
+			<div class="panel panel-default">
+				<div class="panel-heading"><span class="lead">{{ jdCategory }}</span></div>
+				<div class="tablecontainer">
+					<table class="table table-condensed table-hover">
+						<thead>
+						<tr>
+							<th>N</th>
+							<th>Team</th>
+							<th>GP</th><!-- Played -->
+							<th>W</th><!-- Won -->
+							<th>D</th><!-- Drawn -->
+							<th>L</th><!-- Lost -->
+							<th>F:A</th><!-- For --> <!-- Against -->
+							<th>GD</th><!-- Goal Difference -->
+							<th>+/-</th>
+							<th>P</th><!-- Points -->
+							<th>Home team</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="row in Tbl.tableData" ng-class="{'team-set': $index == Tbl.selectedRow,
+							'clicked': (clickTeam == '{{row.cs}}'), 'not-clicked': (clickTeam != '{{row.cs}}')}"> <!-- | orderBy:'p':true">-->
+							<td>{{ $index+1 }} {{count}}</td>
+							<td>{{row.club}}</td>
+							<td>{{row.gp}}</td>
+							<td>{{row.w}}</td>
+							<td>{{row.d}}</td>
+							<td>{{row.l}}</td>
+							<td>{{row.f}} : {{row.a}}</td>
+							<td>{{row.gd}}</td>
+							<td>{{row.pm}}</td>
+							<td>{{row.p}}</td>
+							<td>
+								<button type="button" ng-click="toggleTeam(row.cs)" class="btn btn-success custom-width">Set</button>
+								<button type="button" ng-click="unsetTeam(row.cs)" class="btn btn-danger custom-width">Unset</button>
+							</td>
+						</tr>
 						</tbody>
 					</table>
 				</div>
@@ -68,9 +117,9 @@
 			<b>Finished matches</b>&nbsp;
 			<div class="switch-container">
 				<div class="switch">
-					<input type="radio" class="switch-input" name="view" value="week" id="week" ng-click="showFinished = ! showFinished">
+					<input type="radio" class="switch-input" name="view" value="week" id="week" ng-click="showFinished = false">
 					<label for="week" class="switch-label switch-label-off">ON</label>
-					<input type="radio" class="switch-input" name="view" value="month" id="month" ng-click="showFinished = ! showFinished">
+					<input type="radio" class="switch-input" name="view" value="month" id="month" ng-click="showFinished = true">
 					<label for="month" class="switch-label switch-label-on">OFF</label>
 					<span class="switch-selection"></span>
 				</div>
@@ -85,11 +134,22 @@
 	</div>
 	<div class="col-sm-6">
 		<div class="switches">
-			<b>Planned matches</b>&nbsp; <button type="button" ng-click="showPlanned = ! showPlanned" class="btn btn-success custom-width">On/Off</button>
+			<b>Planned matches</b>
+			<!-- <button type="button" ng-click="showPlanned = ! showPlanned" class="btn btn-success custom-width">On/Off</button>-->
+			<div class="switch-container">
+				<div class="switch">
+					<input type="radio" class="switch-input" name="view" value="pln" id="pln" ng-click="showPlanned = false">
+					<label for="pln" class="switch-label switch-label-off">ON</label>
+					<input type="radio" class="switch-input" name="view" value="unpl" id="unpl" ng-click="showPlanned = true">
+					<label for="unpl" class="switch-label switch-label-on">OFF</label>
+					<span class="switch-selection"></span>
+				</div>
+			</div>
 		</div>
-		<div ng-repeat="n in plannedMatches"  class="row font-smaller80" ng-show="! showPlanned">
+		<br />
+		<div ng-repeat="n in plannedMatches"  class="row font-smaller80 match-win" ng-show="! showPlanned">
 			<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{n.teamClass1}}'), 'not-clicked': (clickTeam != '{{n.teamClass1}}')}"><span>{{n.team1}}</span></div>
-			<div class="col-md-auto text-center match-deuce" ng-click="setFutureMatch(n.teamKey)">&infin; : &infin; </div>
+			<div class="col-md-auto text-center" ng-click="setFutureMatch(n.teamKey)">&infin; : &infin; </div>
 			<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{n.teamClass2}}'), 'not-clicked': (clickTeam != '{{n.teamClass2}}')}">{{n.team2}}</div>
 		</div>
 	</div>
@@ -97,13 +157,13 @@
 
 <div class="row justify-content-md-center">
 	<div class="col col-lg-2">
-		<p>Test <button type="button" class="btn btn-success custom-width">Click</button></p>
+		<p>...</p>
 	</div>
 	<div class="col-md-auto">
 		{{ msg }}
 	</div>
 	<div class="col col-lg-2" ng-class="{'clicked': clicked, 'not-clicked': !clicked}">
-		<p>Test <button type="button" class="btn btn-success custom-width">Click</button></p>
+		<p>...</p>
 	</div>
 	<div class="col col-lg-2"></div>
 </div>

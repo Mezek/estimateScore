@@ -38,6 +38,11 @@ function getFinishedMatches (data, teams) {
 	return finishedMatches;
 }
 
+function getScoreTable (data, teams) {
+	let scoreTable = [];
+	return scoreTable;
+}
+
 function getAlreadyPlayed (data) {
 	let alreadyPlayed = new Map();
 	for (let i = 0; i < data.length; i++) {
@@ -46,7 +51,7 @@ function getAlreadyPlayed (data) {
 	return alreadyPlayed;
 }
 
-function getFuturePlayed (allMatches, alreadyPlayed) {
+function getPlanned (allMatches, alreadyPlayed) {
 	let futurePlayed = new Map(allMatches);
 	for (const [key,value] of alreadyPlayed) {
 		let comparedValue = value;
@@ -67,7 +72,7 @@ function getFuturePlayed (allMatches, alreadyPlayed) {
 function getUnfinishedMatches (nCycle, nTeams, data, teams) {
 	let allMatches = createAllMatches(nCycle, nTeams);
 	let alreadyPlayed = getAlreadyPlayed(data);
-	let futurePlayed = getFuturePlayed(allMatches, alreadyPlayed);
+	let futurePlayed = getPlanned(allMatches, alreadyPlayed);
 	let regTeams = new Map();
 	for(let i = 0; i < teams.length; i++) {
 		regTeams.set(teams[i].id, teams[i].city);

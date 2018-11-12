@@ -45,7 +45,6 @@ app.controller('mainCtrl', function ($scope, $http) {
 			console.warn("Error with reading of data file");
 		});
 
-	//$scope.clickTeam = '1';
 	$scope.toggleTeam = function(clickParameter) {
 		$scope.clickTeam = '';
 		for (let i = 0; i < self.jdTeams.length; i++) {
@@ -54,10 +53,12 @@ app.controller('mainCtrl', function ($scope, $http) {
 				$scope.clickTeam = teamcs;
 		}
 	};
+
 	$scope.unsetTeam = function(clickParameter) {
 		if (clickParameter === $scope.clickTeam)
 			$scope.clickTeam = '';
 	};
+
 	$scope.setFutureMatch = function(key) {
 		//alert(key);
 	};

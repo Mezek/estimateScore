@@ -43,7 +43,7 @@ h2, h1 {
 }
 
 .container.main {
-  border-top: 1px solid rbg(212, 212, 212);
+  border-top: 1px solid rgb(212, 212, 212);
   min-height: 300px;
 }
 
@@ -74,7 +74,7 @@ h2, h1 {
 }
 
 .table-hover tbody tr.clicked:hover {
-  background-color: #ff7700;
+  background-color: #c67600;
 }
 
 .table-hover tbody tr.clicked:active {
@@ -95,7 +95,7 @@ h2, h1 {
   font-weight: normal;
 }
 
-.match-win {
+.match-win:hover {
     background-color: #ff9900;
     font-weight: normal;
 }
@@ -141,13 +141,6 @@ h2, h1 {
     margin: 0 20px;
     padding: 0;
     float: left;
-    background-color: false;
-    background-image: -webkit-gradient(radial, center center, 0, center center, 460, color-stop(0%, rgba(255, 255, 255, 0.1)), color-stop(100%, transparent));
-    background-image: -webkit-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
-    background-image: -moz-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
-    background-image: -ms-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
-    background-image: -o-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
-    background-image: radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .switch {
@@ -157,8 +150,8 @@ h2, h1 {
     margin: 0px;
     background: rgba(0, 0, 0, 0.25);
     border-radius: 3px;
-    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .switch-label {
