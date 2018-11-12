@@ -78,7 +78,8 @@ function getUnfinishedMatches (nCycle, nTeams, data, teams) {
 			team1: regTeams.get(value[1]),
 			team2: regTeams.get(value[2]),
 			teamClass1: 'team' + value[1],
-			teamClass2: 'team' + value[2]
+			teamClass2: 'team' + value[2],
+			teamKey: key
 		});
 	}
 	return unfinishedMatches;

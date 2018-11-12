@@ -69,23 +69,20 @@ h2, h1 {
 	font-weight: bold;
 }
 
-.tablecontainer tr.team-win {
-  background-color: #ff9900;
-  font-weight: normal;
-}
-
-.tablecontainer tr.team-lost {
-  background-color: #0066ff;
-  font-weight: normal;
-}
-
-.tablecontainer tr.team-deuce {
-  background-color: #ff66cc;
-  font-weight: normal;
-}
-
 .table-hover tbody tr:hover {
-  background-color: #ff9900;
+    background-color: #ff9900;
+}
+
+.table-hover tbody tr.clicked:hover {
+  background-color: #ff7700;
+}
+
+.table-hover tbody tr.clicked:active {
+    background-color: #ff9999;
+}
+
+.table-hover tbody tr.clicked:focus {
+    background-color: #ff0000;
 }
 
 .clicked {
@@ -96,6 +93,21 @@ h2, h1 {
 .not-clicked {
   background-color: white;
   font-weight: normal;
+}
+
+.match-win {
+    background-color: #ff9900;
+    font-weight: normal;
+}
+
+.match-lost {
+    background-color: #0066ff;
+    font-weight: normal;
+}
+
+.match-deuce {
+    background-color: #ff66cc;
+    font-weight: normal;
 }
 
 .footer {
@@ -124,3 +136,112 @@ h2, h1 {
   text-align: center;
   font-size: 14px;
 }
+
+.switch-container {
+    margin: 0 20px;
+    padding: 0;
+    float: left;
+    background-color: false;
+    background-image: -webkit-gradient(radial, center center, 0, center center, 460, color-stop(0%, rgba(255, 255, 255, 0.1)), color-stop(100%, transparent));
+    background-image: -webkit-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+    background-image: -moz-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+    background-image: -ms-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+    background-image: -o-radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+    background-image: radial-gradient(center, cover, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.switch {
+    position: relative;
+    height: 26px;
+    width: 120px;
+    margin: 0px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.switch-label {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 58px;
+    line-height: 26px;
+    font-size: 11px;
+    color: #333;
+    text-align: center;
+    text-shadow: 0 0px 0px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+}
+.switch-label:active {
+    font-weight: bold;
+}
+
+.switch-label-off {
+    padding-left: 2px;
+}
+
+.switch-label-on {
+    padding-right: 2px;
+}
+
+.switch-input {
+    display: none;
+}
+
+.switch-input:checked + .switch-label {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.65);
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    -webkit-transition: 0.15s ease-out;
+    -moz-transition: 0.15s ease-out;
+    -ms-transition: 0.15s ease-out;
+    -o-transition: 0.15s ease-out;
+    transition: 0.15s ease-out;
+    -webkit-transition-property: color, text-shadow;
+    -moz-transition-property: color, text-shadow;
+    -ms-transition-property: color, text-shadow;
+    -o-transition-property: color, text-shadow;
+    transition-property: color, text-shadow;
+}
+
+.switch-input:checked + .switch-label-on ~ .switch-selection {
+    left: 60px;
+    /* Note: left: 50%; doesn't transition in WebKit */
+}
+
+.switch-selection {
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    left: 2px;
+    display: block;
+    width: 58px;
+    height: 22px;
+    border-radius: 3px;
+    background-color: #28a745;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #65bd63), color-stop(100%, #28a745));
+    background-image: -webkit-linear-gradient(top, #65bd63, #28a745);
+    background-image: -moz-linear-gradient(top, #65bd63, #28a745);
+    background-image: -ms-linear-gradient(top, #65bd63, #28a745);
+    background-image: -o-linear-gradient(top, #65bd63, #28a745);
+    background-image: linear-gradient(top, #65bd63, #28a745);
+    -webkit-box-shadow: inset 0 1px #ccc, 0 0 2px #555;
+    box-shadow: inset 0 1px #ccc, 0 0 2px #555;
+    -webkit-transition: left 0.15s ease-out;
+    -moz-transition: left 0.15s ease-out;
+    -ms-transition: left 0.15s ease-out;
+    -o-transition: left 0.15s ease-out;
+    transition: left 0.15s ease-out;
+}
+
+.switch-blue .switch-selection {
+    background-color: #3aa2d0;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4fc9ee), color-stop(100%, #3aa2d0));
+    background-image: -webkit-linear-gradient(top, #4fc9ee, #3aa2d0);
+    background-image: -moz-linear-gradient(top, #4fc9ee, #3aa2d0);
+    background-image: -ms-linear-gradient(top, #4fc9ee, #3aa2d0);
+    background-image: -o-linear-gradient(top, #4fc9ee, #3aa2d0);
+    background-image: linear-gradient(top, #4fc9ee, #3aa2d0);
+}
+

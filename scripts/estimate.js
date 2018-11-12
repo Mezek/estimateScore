@@ -58,6 +58,9 @@ app.controller('mainCtrl', function ($scope, $http) {
 		if (clickParameter === $scope.clickTeam)
 			$scope.clickTeam = '';
 	};
+	$scope.setFutureMatch = function(key) {
+		//alert(key);
+	};
 });
 
 app.controller('mainMatches', function ($scope) {
