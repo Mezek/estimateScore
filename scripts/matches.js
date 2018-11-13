@@ -27,10 +27,10 @@ function getFinishedMatches (data, teams) {
 	for (let i = 0; i < data.length; i++) {
 		finishedMatches[i] = {cycle: data[i].cycle,
 			round: data[i].round,
-			team1: regTeams.get(data[i].match[0]),
-			team2: regTeams.get(data[i].match[1]),
 			score1: data[i].score[0],
 			score2: data[i].score[1],
+			team1: regTeams.get(data[i].match[0]),
+			team2: regTeams.get(data[i].match[1]),
 			teamClass1: 'team' + data[i].match[0],
 			teamClass2: 'team' + data[i].match[1]
 		};
@@ -161,6 +161,7 @@ function getUnfinishedMatches (nCycle, nTeams, data, teams) {
 	let unfinishedMatches = [];
 	for (const [key,value] of futurePlayed.entries()) {
 		unfinishedMatches.push({
+			result: 0,
 			team1: regTeams.get(value[1]),
 			team2: regTeams.get(value[2]),
 			teamClass1: 'team' + value[1],

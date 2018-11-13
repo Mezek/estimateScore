@@ -100,7 +100,7 @@
 		<div ng-repeat="n in plannedMatches" id="{{n.teamKey}}" class="row font-smaller80" ng-show="! showPlanned"
 			ng-class="{'match-win': (clickResult == 1), 'match-deuce': (clickResult == 2), 'match-lost': (clickResult == 3)}">
 			<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{n.teamClass1}}'), 'not-clicked': (clickTeam != '{{n.teamClass1}}')}"><span>{{n.team1}}</span></div>
-			<div class="col-md-auto text-center" ng-click="setFutureMatch(n.teamKey)">&infin; : &infin; </div>
+			<div class="col-md-auto text-center" ng-click="setFutureMatch(n)">&infin; : &infin; </div>
 			<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{n.teamClass2}}'), 'not-clicked': (clickTeam != '{{n.teamClass2}}')}">{{n.team2}}</div>
 		</div>
 	</div>

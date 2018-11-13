@@ -62,11 +62,19 @@ app.controller('mainCtrl', function ($scope, $http) {
 	};
 
 	$scope.clickResult = 0;
-	$scope.setFutureMatch = function(key) {
+	$scope.futureMatches = new Map();
+	$scope.setFutureMatch = function(oneMatch) {
 		$scope.clickResult++;
 		if ($scope.clickResult === 4)
 			$scope.clickResult = 0;
-		console.log(key + ' ' + $scope.clickResult);
+		$scope.futureMatches.set(oneMatch.teamKey, oneMatch);
+		//console.log($scope.futureMatches.size);
+		//$scope.futureMatches.forEach((value, key) => console.log(`key: ${key}, value: ${value}`));
+			//console.log(`${teamKey}` + ` ` + $scope.clickResult);
+		//// ;
+		for (const value of $scope.futureMatches){
+			console.log(value);
+		}
 	};
 });
 
