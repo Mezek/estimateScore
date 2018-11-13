@@ -161,7 +161,7 @@ function getUnfinishedMatches (nCycle, nTeams, data, teams) {
 	let unfinishedMatches = [];
 	for (const [key,value] of futurePlayed.entries()) {
 		unfinishedMatches.push({
-			result: 0,
+			matchResult: 0,
 			team1: regTeams.get(value[1]),
 			team2: regTeams.get(value[2]),
 			teamClass1: 'team' + value[1],
@@ -169,6 +169,14 @@ function getUnfinishedMatches (nCycle, nTeams, data, teams) {
 			teamKey: key
 		});
 	}
+	return unfinishedMatches;
+}
+
+function buildPlannedWithFuture (myData, myMap) {
+	let unfinishedMatches = myData;
+	//for (let i = 0; i < 10; i++) {
+	//	unfinishedMatches[i] = myData[i];
+	//}
 	return unfinishedMatches;
 }
 

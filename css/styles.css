@@ -95,9 +95,13 @@ h2, h1 {
   font-weight: normal;
 }
 
-.match-win:hover {
+.match-win {
     background-color: #ff9900;
     font-weight: normal;
+}
+
+.match-win:hover {
+    background-color: #ff6600;
 }
 
 .match-lost {

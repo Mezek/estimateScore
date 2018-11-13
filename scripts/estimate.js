@@ -63,18 +63,22 @@ app.controller('mainCtrl', function ($scope, $http) {
 
 	$scope.clickResult = 0;
 	$scope.futureMatches = new Map();
-	$scope.setFutureMatch = function(oneMatch) {
+	$scope.setFutureMatch = function(clickedMatch) {
+		let oneMatch = clickedMatch;
+		$scope.choiceDone = oneMatch.teamKey;
 		$scope.clickResult++;
 		if ($scope.clickResult === 4)
 			$scope.clickResult = 0;
+		oneMatch.matchResult = $scope.clickResult;
 		$scope.futureMatches.set(oneMatch.teamKey, oneMatch);
 		//console.log($scope.futureMatches.size);
 		//$scope.futureMatches.forEach((value, key) => console.log(`key: ${key}, value: ${value}`));
 			//console.log(`${teamKey}` + ` ` + $scope.clickResult);
 		//// ;
-		for (const value of $scope.futureMatches){
-			console.log(value);
+		for (const [key,value] of $scope.futureMatches){
+		//	console.log(value.matchResult);
 		}
+		$scope.plannedMatches = buildPlannedWithFuture($scope.plannedMatches, $scope.futureMatches);
 	};
 });
 
