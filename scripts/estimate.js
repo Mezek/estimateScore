@@ -62,23 +62,33 @@ app.controller('mainCtrl', function ($scope, $http) {
 	};
 
 	$scope.clickResult = 0;
+	$scope.lastValue = -1;
+	$scope.isResult = [];
 	$scope.futureMatches = new Map();
-	$scope.setFutureMatch = function(clickedMatch) {
+	$scope.setFutureMatch = function(id, clickedMatch) {
+		//$scope.scoreTable = getScoreTable(self.jdMatches, self.jdTeams);
 		let oneMatch = clickedMatch;
-		$scope.choiceDone = oneMatch.teamKey;
+		if ($scope.lastValue !== id)
+			$scope.clickResult = oneMatch.matchResult;
 		$scope.clickResult++;
 		if ($scope.clickResult === 4)
 			$scope.clickResult = 0;
+		$scope.lastValue = id;
+		$scope.isResult[id] = $scope.clickResult;
 		oneMatch.matchResult = $scope.clickResult;
 		$scope.futureMatches.set(oneMatch.teamKey, oneMatch);
-		//console.log($scope.futureMatches.size);
-		//$scope.futureMatches.forEach((value, key) => console.log(`key: ${key}, value: ${value}`));
-			//console.log(`${teamKey}` + ` ` + $scope.clickResult);
-		//// ;
+		self.enhTabData = self.jdMatches;
+		self.enhTabData.push({
+			"cycle": 0,
+			"round": 0,
+			"match": [1, 6],
+			"score": [7, 0]
+		});
+		$scope.scoreTable = getScoreTable(self.enhTabData, self.jdTeams);
+
 		for (const [key,value] of $scope.futureMatches){
-		//	console.log(value.matchResult);
+			//
 		}
-		$scope.plannedMatches = buildPlannedWithFuture($scope.plannedMatches, $scope.futureMatches);
 	};
 });
 
