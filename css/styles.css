@@ -95,23 +95,25 @@ h2, h1 {
   font-weight: normal;
 }
 
+.match-win:hover, .match-deuce:hover, .match-lost:hover, .match-unset:hover {
+    background-color: #bbbbbb;
+}
 .match-win {
     background-color: #ff9900;
     font-weight: normal;
 }
 
-.match-win:hover {
-    background-color: #ff6600;
+.match-deuce, .match-unset:active {
+    background-color: #ff66cc;
+    font-weight: normal;
 }
 
 .match-lost {
     background-color: #0066ff;
     font-weight: normal;
 }
-
-.match-deuce {
-    background-color: #ff66cc;
-    font-weight: normal;
+.match-lost:active, .match-deuce:active, .match-win:active {
+    background-color: #eeeeee;
 }
 
 .footer {

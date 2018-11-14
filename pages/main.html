@@ -99,10 +99,10 @@
 		<br />
 		<div ng-repeat="n in plannedMatches" id="{{n.teamKey}}" class="row font-smaller80" ng-show="! showPlanned">
 			<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{n.teamClass1}}'), 'not-clicked': (clickTeam != '{{n.teamClass1}}')}"><span>{{n.teamName1}}</span></div>
-			<div class="col-md-auto text-center" ng-click="setFutureMatch($index, n)"
+			<div class="col-md-auto text-center match-unset" ng-click="setFutureMatch($index, n)"
 				 ng-class="{'match-win': isResult[$index] == 1,
 				 			'match-deuce': isResult[$index] == 2,
-							 'match-lost': isResult[$index] == 3}"> &infin; : &infin; </div>
+							'match-lost': isResult[$index] == 3}"> &infin; {{n.matchResult}} &infin; </div>
 			<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{n.teamClass2}}'), 'not-clicked': (clickTeam != '{{n.teamClass2}}')}">{{n.teamName2}}</div>
 		</div>
 	</div>
