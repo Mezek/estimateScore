@@ -37,20 +37,20 @@ app.controller('mainCtrl', function ($scope, $http) {
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;
 			$scope.jdYears = jsonData.data.years;
-			self.jdTeams = jsonData.data.teams;
-			self.jdMatches = jsonData.data.scores;
-			$scope.finishedMatches = getFinishedMatches(self.jdMatches, self.jdTeams);
-			$scope.plannedMatches = getUnfinishedMatches(3, 8, self.jdMatches, self.jdTeams);
-			$scope.scoreTable = getScoreTable(self.jdMatches, self.jdTeams);
-			//$scope.futureMatches = getScoreTable(self.jdMatches, self.jdTeams);
+			$scope.jdTeams = jsonData.data.teams;
+			$scope.jdMatches = jsonData.data.scores;
+			$scope.finishedMatches = getFinishedMatches($scope.jdMatches, $scope.jdTeams);
+			$scope.plannedMatches = getUnfinishedMatches(3, 8, $scope.jdMatches, $scope.jdTeams);
+			$scope.scoreTable = getScoreTable($scope.jdMatches, $scope.jdTeams);
+			//$scope.futureMatches = getScoreTable($scope.jdMatches, $scope.jdTeams);
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");
 		});
 
 	$scope.toggleTeam = function(clickParameter) {
 		$scope.clickTeam = '';
-		for (let i = 0; i < self.jdTeams.length; i++) {
-			let teamcs = 'team' + self.jdTeams[i].id;
+		for (let i = 0; i < $scope.jdTeams.length; i++) {
+			let teamcs = 'team' + $scope.jdTeams[i].id;
 			if (clickParameter === teamcs)
 				$scope.clickTeam = teamcs;
 		}
@@ -66,7 +66,7 @@ app.controller('mainCtrl', function ($scope, $http) {
 	$scope.isResult = [];
 	$scope.futureMatches = new Map();
 	$scope.setFutureMatch = function(id, clickedMatch) {
-		//$scope.scoreTable = getScoreTable(self.jdMatches, self.jdTeams);
+		//$scope.scoreTable = getScoreTable($scope.jdMatches, $scope.jdTeams);
 		let oneMatch = clickedMatch;
 		if ($scope.lastValue !== id)
 			$scope.clickResult = oneMatch.matchResult;
@@ -77,18 +77,23 @@ app.controller('mainCtrl', function ($scope, $http) {
 		$scope.isResult[id] = $scope.clickResult;
 		oneMatch.matchResult = $scope.clickResult;
 		$scope.futureMatches.set(oneMatch.teamKey, oneMatch);
-		self.enhTabData = self.jdMatches;
-		self.enhTabData.push({
-			"cycle": 0,
-			"round": 0,
-			"match": [1, 6],
-			"score": [7, 0]
-		});
-		$scope.scoreTable = getScoreTable(self.enhTabData, self.jdTeams);
 
+		$scope.enhTabData = Array.from($scope.jdMatches);
 		for (const [key,value] of $scope.futureMatches){
-			//
+			if (value.matchResult !== 0) {
+				let goal1 = 0;
+				let goal2 = 0;
+				if (value.matchResult === 1) { goal1 = 1; goal2 = 0; }
+				if (value.matchResult === 3) { goal1 = 0; goal2 = 1; }
+				$scope.enhTabData.push({
+					"cycle": 0,
+					"round": 0,
+					"match": [value.teamId1, value.teamId2],
+					"score": [goal1, goal2]
+				});
+			}
 		}
+		$scope.scoreTable = getScoreTable($scope.enhTabData, $scope.jdTeams);
 	};
 });
 
