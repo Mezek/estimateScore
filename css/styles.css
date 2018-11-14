@@ -70,11 +70,11 @@ h2, h1 {
 }
 
 .table-hover tbody tr:hover {
-    background-color: #ff9900;
+    background-color: #ffc164;
 }
 
 .table-hover tbody tr.clicked:hover {
-  background-color: #c67600;
+    background-color: #ffb039;
 }
 
 .table-hover tbody tr.clicked:active {
@@ -86,34 +86,41 @@ h2, h1 {
 }
 
 .clicked {
-  background-color: #ccc;
-  font-weight: bold;
+    background-color: #ccc;
+    font-weight: bold;
 }
 
 .not-clicked {
-  background-color: white;
-  font-weight: normal;
+    background-color: white;
+    font-weight: normal;
 }
 
-.match-win:hover, .match-deuce:hover, .match-lost:hover, .match-unset:hover {
-    background-color: #bbbbbb;
+.match-unset:hover {
+    background-color: #cecece;
 }
-.match-win {
+.match-unset, .match-lost:active {
+    background-color: white;
+}
+
+.match-win:hover {
+    background-color: #c67600;
+}
+.match-win, .match-unset:active {
     background-color: #ff9900;
-    font-weight: normal;
 }
 
-.match-deuce, .match-unset:active {
+.match-deuce:hover {
+    background-color: #ff3bbf;
+}
+.match-deuce, .match-win:active {
     background-color: #ff66cc;
-    font-weight: normal;
 }
 
-.match-lost {
-    background-color: #0066ff;
-    font-weight: normal;
+.match-lost:hover {
+    background-color: #004ab8;
 }
-.match-lost:active, .match-deuce:active, .match-win:active {
-    background-color: #eeeeee;
+.match-lost, .match-deuce:active {
+    background-color: #0066ff;
 }
 
 .footer {
