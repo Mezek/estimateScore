@@ -1,37 +1,37 @@
 p {
-  line-height: 1.6;
-  font-size: 16px;
-  color: #555;
+    line-height: 1.6;
+    font-size: 16px;
+    color: #555;
 }
 
 a {
-  color: #5caed6;
+    color: #5caed6;
 }
 
 .content h2,
 .content h3,
 .content h4,
 .content h5 {
-  color: #555;
-  font-weight: normal;
+    color: #555;
+    font-weight: normal;
 }
 
 h2 {
-  font-size: 22.5px;
+    font-size: 22.5px;
 }
 
 h1 {
-  font-size: 28px;
-  margin-bottom: 16px;
+    font-size: 28px;
+    margin-bottom: 16px;
 }
 
 h2, h1 {
-  color: rgb(102, 102, 102);
-  font-weight: normal;
+    color: rgb(102, 102, 102);
+    font-weight: normal;
 }
 
 .content h2, .content h3, .content h4, .content h5 {
-  margin-top: 0.5em;
+    margin-top: 0.5em;
 }
 
 .font-smaller90 {
@@ -43,8 +43,8 @@ h2, h1 {
 }
 
 .container.main {
-  border-top: 1px solid rgb(212, 212, 212);
-  min-height: 300px;
+    border-top: 1px solid rgb(212, 212, 212);
+    min-height: 300px;
 }
 
 .panel-heading {
@@ -124,30 +124,30 @@ h2, h1 {
 }
 
 .footer {
-  text-align: center;
-  border-top: 1px solid rgb(212, 212, 212);
-  padding: 45px 0 15px;
-  background: #fff;
-  margin-top: 40px;
+    text-align: center;
+    border-top: 1px solid rgb(212, 212, 212);
+    padding: 45px 0 15px;
+    background: #fff;
+    margin-top: 40px;
 }
 
 .footer a {
-  margin-left: 3px;
-  margin-right: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .footer a:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .footer img {
-  border-radius: 3px;
+    border-radius: 3px;
 }
 
 .footer p {
-  color: #555;
-  text-align: center;
-  font-size: 14px;
+    color: #555;
+    text-align: center;
+    font-size: 14px;
 }
 
 .switch-container {
