@@ -19,23 +19,20 @@ app.config(function ($translateProvider) {
 });
 
 app.config(function($routeProvider) {
-    $routeProvider.when('/', {
-		templateUrl : 'pages/main.html',
+    $routeProvider
+    .when('/', {
+        templateUrl : 'pages/main.html',
 		controller  : 'mainCtrl'
-	});
-	$routeProvider.when('/team_WU15', {
-		templateUrl : 'pages/team_WU15.html',
-		controller  : 'wuCtrl'
-	});
-	$routeProvider.when('/next', {
-		templateUrl : 'pages/next.html',
-		controller  : 'nextCtrl'
-	});
+    })
+    .when('/next', {
+        templateUrl : 'pages/next.html',
+        controller  : 'nextCtrl'
+    });
 });
 
 app.controller('mainCtrl', function ($scope, $http) {
 	let self = this;
-    $scope.msg = 'Constructing functions...';
+    $scope.msg = 'Building main tab...';
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;
@@ -105,10 +102,6 @@ app.controller('mainMatches', function ($scope) {
 	$scope.msg = 'Building matches';
 });
 
-app.controller('wuCtrl', function ($scope) {
-	let self = this;
-	$scope.msg = 'Welcome fan of WU15!';
-});
 
 app.controller('nextCtrl', function ($scope) {
     $scope.msg = 'Next Tab message';
@@ -182,22 +175,5 @@ app.controller('tableCtrl', ['$scope', function($scope) {
 	self.unsetHomeTeam = function(tID) {
 		if (self.selectedRow === tID - 1)
 			self.selectedRow = null;
-	};
-	
-	
-	self.submit = function() {
-		if(self.user.id === null){
-			self.user.id = self.id++;
-			console.log('Saving New User', self.user);    
-			self.users.push(self.user);//Or send to server, we will do it in when handling services
-		}else{
-			for(var i = 0; i < self.users.length; i++){
-				if(self.users[i].id === self.user.id) {
-				  self.users[i] = self.user;
-				  break;
-				}
-			}
-		   console.log('User updated with id ', self.user.id);
-		}
 	};
 }]);
