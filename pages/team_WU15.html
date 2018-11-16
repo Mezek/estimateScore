@@ -1,0 +1,89 @@
+<!-- team_wu15.html -->
+
+<div id="test" class="row" ng-controller="mainCtrl">
+<div class="col">
+
+<div id="scoreTable" class="row">
+	<div class="col">
+		<div>
+			<h3>{{ jdYears }}</h3>
+			<div class="panel panel-default">
+				<div class="panel-heading"><span class="lead">{{ jdCategory }}</span></div>
+				<div class="tablecontainer">
+					<table class="table table-condensed table-hover">
+						<thead>
+							<tr>
+								<th>N</th>
+								<th>Team</th>
+								<th>GP</th><!-- Played -->
+								<th>W</th><!-- Won -->
+								<th>D</th><!-- Drawn -->
+								<th>L</th><!-- Lost -->
+								<th>F:A</th><!-- For --> <!-- Against -->
+								<th>GD</th><!-- Goal Difference -->
+								<th>+/-</th>
+								<th>P</th><!-- Points -->
+								<th>Home team</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="row in scoreTable" ng-class="{'clicked': (clickTeam == '{{row.cs}}'), 'not-clicked': (clickTeam != '{{row.cs}}')}"> <!-- | orderBy:'p':true">-->
+								<td>{{ $index+1 }} {{count}}</td>
+								<td>{{row.club}}</td>
+								<td>{{row.gp}}</td>
+								<td>{{row.w}}</td>
+								<td>{{row.d}}</td>
+								<td>{{row.l}}</td>
+								<td>{{row.f}} : {{row.a}}</td>
+								<td>{{row.gd}}</td>
+								<td>{{row.pm}}</td>
+								<td>{{row.p}}</td>
+								<td>
+									<button type="button" ng-click="toggleTeam(row.cs)" class="btn btn-success custom-width">Set</button>
+									<button type="button" ng-click="unsetTeam(row.cs)" class="btn btn-danger custom-width">Unset</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-2">
+		<div class="switches">
+			<div class="switch-container">
+				<div class="switch">
+					<input type="radio" class="switch-input" name="viewF" value="week" id="week" ng-click="showFinished = false">
+					<label for="week" class="switch-label switch-label-off">ON</label>
+					<input type="radio" class="switch-input" name="viewF" value="month" id="month" ng-click="showFinished = true">
+					<label for="month" class="switch-label switch-label-on">OFF</label>
+					<span class="switch-selection"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="font-weight-bold text-center">Finished matches</div><br />
+		<div ng-repeat="m in finishedMatches"  class="row font-smaller80" ng-show="! showFinished">
+			<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{m.teamClass1}}'), 'not-clicked': (clickTeam != '{{m.teamClass1}}')}">{{m.team1}}</div>
+			<div class="col-md-auto text-center">{{m.score1}} : {{m.score2}} </div>
+			<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{m.teamClass2}}'), 'not-clicked': (clickTeam != '{{m.teamClass2}}')}">{{m.team2}}</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+	</div>
+</div>
+
+</div>
+</div>
+
+<div class="row">
+	<div class="col-md-auto text-white">
+		{{ msg }}
+	</div>
+</div>
+

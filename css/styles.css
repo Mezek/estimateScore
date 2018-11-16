@@ -103,7 +103,7 @@ h2, h1 {
 }
 
 .match-win:hover {
-    background-color: #c67600;
+    background-color: #ed9209;
 }
 .match-win, .match-unset:active {
     background-color: #ff9900;
@@ -117,10 +117,10 @@ h2, h1 {
 }
 
 .match-lost:hover {
-    background-color: #004ab8;
+    background-color: #1372ff;
 }
 .match-lost, .match-deuce:active {
-    background-color: #0066ff;
+    background-color: #3c8afc;
 }
 
 .footer {

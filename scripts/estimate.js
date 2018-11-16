@@ -19,20 +19,23 @@ app.config(function ($translateProvider) {
 });
 
 app.config(function($routeProvider) {
-    $routeProvider
-    .when('/', {
-        templateUrl : 'pages/main.html',
+    $routeProvider.when('/', {
+		templateUrl : 'pages/main.html',
 		controller  : 'mainCtrl'
-    })
-    .when('/next', {
-        templateUrl : 'pages/next.html',
-        controller  : 'nextCtrl'
-    });
+	});
+	$routeProvider.when('/team_WU15', {
+		templateUrl : 'pages/team_WU15.html',
+		controller  : 'wuCtrl'
+	});
+	$routeProvider.when('/next', {
+		templateUrl : 'pages/next.html',
+		controller  : 'nextCtrl'
+	});
 });
 
 app.controller('mainCtrl', function ($scope, $http) {
 	let self = this;
-    $scope.msg = 'Building main tab...';
+    $scope.msg = 'Constructing functions...';
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;
@@ -102,6 +105,10 @@ app.controller('mainMatches', function ($scope) {
 	$scope.msg = 'Building matches';
 });
 
+app.controller('wuCtrl', function ($scope) {
+	let self = this;
+	$scope.msg = 'Welcome fan of WU15!';
+});
 
 app.controller('nextCtrl', function ($scope) {
     $scope.msg = 'Next Tab message';
