@@ -19,20 +19,23 @@ app.config(function ($translateProvider) {
 });
 
 app.config(function($routeProvider) {
-    $routeProvider
-    .when('/', {
-        templateUrl : 'pages/main.html',
+	$routeProvider.when('/', {
+		templateUrl : 'pages/main.html',
 		controller  : 'mainCtrl'
-    })
-    .when('/next', {
-        templateUrl : 'pages/next.html',
-        controller  : 'nextCtrl'
-    });
+	})
+	$routeProvider.when('/team_WU15', {
+		templateUrl : 'pages/team_WU15.html',
+		controller  : 'wuCtrl'
+	})
+	$routeProvider.when('/next', {
+		templateUrl : 'pages/next.html',
+		controller  : 'nextCtrl'
+	});
 });
 
 app.controller('mainCtrl', function ($scope, $http) {
 	let self = this;
-    $scope.msg = 'Building main tab...';
+    $scope.msg = 'Constructing functions...';
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;
@@ -47,7 +50,7 @@ app.controller('mainCtrl', function ($scope, $http) {
 			console.warn("Error with reading of data file");
 		});
 
-	$scope.toggleTeam = function(clickParameter) {
+	$scope.setTeam = function(clickParameter) {
 		$scope.clickTeam = '';
 		for (let i = 0; i < $scope.jdTeams.length; i++) {
 			let teamcs = 'team' + $scope.jdTeams[i].id;
@@ -59,6 +62,26 @@ app.controller('mainCtrl', function ($scope, $http) {
 	$scope.unsetTeam = function(clickParameter) {
 		if (clickParameter === $scope.clickTeam)
 			$scope.clickTeam = '';
+	};
+
+	$scope.isToggle = [];
+	$scope.checkedId = 0;
+	$scope.toggleTeam = function(clickParameter) {
+		if ( $scope.checkedId === clickParameter ) {
+			$scope.isToggle[clickParameter] = false;
+			$scope.checkedId = 0;
+			$scope.clickTeam = '';
+			return;
+		}
+		for (let i = 0; i < $scope.jdTeams.length; i++) {
+			if ( i+1 === clickParameter) {
+				$scope.isToggle[i+1] = true;
+				$scope.checkedId = clickParameter;
+				$scope.clickTeam = 'team' + $scope.jdTeams[i].id;
+			} else {
+				$scope.isToggle[i+1] = false;
+			}
+		}
 	};
 
 	$scope.clickResult = 0;
@@ -102,6 +125,10 @@ app.controller('mainMatches', function ($scope) {
 	$scope.msg = 'Building matches';
 });
 
+app.controller('wuCtrl', function ($scope) {
+	let self = this;
+	$scope.msg = 'Welcome fan of WU15!';
+});
 
 app.controller('nextCtrl', function ($scope) {
     $scope.msg = 'Next Tab message';

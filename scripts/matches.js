@@ -174,11 +174,6 @@ function getUnfinishedMatches (nCycle, nTeams, data, teams) {
 	return unfinishedMatches;
 }
 
-function buildFuture (myData) {
-	let predictedMatch = myData;
-	return predictedMatch;
-}
-
 /**
 const tableName = 'user'
 const User = {
