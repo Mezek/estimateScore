@@ -101,6 +101,10 @@ h2, h1 {
     background: #ffffff;
 }
 
+.stripRow .row:hover {
+    background-color: #e2e2e2;
+}
+
 .match-unset:hover {
     background-color: #cecece;
 }

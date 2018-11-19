@@ -81,10 +81,12 @@
 			</div>
 		</div>
 		<br /><br />
-		<div ng-repeat="m in finishedMatches" class="row font-smaller80 row-striped" ng-show="! showFinished">
-			<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{m.teamClass1}}'), 'not-clicked': (clickTeam != '{{m.teamClass1}}')}">{{m.team1}}</div>
-			<div class="col-md-auto text-center">{{m.score1}} : {{m.score2}} </div>
-			<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{m.teamClass2}}'), 'not-clicked': (clickTeam != '{{m.teamClass2}}')}">{{m.team2}}</div>
+		<div class="stripRow mx-5">
+			<div ng-repeat="m in finishedMatches" class="row font-smaller80" ng-show="! showFinished">
+				<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{m.teamClass1}}'), 'not-clicked': (clickTeam != '{{m.teamClass1}}')}">{{m.team1}}</div>
+				<div class="col-md-auto text-center">{{m.score1}} : {{m.score2}} </div>
+				<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{m.teamClass2}}'), 'not-clicked': (clickTeam != '{{m.teamClass2}}')}">{{m.team2}}</div>
+			</div>
 		</div>
 		<br />
 	</div>
@@ -104,7 +106,7 @@
 			</div>
 		</div>
 		<br /><br />
-		<div class="stripRow">
+		<div class="stripRow mx-5">
 			<div ng-repeat="n in plannedMatches" id="{{n.teamKey}}" class="row font-smaller80" ng-show="! showPlanned">
 				<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{n.teamClass1}}'), 'not-clicked': (clickTeam != '{{n.teamClass1}}')}"><span>{{n.teamName1}}</span></div>
 				<div class="col-md-auto text-center match-unset" ng-click="setFutureMatch($index, n)"
