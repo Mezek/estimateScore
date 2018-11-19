@@ -86,20 +86,26 @@ h2, h1 {
 }
 
 .clicked {
-    background-color: #ccc;
+    background-color: #e0e0e0;
     font-weight: bold;
 }
 
 .not-clicked {
-    background-color: white;
     font-weight: normal;
+}
+
+.stripRow .row:nth-of-type(odd) {
+    background-color: #f5f5f5;
+}
+.stripRow .row:nth-of-type(even) {
+    background: #ffffff;
 }
 
 .match-unset:hover {
     background-color: #cecece;
 }
 .match-unset, .match-lost:active {
-    background-color: white;
+    /*background-color: white;*/
 }
 
 .match-win:hover {
@@ -249,10 +255,6 @@ h2, h1 {
     background-image: -ms-linear-gradient(top, #4fc9ee, #3aa2d0);
     background-image: -o-linear-gradient(top, #4fc9ee, #3aa2d0);
     background-image: linear-gradient(top, #4fc9ee, #3aa2d0);
-}
-
-.row-striped:hover {
-    background-color: #fdfdfd;
 }
 
 .onoffswitch {
