@@ -33,7 +33,7 @@ app.config(function($routeProvider) {
 	});
 });
 
-app.controller('mainCtrl', function ($scope, $http) {
+app.controller('mainCtrl', function ($scope, $route, $http) {
 	let self = this;
     $scope.msg = 'Constructing functions...';
 	$http.get("scripts/results.json")
@@ -118,6 +118,10 @@ app.controller('mainCtrl', function ($scope, $http) {
 		}
 		$scope.scoreTable = getScoreTable($scope.enhTabData, $scope.jdTeams);
 	};
+
+	$scope.reloadRoute = function() {
+		$route.reload();
+	}
 });
 
 app.controller('mainMatches', function ($scope) {
