@@ -36,6 +36,8 @@ app.config(function($routeProvider) {
 app.controller('mainCtrl', function ($scope, $route, $http) {
 	let self = this;
     $scope.msg = 'Constructing functions...';
+    $scope.nCycle = 3;
+    $scope.nTeams = 8;
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;
@@ -43,7 +45,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			$scope.jdTeams = jsonData.data.teams;
 			$scope.jdMatches = jsonData.data.scores;
 			$scope.finishedMatches = getFinishedMatches($scope.jdMatches, $scope.jdTeams);
-			$scope.plannedMatches = getUnfinishedMatches(3, 8, $scope.jdMatches, $scope.jdTeams);
+			$scope.plannedMatches = getUnfinishedMatches($scope.nCycle, $scope.nTeams, $scope.jdMatches, $scope.jdTeams);
 			$scope.scoreTable = getScoreTable($scope.jdMatches, $scope.jdTeams);
 			//$scope.futureMatches = getScoreTable($scope.jdMatches, $scope.jdTeams);
 		}, function (jsonData) {
@@ -71,6 +73,8 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			$scope.isToggle[clickParameter] = false;
 			$scope.checkedId = 0;
 			$scope.clickTeam = '';
+			$scope.checkedName = '';
+			$scope.oneTeamLefts = null;
 			return;
 		}
 		for (let i = 0; i < $scope.jdTeams.length; i++) {
@@ -82,6 +86,8 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 				$scope.isToggle[i+1] = false;
 			}
 		}
+		$scope.checkedName = getNameFromId($scope.checkedId, $scope.jdTeams);
+		$scope.oneTeamLefts = $scope.nCycle*($scope.nTeams - 1) - $scope.scoreTable[$scope.checkedId-1].gp;
 	};
 
 	$scope.clickResult = 0;
@@ -117,6 +123,10 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			}
 		}
 		$scope.scoreTable = getScoreTable($scope.enhTabData, $scope.jdTeams);
+		if ($scope.checkedId !== 0) {
+			// display column values
+			$scope.oneTeamLefts = $scope.nCycle*($scope.nTeams - 1) - $scope.scoreTable[$scope.checkedId - 1].gp;
+		}
 	};
 
 	$scope.reloadRoute = function() {

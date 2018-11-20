@@ -174,20 +174,10 @@ function getUnfinishedMatches (nCycle, nTeams, data, teams) {
 	return unfinishedMatches;
 }
 
-/**
-const tableName = 'user'
-const User = {
-	getOne (userId) {
-		return knex(tableName)
-			.where({ id: userId })
-			.first()
+function getNameFromId (id, teams) {
+	let teamName = '';
+	for(let i = 0; i < teams.length; i++) {
+		if (id === teams[i].id) teamName = teams[i].city;
 	}
-};
-
-// route handler (eg. server/routes/user/get.js)
-function getUserRouteHandler (req, res) {
-	const { userId } = req.params;
-	User.getOne(userId)
-		.then((user) => res.json(user))
+	return teamName;
 }
-**/
