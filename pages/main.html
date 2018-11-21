@@ -49,7 +49,7 @@
 								<td>
 									<div class="onoffswitch">
 										<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="tableonoffswitch{{row.tid}}" 
-											ng-model="isToggle[row.tid]" ng-click="toggleTeam(row.tid)">
+											ng-model="isToggled[row.tid]" ng-click="toggleTeam(row.tid)">
 										<label class="onoffswitch-label" for="tableonoffswitch{{row.tid}}">
 											<span class="onoffswitch-inner"></span>
 											<span class="onoffswitch-switch"></span>
@@ -128,7 +128,7 @@
 		<div class="border-light font-smaller80 p-1 match-deuce">2: draw</div>
 		<div class="border-light font-smaller80 p-1 match-lost">3: defeat</div>
 		<br />
-		<div>
+		<div ng-show="showLeftMatches">
 			<h5>{{checkedName}}</h5>
 			<div>Must play: {{oneTeamLefts}}</div>
 		</div>

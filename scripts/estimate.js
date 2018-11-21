@@ -66,28 +66,33 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			$scope.clickTeam = '';
 	};
 
-	$scope.isToggle = [];
+	$scope.isToggled = [];
 	$scope.checkedId = 0;
+	$scope.showLeftMatches = false;
 	$scope.toggleTeam = function(clickParameter) {
+		// double click to untoggle team
 		if ( $scope.checkedId === clickParameter ) {
-			$scope.isToggle[clickParameter] = false;
+			$scope.isToggled[clickParameter] = false;
 			$scope.checkedId = 0;
 			$scope.clickTeam = '';
 			$scope.checkedName = '';
 			$scope.oneTeamLefts = null;
+			$scope.showLeftMatches = false;
 			return;
 		}
+		// continue with click
 		for (let i = 0; i < $scope.jdTeams.length; i++) {
 			if ( i+1 === clickParameter) {
-				$scope.isToggle[i+1] = true;
+				$scope.isToggled[i+1] = true;
 				$scope.checkedId = clickParameter;
 				$scope.clickTeam = 'team' + $scope.jdTeams[i].id;
 			} else {
-				$scope.isToggle[i+1] = false;
+				$scope.isToggled[i+1] = false;
 			}
 		}
 		$scope.checkedName = getNameFromId($scope.checkedId, $scope.jdTeams);
-		$scope.oneTeamLefts = $scope.nCycle*($scope.nTeams - 1) - $scope.scoreTable[$scope.checkedId-1].gp;
+		$scope.oneTeamLefts = $scope.nCycle*($scope.nTeams - 1) - $scope.scoreTable[$scope.checkedId - 1].gp;
+		$scope.showLeftMatches = true;
 	};
 
 	$scope.clickResult = 0;
