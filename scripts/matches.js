@@ -1,9 +1,9 @@
 // Get all matches
-function createAllMatches (nCycle = 1, nTeams = 2) {
-	const numOfEvents = nCycle*nTeams*(nTeams-1)/2;
+function createAllMatches (nCycles = 1, nTeams = 2) {
+	const numOfEvents = nCycles*nTeams*(nTeams-1)/2;
 	let allMatches = new Map();
 	let nKey = 0;
-	for(let i = 1; i < nCycle+1; i++) {
+	for(let i = 1; i < nCycles+1; i++) {
 		for(let j = 1; j < nTeams; j++) {
 			for(let k = j+1; k < nTeams+1; k++) {
 				allMatches.set(nKey, [i, j, k]);
@@ -38,8 +38,8 @@ function getFinishedMatches (data, teams) {
 	return finishedMatches;
 }
 
-function getScoreTable (data, teams) {
-	let dataDone = data;
+function getScoreTable (cycles, matches, teams) {
+	let dataDone = matches;
 	let scoreTable = [];
 	let nRound = [];
 	let nWin = [];
@@ -102,10 +102,11 @@ function getScoreTable (data, teams) {
 		//if (nAst[i] < 10) nAst[i] = "\xa0\xa0" + nAst[i];
 		nGD[i] = nFor[i] - nAst[i];
 		nPts[i] = 3*nWin[i] + nDrawn[i];
-	}	
+	}
+	let nAG = cycles*(teams.length - 1);
 	for (let i = 0; i < teams.length; i++) {
-		scoreTable[i] = {tid: teams[i].id, cs: 'team' + teams[i].id,
-			club: teams[i].name, gp: nRound[i], w: nWin[i], d: nDrawn[i],
+		scoreTable[i] = {tid: teams[i].id, cs: 'team' + teams[i].id, club: teams[i].name,
+			allg: nAG, gp: nRound[i], w: nWin[i], d: nDrawn[i],
 			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i]};
 	}
 	// prepared for more sophisticated score sort
@@ -150,8 +151,8 @@ function getPlanned (allMatches, alreadyPlayed) {
 }
 
 // Get unfinished matches
-function getUnfinishedMatches (nCycle, nTeams, data, teams) {
-	let allMatches = createAllMatches(nCycle, nTeams);
+function getUnfinishedMatches (nCycles, nTeams, data, teams) {
+	let allMatches = createAllMatches(nCycles, nTeams);
 	let alreadyPlayed = getAlreadyPlayed(data);
 	let futurePlayed = getPlanned(allMatches, alreadyPlayed);
 	let regTeams = new Map();
@@ -180,4 +181,9 @@ function getNameFromId (id, teams) {
 		if (id === teams[i].id) teamName = teams[i].city;
 	}
 	return teamName;
+}
+
+function getGP (id, tableData) {
+	let gp = tableData[id].allg - tableData[id].gp;
+	return gp;
 }

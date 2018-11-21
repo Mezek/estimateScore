@@ -2,6 +2,7 @@
 	"authors"  : "mezek",
 	"years"    : "2018/19",
 	"category" : "WU15",
+	"cycles"   : 3,
 	"teams": [{
 			"id": 1,
 			"name": "ŠK Slovan Bratislava futbal",

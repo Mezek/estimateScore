@@ -35,19 +35,19 @@ app.config(function($routeProvider) {
 
 app.controller('mainCtrl', function ($scope, $route, $http) {
 	let self = this;
-    $scope.msg = 'Constructing functions...';
-    $scope.nCycle = 3;
-    $scope.nTeams = 8;
+	$scope.msg = 'Constructing functions...';
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;
 			$scope.jdYears = jsonData.data.years;
+			$scope.nCycles = jsonData.data.cycles;
 			$scope.jdTeams = jsonData.data.teams;
+			$scope.nTeams = $scope.jdTeams.length;
 			$scope.jdMatches = jsonData.data.scores;
 			$scope.finishedMatches = getFinishedMatches($scope.jdMatches, $scope.jdTeams);
-			$scope.plannedMatches = getUnfinishedMatches($scope.nCycle, $scope.nTeams, $scope.jdMatches, $scope.jdTeams);
-			$scope.scoreTable = getScoreTable($scope.jdMatches, $scope.jdTeams);
-			//$scope.futureMatches = getScoreTable($scope.jdMatches, $scope.jdTeams);
+			$scope.plannedMatches = getUnfinishedMatches($scope.nCycles, $scope.nTeams, $scope.jdMatches, $scope.jdTeams);
+			$scope.scoreTable = getScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
+			//$scope.futureMatches = getScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");
 		});
@@ -90,9 +90,9 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 				$scope.isToggled[i+1] = false;
 			}
 		}
-		$scope.checkedName = getNameFromId($scope.checkedId, $scope.jdTeams);
-		$scope.oneTeamLefts = $scope.nCycle*($scope.nTeams - 1) - $scope.scoreTable[$scope.checkedId - 1].gp;
 		$scope.showLeftMatches = true;
+		$scope.checkedName = getNameFromId($scope.checkedId, $scope.jdTeams);
+		$scope.oneTeamLefts = getGP($scope.checkedId - 1, $scope.scoreTable);
 	};
 
 	$scope.clickResult = 0;
@@ -100,7 +100,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 	$scope.isResult = [];
 	$scope.futureMatches = new Map();
 	$scope.setFutureMatch = function(id, clickedMatch) {
-		//$scope.scoreTable = getScoreTable($scope.jdMatches, $scope.jdTeams);
+		//$scope.scoreTable = getScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
 		let oneMatch = clickedMatch;
 		if ($scope.lastValue !== id)
 			$scope.clickResult = oneMatch.matchResult;
@@ -127,11 +127,11 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 				});
 			}
 		}
-		$scope.scoreTable = getScoreTable($scope.enhTabData, $scope.jdTeams);
-		if ($scope.checkedId !== 0) {
-			// display column values
-			$scope.oneTeamLefts = $scope.nCycle*($scope.nTeams - 1) - $scope.scoreTable[$scope.checkedId - 1].gp;
-		}
+		$scope.scoreTable = getScoreTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams);
+		//if ($scope.checkedId !== 0) {
+			// possible mismatch of ID and TID
+			$scope.oneTeamLefts = getGP($scope.checkedId - 1, $scope.scoreTable);
+		//}
 	};
 
 	$scope.reloadRoute = function() {
