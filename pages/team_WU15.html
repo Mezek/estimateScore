@@ -58,29 +58,29 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2">
-		<div class="switches">
-			<div class="switch-container">
-				<div class="switch">
-					<input type="radio" class="switch-input" name="viewF" value="week" id="week" ng-click="showFinished = false">
-					<label for="week" class="switch-label switch-label-off">ON</label>
-					<input type="radio" class="switch-input" name="viewF" value="month" id="month" ng-click="showFinished = true">
-					<label for="month" class="switch-label switch-label-on">OFF</label>
-					<span class="switch-selection"></span>
-				</div>
+	<div class="col-sm-6">
+		<b>Finished matches</b>&nbsp;
+		<div class="switch-container">
+			<div class="onoffswitch2">
+				<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="finishedMtch"
+					   ng-init="showFinished = false" ng-click="showFinished = !showFinished" checked>
+				<label class="onoffswitch2-label" for="finishedMtch">
+					<span class="onoffswitch2-inner"></span>
+					<span class="onoffswitch2-switch"></span>
+				</label>
+			</div>
+		</div>
+		<br /><br />
+		<div class="stripRow mx-5">
+			<div ng-repeat="m in finishedMatches"  class="row font-smaller80" ng-show="! showFinished">
+				<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{m.teamClass1}}'), 'not-clicked': (clickTeam != '{{m.teamClass1}}')}">{{m.team1}}</div>
+				<div class="col-md-auto text-center">{{m.score1}} : {{m.score2}} </div>
+				<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{m.teamClass2}}'), 'not-clicked': (clickTeam != '{{m.teamClass2}}')}">{{m.team2}}</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-6">
-		<div class="font-weight-bold text-center">Finished matches</div><br />
-		<div ng-repeat="m in finishedMatches"  class="row font-smaller80" ng-show="! showFinished">
-			<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{m.teamClass1}}'), 'not-clicked': (clickTeam != '{{m.teamClass1}}')}">{{m.team1}}</div>
-			<div class="col-md-auto text-center">{{m.score1}} : {{m.score2}} </div>
-			<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{m.teamClass2}}'), 'not-clicked': (clickTeam != '{{m.teamClass2}}')}">{{m.team2}}</div>
-		</div>
-	</div>
 
-	<div class="col-sm-4">
+	<div class="col-sm-6">
 	</div>
 </div>
 

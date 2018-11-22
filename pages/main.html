@@ -23,7 +23,7 @@
 					<table class="table table-condensed table-hover">
 						<thead>
 							<tr>
-								<th>N</th>
+								<th>No.</th>
 								<th>Team</th>
 								<th>GP</th><!-- Played -->
 								<th>W</th><!-- Won -->
@@ -37,7 +37,7 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="row in scoreTable" ng-class="{'clicked': (clickTeam == '{{row.cs}}'), 'not-clicked': (clickTeam != '{{row.cs}}')}"> <!-- | orderBy:'p':true">-->
-								<td>{{$index + 1}} {{checkedTid}}</td>
+								<td>{{$index + 1}}</td>
 								<td>{{row.club}}</td>
 								<td>{{row.gp}}</td>
 								<td>{{row.w}}</td>
