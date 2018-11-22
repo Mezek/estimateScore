@@ -37,7 +37,7 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="row in scoreTable" ng-class="{'clicked': (clickTeam == '{{row.cs}}'), 'not-clicked': (clickTeam != '{{row.cs}}')}"> <!-- | orderBy:'p':true">-->
-								<td>{{ $index+1 }} {{count}}</td>
+								<td>{{$index + 1}} {{checkedTid}}</td>
 								<td>{{row.club}}</td>
 								<td>{{row.gp}}</td>
 								<td>{{row.w}}</td>
@@ -96,9 +96,9 @@
 			<!-- <button type="button" ng-click="showPlanned = ! showPlanned" class="btn btn-success custom-width">On/Off</button>-->
 			<div class="switch-container">
 				<div class="onoffswitch2">
-					<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="plannedMtch" 
+					<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="plannedMatch"
 						ng-init="showPlanned = false" ng-click="showPlanned = !showPlanned" checked>
-					<label class="onoffswitch2-label" for="plannedMtch">
+					<label class="onoffswitch2-label" for="plannedMatch">
 						<span class="onoffswitch2-inner"></span>
 						<span class="onoffswitch2-switch"></span>
 					</label>

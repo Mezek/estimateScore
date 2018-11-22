@@ -183,7 +183,12 @@ function getNameFromId (id, teams) {
 	return teamName;
 }
 
-function getGP (id, tableData) {
-	let gp = tableData[id].allg - tableData[id].gp;
+function getGP (tid, tableData) {
+	let gp = null;
+	for(let i = 0; i < tableData.length; i++) {
+		if (tableData[i].tid === tid) {
+			gp = tableData[i].allg - tableData[i].gp;
+		}
+	}
 	return gp;
 }

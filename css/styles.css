@@ -55,16 +55,7 @@ h2, h1 {
 	padding: 2px;
 }
 
-.tablecontainer .btn, .switches .btn {
-	padding: 2px 5px;
-}
-
-.tablecontainer .team-unset {
-	background-color: white;
-	font-weight: normal;
-}
-
-.tablecontainer .team-set, .testClass {
+.testClass {
 	background-color: #ccc;
 	font-weight: bold;
 }

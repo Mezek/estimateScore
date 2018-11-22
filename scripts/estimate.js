@@ -52,28 +52,15 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			console.warn("Error with reading of data file");
 		});
 
-	$scope.setTeam = function(clickParameter) {
-		$scope.clickTeam = '';
-		for (let i = 0; i < $scope.jdTeams.length; i++) {
-			let teamcs = 'team' + $scope.jdTeams[i].id;
-			if (clickParameter === teamcs)
-				$scope.clickTeam = teamcs;
-		}
-	};
-
-	$scope.unsetTeam = function(clickParameter) {
-		if (clickParameter === $scope.clickTeam)
-			$scope.clickTeam = '';
-	};
-
 	$scope.isToggled = [];
-	$scope.checkedId = 0;
+	$scope.checkedTid = 0;
 	$scope.showLeftMatches = false;
+
 	$scope.toggleTeam = function(clickParameter) {
 		// double click to untoggle team
-		if ( $scope.checkedId === clickParameter ) {
+		if ( $scope.checkedTid === clickParameter ) {
 			$scope.isToggled[clickParameter] = false;
-			$scope.checkedId = 0;
+			$scope.checkedTid = 0;
 			$scope.clickTeam = '';
 			$scope.checkedName = '';
 			$scope.oneTeamLefts = null;
@@ -84,31 +71,31 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 		for (let i = 0; i < $scope.jdTeams.length; i++) {
 			if ( i+1 === clickParameter) {
 				$scope.isToggled[i+1] = true;
-				$scope.checkedId = clickParameter;
+				$scope.checkedTid = clickParameter;
 				$scope.clickTeam = 'team' + $scope.jdTeams[i].id;
 			} else {
 				$scope.isToggled[i+1] = false;
 			}
 		}
 		$scope.showLeftMatches = true;
-		$scope.checkedName = getNameFromId($scope.checkedId, $scope.jdTeams);
-		$scope.oneTeamLefts = getGP($scope.checkedId - 1, $scope.scoreTable);
+		$scope.checkedName = getNameFromId($scope.checkedTid, $scope.jdTeams);
+		$scope.oneTeamLefts = getGP($scope.checkedTid, $scope.scoreTable);
 	};
 
 	$scope.clickResult = 0;
 	$scope.lastValue = -1;
 	$scope.isResult = [];
 	$scope.futureMatches = new Map();
-	$scope.setFutureMatch = function(id, clickedMatch) {
-		//$scope.scoreTable = getScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
-		let oneMatch = clickedMatch;
-		if ($scope.lastValue !== id)
+
+	$scope.setFutureMatch = function(valIndex, matchData) {
+		let oneMatch = matchData;
+		if ($scope.lastValue !== valIndex)
 			$scope.clickResult = oneMatch.matchResult;
 		$scope.clickResult++;
 		if ($scope.clickResult === 4)
 			$scope.clickResult = 0;
-		$scope.lastValue = id;
-		$scope.isResult[id] = $scope.clickResult;
+		$scope.lastValue = valIndex;
+		$scope.isResult[valIndex] = $scope.clickResult;
 		oneMatch.matchResult = $scope.clickResult;
 		$scope.futureMatches.set(oneMatch.teamKey, oneMatch);
 
@@ -128,9 +115,9 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			}
 		}
 		$scope.scoreTable = getScoreTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams);
-		//if ($scope.checkedId !== 0) {
+		//if ($scope.checkedTid !== 0) {
 			// possible mismatch of ID and TID
-			$scope.oneTeamLefts = getGP($scope.checkedId - 1, $scope.scoreTable);
+			$scope.oneTeamLefts = getGP($scope.checkedTid, $scope.scoreTable);
 		//}
 	};
 

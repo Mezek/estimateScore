@@ -39,8 +39,14 @@
 								<td>{{row.pm}}</td>
 								<td>{{row.p}}</td>
 								<td>
-									<button type="button" ng-click="setTeam(row.cs)" class="btn btn-success custom-width">Set</button>
-									<button type="button" ng-click="unsetTeam(row.cs)" class="btn btn-danger custom-width">Unset</button>
+									<div class="onoffswitch">
+										<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="tableonoffswitch{{row.tid}}"
+											   ng-model="isToggled[row.tid]" ng-click="toggleTeam(row.tid)">
+										<label class="onoffswitch-label" for="tableonoffswitch{{row.tid}}">
+											<span class="onoffswitch-inner"></span>
+											<span class="onoffswitch-switch"></span>
+										</label>
+									</div>
 								</td>
 							</tr>
 						</tbody>
