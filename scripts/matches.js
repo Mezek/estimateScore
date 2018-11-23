@@ -192,3 +192,15 @@ function getGP (tid, tableData) {
 	}
 	return gp;
 }
+
+// TODO: function scoreSort(): URČENIE PORADIA DRUŽSTIEV V TABUĽKE
+// • vyšší počet bodov
+// • vyšší počet bodov zo vzájomných zápasov
+// • gólový rozdiel, potom gólový pomer zo súčtu daných a inkasovaných gólov vo vzájomných zápasoch
+// • gólový rozdiel a následne pomer zo všetkých zápasov
+
+// TODO: odhad či bude ohrozené prvé miesto pre tím No. 1
+
+// TODO: odhad či je šanca na prvé miesto pre daný tím
+
+// TODO: definitoricky jasné a závisiace na výsledkoch
