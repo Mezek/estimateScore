@@ -204,3 +204,9 @@ function getGP (tid, tableData) {
 // TODO: odhad či je šanca na prvé miesto pre daný tím
 
 // TODO: definitoricky jasné a závisiace na výsledkoch
+
+// TODO: 2. Vyšší počet bodů získaný ve vzájemných utkáních v základní části
+// 3. Brankový rozdíl ze vzájemných utkání v základní části
+// 4. Vyšší počet vstřelených branek ve vzájemných utkáních v základní části
+// 5. Vyšší brankový rozdíl ze všech utkání v celé soutěži (včetně nadstavbové části)
+// 6. Vyšší počet vstřelených branek v celé soutěži
