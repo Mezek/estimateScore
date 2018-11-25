@@ -105,7 +105,8 @@ function getScoreTable (cycles, matches, teams) {
 	}
 	let nAG = cycles*(teams.length - 1);
 	for (let i = 0; i < teams.length; i++) {
-		scoreTable[i] = {tid: teams[i].id, cs: 'team' + teams[i].id, club: teams[i].name,
+		scoreTable[i] = {pos: 0, tid: teams[i].id,
+			cs: 'team' + teams[i].id, club: teams[i].name,
 			allg: nAG, gp: nRound[i], w: nWin[i], d: nDrawn[i],
 			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i]};
 	}
