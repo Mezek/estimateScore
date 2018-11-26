@@ -112,6 +112,7 @@ function getScoreTable (cycles, matches, teams) {
 	}
 	// prepared for more sophisticated score sort
 	scoreTable.sort(compare);
+	scoreTable = reArrangePos(scoreTable);
 	//$.getScript("scripts/matches.js", function() {
 	//	console.log(createAllMatches(2, 5));
 	//});
@@ -168,7 +169,7 @@ function getUnfinishedMatches (nCycles, nTeams, data, teams) {
 			teamId2: value[2],
 			teamName1: regTeams.get(value[1]),
 			teamName2: regTeams.get(value[2]),
-			teamClass1: 'team' + value[1],
+				teamClass1: 'team' + value[1],
 			teamClass2: 'team' + value[2],
 			teamKey: key
 		});
@@ -192,6 +193,14 @@ function getGP (tid, tableData) {
 		}
 	}
 	return gp;
+}
+
+function reArrangePos (tableData) {
+	let reData = tableData;
+	for(let i = 0; i < reData.length; i++) {
+		reData[i].pos = i;
+	}
+	return reData;
 }
 
 // TODO: function scoreSort(): URČENIE PORADIA DRUŽSTIEV V TABUĽKE
