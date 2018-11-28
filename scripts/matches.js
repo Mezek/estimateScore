@@ -105,14 +105,16 @@ function getScoreTable (cycles, matches, teams) {
 	}
 	let nAG = cycles*(teams.length - 1);
 	for (let i = 0; i < teams.length; i++) {
-		scoreTable[i] = {pos: 0, tid: teams[i].id,
+		scoreTable[i] = { pos: 0, tid: teams[i].id,
 			cs: 'team' + teams[i].id, club: teams[i].name,
 			allg: nAG, gp: nRound[i], w: nWin[i], d: nDrawn[i],
-			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i]};
+			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i],
+			winner: 0 };
 	}
 	// prepared for more sophisticated score sort
 	scoreTable.sort(compare);
 	scoreTable = reArrangePos(scoreTable);
+	scoreTable[0].winner = getWinner(scoreTable);
 	//$.getScript("scripts/matches.js", function() {
 	//	console.log(createAllMatches(2, 5));
 	//});
@@ -169,7 +171,7 @@ function getUnfinishedMatches (nCycles, nTeams, data, teams) {
 			teamId2: value[2],
 			teamName1: regTeams.get(value[1]),
 			teamName2: regTeams.get(value[2]),
-				teamClass1: 'team' + value[1],
+			teamClass1: 'team' + value[1],
 			teamClass2: 'team' + value[2],
 			teamKey: key
 		});
@@ -196,11 +198,22 @@ function getGP (tid, tableData) {
 }
 
 function reArrangePos (tableData) {
-	let reData = tableData;
-	for(let i = 0; i < reData.length; i++) {
-		reData[i].pos = i;
+	let reArrangeData = tableData;
+	for(let i = 0; i < reArrangeData.length; i++) {
+		reArrangeData[i].pos = i;
 	}
-	return reData;
+	return reArrangeData;
+}
+
+function getWinner (tableData) {
+	let t0 = tableData[0];
+	let t1 = tableData[1];
+	let teamsDiff = t0.p - t1.p;
+	let mGain = (t0.allg - t0.gp)*3;
+	let diff = 0;
+	if (mGain < teamsDiff) diff = 1;
+	//console.log(mGain, teamsDiff);
+	return diff;
 }
 
 // TODO: function scoreSort(): URČENIE PORADIA DRUŽSTIEV V TABUĽKE
