@@ -109,7 +109,7 @@ function getScoreTable (cycles, matches, teams) {
 			cs: 'team' + teams[i].id, club: teams[i].name,
 			allg: nAG, gp: nRound[i], w: nWin[i], d: nDrawn[i],
 			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i],
-			winner: 0 };
+			winner: false };
 	}
 	// prepared for more sophisticated score sort
 	scoreTable.sort(compare);
@@ -160,7 +160,7 @@ function getUnfinishedMatches (nCycles, nTeams, data, teams) {
 	let alreadyPlayed = getAlreadyPlayed(data);
 	let futurePlayed = getPlanned(allMatches, alreadyPlayed);
 	let regTeams = new Map();
-	for(let i = 0; i < teams.length; i++) {
+	for (let i = 0; i < teams.length; i++) {
 		regTeams.set(teams[i].id, teams[i].city);
 	}
 	let unfinishedMatches = [];
@@ -181,7 +181,7 @@ function getUnfinishedMatches (nCycles, nTeams, data, teams) {
 
 function getNameFromId (id, teams) {
 	let teamName = '';
-	for(let i = 0; i < teams.length; i++) {
+	for (let i = 0; i < teams.length; i++) {
 		if (id === teams[i].id) teamName = teams[i].city;
 	}
 	return teamName;
@@ -189,7 +189,7 @@ function getNameFromId (id, teams) {
 
 function getGP (tid, tableData) {
 	let gp = null;
-	for(let i = 0; i < tableData.length; i++) {
+	for (let i = 0; i < tableData.length; i++) {
 		if (tableData[i].tid === tid) {
 			gp = tableData[i].allg - tableData[i].gp;
 		}
@@ -199,21 +199,20 @@ function getGP (tid, tableData) {
 
 function reArrangePos (tableData) {
 	let reArrangeData = tableData;
-	for(let i = 0; i < reArrangeData.length; i++) {
+	for (let i = 0; i < reArrangeData.length; i++) {
 		reArrangeData[i].pos = i;
 	}
 	return reArrangeData;
 }
 
 function getWinner (tableData) {
-	let t0 = tableData[0];
-	let t1 = tableData[1];
-	let teamsDiff = t0.p - t1.p;
-	let mGain = (t0.allg - t0.gp)*3;
-	let diff = 0;
-	if (mGain < teamsDiff) diff = 1;
-	//console.log(mGain, teamsDiff);
-	return diff;
+	let winResult = true;
+	for (let i = 1; i < tableData.length; i++) {
+		let td = tableData[i];
+		let possiblePoints = td.p + 3*(td.allg - td.gp);
+		if (possiblePoints > tableData[0].p) winResult = false;
+	}
+	return winResult;
 }
 
 // TODO: function scoreSort(): URČENIE PORADIA DRUŽSTIEV V TABUĽKE
