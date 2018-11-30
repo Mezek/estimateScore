@@ -1,1 +1,2 @@
-Compare teams with the same score.
+- Compare teams with the same score.
+- Five last matches status.
