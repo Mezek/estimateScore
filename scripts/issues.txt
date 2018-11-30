@@ -1,0 +1,1 @@
+Compare teams with the same score.
