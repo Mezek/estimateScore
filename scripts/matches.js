@@ -1,3 +1,20 @@
+// TodoModel as a Factory Function
+function TodoModel(){
+    var todos = [];
+    var lastChange = null;
+        
+    function addToPrivateList(){
+        console.log("addToPrivateList"); 
+    }
+    function add() { console.log("add"); }
+    function reload(){}
+    
+    return Object.freeze({
+        add,
+        reload
+    });
+}
+
 // Get all matches
 function createAllMatches (nCycles = 1, nTeams = 2) {
 	const numOfEvents = nCycles*nTeams*(nTeams-1)/2;
@@ -220,10 +237,6 @@ function getWinner (tableData) {
 // • vyšší počet bodov zo vzájomných zápasov
 // • gólový rozdiel, potom gólový pomer zo súčtu daných a inkasovaných gólov vo vzájomných zápasoch
 // • gólový rozdiel a následne pomer zo všetkých zápasov
-
-// TODO: odhad či bude ohrozené prvé miesto pre tím No. 1
-
-// TODO: odhad či je šanca na prvé miesto pre daný tím
 
 // TODO: definitoricky jasné a závisiace na výsledkoch
 
