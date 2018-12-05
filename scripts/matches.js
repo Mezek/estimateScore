@@ -72,6 +72,7 @@ function createScoreTable (cycles, matches, teams) {
 			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i],
 			winner: false };
 	}
+
 	return scoreTable;
 }
 
@@ -109,24 +110,28 @@ function createAllMatches (nCycles = 1, nTeams = 2) {
 }
 
 // Get finished matches
-function getFinishedMatches (data, teams) {
+function getFinishedMatches (matches, teams) {
 	let regTeams = new Map();
 	for(let i = 0; i < teams.length; i++) {
 		regTeams.set(teams[i].id, teams[i].city);
 	}
 	let finishedMatches = [];
-	for (let i = 0; i < data.length; i++) {
-		finishedMatches[i] = {cycle: data[i].cycle,
-			round: data[i].round,
-			score1: data[i].score[0],
-			score2: data[i].score[1],
-			team1: regTeams.get(data[i].match[0]),
-			team2: regTeams.get(data[i].match[1]),
-			teamClass1: 'team' + data[i].match[0],
-			teamClass2: 'team' + data[i].match[1]
+	for (let i = 0; i < matches.length; i++) {
+		finishedMatches[i] = {cycle: matches[i].cycle,
+			round: matches[i].round,
+			score1: matches[i].score[0],
+			score2: matches[i].score[1],
+			team1: regTeams.get(matches[i].match[0]),
+			team2: regTeams.get(matches[i].match[1]),
+			teamClass1: 'team' + matches[i].match[0],
+			teamClass2: 'team' + matches[i].match[1]
 		};
 	}
 	return finishedMatches;
+}
+
+function getMutualResults() {
+
 }
 
 function getScoreTable (cycles, matches, teams) {
