@@ -73,7 +73,19 @@ function createScoreTable (cycles, matches, teams) {
 			winner: false };
 	}
 
-	return scoreTable;
+	function getData(){
+		return scoreTable;
+	}
+
+	function getSort(){
+		console.log("Sorting...");
+		return "SSS";
+	}
+
+	return {
+		getData: getData,
+		getSort: getSort
+	}
 }
 
 function comparePoints(a,b) {
@@ -85,9 +97,10 @@ function comparePoints(a,b) {
 }
 
 function createSortedTable (cycles, matches, teams) {
-	let sortedTable = createScoreTable(cycles, matches, teams);
-	sortedTable.sort(comparePoints);
-	return sortedTable;
+	let scoreTable = createScoreTable(cycles, matches, teams);
+	let tableSortPoints = scoreTable.getData();
+	//tableSort = tableSort.sort(comparePoints);
+	return tableSortPoints.sort(comparePoints);
 }
 
 // Get all matches
