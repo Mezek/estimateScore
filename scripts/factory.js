@@ -1,65 +1,62 @@
-function Factory() {
-    this.createEmployee = function (type) {
-        var employee;
- 
-        if (type === "fulltime") {
-            employee = new FullTime();
-        } else if (type === "parttime") {
-            employee = new PartTime();
-        } else if (type === "temporary") {
-            employee = new Temporary();
-        } else if (type === "contractor") {
-            employee = new Contractor();
-        }
- 
-        employee.type = type;
- 
-        employee.say = function () {
-            log.add(this.type + ": rate " + this.hourly + "/hour");
-        }
- 
-        return employee;
-    }
+
+function createCar(numberOfDoors){
+	var numberOfWheels = 4;
+
+	function describe(){
+		return "I have " + numberOfWheels +
+			" wheels and " + numberOfDoors + " doors.";
+	}
+
+	return {
+		describe: describe
+	};
 }
- 
-var FullTime = function () {
-    this.hourly = "$12";
-};
- 
-var PartTime = function () {
-    this.hourly = "$11";
-};
- 
-var Temporary = function () {
-    this.hourly = "$10";
-};
- 
-var Contractor = function () {
-    this.hourly = "$15";
-};
- 
-// log helper
-var log = (function () {
-    var log = "";
- 
-    return {
-        add: function (msg) { log += msg + "\n"; },
-        show: function () { alert(log); log = ""; }
-    }
-})();
- 
-function run() {
-    var employees = [];
-    var factory = new Factory();
- 
-    employees.push(factory.createEmployee("fulltime"));
-    employees.push(factory.createEmployee("parttime"));
-    employees.push(factory.createEmployee("temporary"));
-    employees.push(factory.createEmployee("contractor"));
-    
-    for (var i = 0, len = employees.length; i < len; i++) {
-        employees[i].say();
-    }
- 
-    log.show();
+
+function createOdometer(){
+	var mileage = 100;
+
+	function increment(numberOfMiles){ mileage += numberOfMiles; }
+	function report(){ return mileage; }
+
+	return {
+		increment: increment,
+		report: report
+	}
+}
+
+function createCarWithOdometer(numberOfDoors){
+	var odometer = createOdometer();
+	var car = createCar(numberOfDoors);
+
+	car.drive = function(numberOfMiles){
+		odometer.increment(numberOfMiles);
+	};
+
+	car.mileage = function(){
+		return "car has driven " + odometer.report() + " miles";
+	};
+
+	return car;
+}
+
+let mycar = createCarWithOdometer(10);
+console.log(mycar.mileage());
+
+
+//------------------
+
+function createScoreTable() {
+	var teams = [];
+	var result = null;
+
+	function showTeams() {
+		console.log(teams);
+	}
+	function add() { console.log("Add"); }
+	function reload(){}
+
+	return Object.freeze({
+		add,
+		reload,
+	});
 }

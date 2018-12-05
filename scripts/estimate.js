@@ -22,11 +22,11 @@ app.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'pages/main.html',
 		controller  : 'mainCtrl'
-	})
+	});
 	$routeProvider.when('/team_WU15', {
 		templateUrl : 'pages/team_WU15.html',
 		controller  : 'wuCtrl'
-	})
+	});
 	$routeProvider.when('/next', {
 		templateUrl : 'pages/next.html',
 		controller  : 'nextCtrl'
@@ -46,11 +46,15 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			$scope.jdMatches = jsonData.data.scores;
 			$scope.finishedMatches = getFinishedMatches($scope.jdMatches, $scope.jdTeams);
 			$scope.plannedMatches = getUnfinishedMatches($scope.nCycles, $scope.nTeams, $scope.jdMatches, $scope.jdTeams);
-			$scope.scoreTable = getScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
 			//$scope.futureMatches = getScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
+
+			$scope.scoreTable = createSortedTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
+			//console.log($scope.newScoreTable);
+
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");
 		});
+
 
 	$scope.isToggled = [];
 	$scope.checkedTid = 0;

@@ -1,18 +1,92 @@
-// TodoModel as a Factory Function
-function TodoModel(){
-    var todos = [];
-    var lastChange = null;
-        
-    function addToPrivateList(){
-        console.log("addToPrivateList"); 
-    }
-    function add() { console.log("add"); }
-    function reload(){}
-    
-    return Object.freeze({
-        add,
-        reload
-    });
+// Factory for Table
+function createScoreTable (cycles, matches, teams) {
+	let dataDone = matches;
+	let scoreTable = [];
+	let nRound = [];
+	let nWin = [];
+	let nLost = [];
+	let nDrawn = [];
+	let nFor = [];
+	let nAst = [];
+	let nGD = [];
+	let nPts = [];
+	let nPM = [];
+	for (let i = 0; i < teams.length; i++) {
+		nRound[i] = 0;
+		nWin[i] = 0;
+		nLost[i] = 0;
+		nDrawn[i] = 0;
+		nFor[i] = 0;
+		nAst[i] = 0;
+		nPM[i] = 0;
+		for (let j = 0; j < dataDone.length; j++) {
+			if (dataDone[j].match[0] === teams[i].id) {
+				nRound[i] = nRound[i] + 1;
+				let doma = dataDone[j].score[0];
+				let host = dataDone[j].score[1];
+				nFor[i] += doma;
+				nAst[i] += host;
+				if ( doma > host ) {
+					nWin[i] = nWin[i] + 1;
+					nPM[i] += 0;
+				}
+				if ( doma === host ) {
+					nDrawn[i] = nDrawn[i] + 1;
+					nPM[i] -= 2;
+				}
+				if ( doma < host ) {
+					nLost[i] = nLost[i] + 1;
+					nPM[i] -= 3;
+				}
+			}
+			if (dataDone[j].match[1] === teams[i].id) {
+				nRound[i] = nRound[i] + 1;
+				let doma = dataDone[j].score[1];
+				let host = dataDone[j].score[0];
+				nFor[i] += doma;
+				nAst[i] += host;
+				if ( doma > host ) {
+					nWin[i] = nWin[i] + 1;
+					nPM[i] += 3;
+				}
+				if ( doma === host ) {
+					nDrawn[i] = nDrawn[i] + 1;
+					nPM[i] += 1;
+				}
+				if ( doma < host ) {
+					nLost[i] = nLost[i] + 1;
+					nPM[i] += 0;
+				}
+			}
+		}
+		//if (nFor[i] < 10) nFor[i] = "\xa0\xa0" + nFor[i];
+		//if (nAst[i] < 10) nAst[i] = "\xa0\xa0" + nAst[i];
+		nGD[i] = nFor[i] - nAst[i];
+		nPts[i] = 3*nWin[i] + nDrawn[i];
+	}
+	let nAG = cycles*(teams.length - 1);
+	for (let i = 0; i < teams.length; i++) {
+		scoreTable[i] = { pos: 0, tid: teams[i].id,
+			cs: 'team' + teams[i].id, club: teams[i].name,
+			allg: nAG, gp: nRound[i], w: nWin[i], d: nDrawn[i],
+			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i],
+			winner: false };
+	}
+	return scoreTable;
+}
+
+function comparePoints(a,b) {
+	if (a.p < b.p)
+		return +1;
+	if (a.p > b.p)
+		return -1;
+	return 0;
+}
+
+function createSortedTable (cycles, matches, teams) {
+	let sortedTable = createScoreTable(cycles, matches, teams);
+	sortedTable.sort(comparePoints);
+	return sortedTable;
 }
 
 // Get all matches
@@ -28,7 +102,7 @@ function createAllMatches (nCycles = 1, nTeams = 2) {
 			}
 		}
 	}
-	if (nKey != numOfEvents) {
+	if (nKey !== numOfEvents) {
 		console.error("Check number of matches in FCN: " + createAllMatches.name);
 	}
 	return allMatches;
@@ -129,7 +203,7 @@ function getScoreTable (cycles, matches, teams) {
 			winner: false };
 	}
 	// prepared for more sophisticated score sort
-	scoreTable.sort(compare);
+	scoreTable.sort(comparePoints);
 	scoreTable = reArrangePos(scoreTable);
 	scoreTable[0].winner = getWinner(scoreTable);
 	//$.getScript("scripts/matches.js", function() {
@@ -137,14 +211,6 @@ function getScoreTable (cycles, matches, teams) {
 	//});
 	return scoreTable;
 }
-
-function compare(a,b) {
-	if (a.p < b.p)
-		return +1;
-	if (a.p > b.p)
-		return -1;
-	return 0;
-};
 
 function getAlreadyPlayed (data) {
 	let alreadyPlayed = new Map();
