@@ -99,18 +99,18 @@ function comparePoints(a,b) {
 function createSortedTable (cycles, matches, teams) {
 	let scoreTable = createScoreTable(cycles, matches, teams);
 	let tableSortPoints = scoreTable.getData();
-	//tableSort = tableSort.sort(comparePoints);
-	return tableSortPoints.sort(comparePoints);
+	//tableSortPoints.sort(comparePoints);
+	return tableSortPoints;
 }
 
-// Get all matches
-function createAllMatches (nCycles = 1, nTeams = 2) {
-	const numOfEvents = nCycles*nTeams*(nTeams-1)/2;
+// Counters of matches
+function createAllMatches (cycles = 1, teams = 2) {
+	const numOfEvents = cycles*teams*(teams-1)/2;
 	let allMatches = new Map();
 	let nKey = 0;
-	for(let i = 1; i < nCycles+1; i++) {
-		for(let j = 1; j < nTeams; j++) {
-			for(let k = j+1; k < nTeams+1; k++) {
+	for(let i = 1; i < cycles+1; i++) {
+		for(let j = 1; j < teams; j++) {
+			for(let k = j+1; k < teams+1; k++) {
 				allMatches.set(nKey, [i, j, k]);
 				nKey++;
 			}
@@ -141,6 +141,56 @@ function getFinishedMatches (matches, teams) {
 		};
 	}
 	return finishedMatches;
+}
+
+function getAlreadyPlayed (data) {
+	let alreadyPlayed = new Map();
+	for (let i = 0; i < data.length; i++) {
+		alreadyPlayed.set(i, [data[i].cycle, data[i].match[0], data[i].match[1]]);
+	}
+	return alreadyPlayed;
+}
+
+function getPlanned (allMatches, alreadyPlayed) {
+	let futurePlayed = new Map(allMatches);
+	for (const [key,value] of alreadyPlayed) {
+		let comparedValue = value;
+		if (value[1] > value[2]) {
+			comparedValue = [value[0], value[2], value[1]];
+		}
+		for (const [key2,value2] of futurePlayed) {
+			if (value2.every(function(value, index) { return value === comparedValue[index]})) {
+				futurePlayed.delete(key2);
+				break;
+			}
+		}
+	}
+	return futurePlayed;
+}
+
+// Get unfinished matches
+function getUnfinishedMatches (nCycles, nTeams, data, teams) {
+	let allMatches = createAllMatches(nCycles, nTeams);
+	let alreadyPlayed = getAlreadyPlayed(data);
+	let futurePlayed = getPlanned(allMatches, alreadyPlayed);
+	let regTeams = new Map();
+	for (let i = 0; i < teams.length; i++) {
+		regTeams.set(teams[i].id, teams[i].city);
+	}
+	let unfinishedMatches = [];
+	for (const [key,value] of futurePlayed.entries()) {
+		unfinishedMatches.push({
+			matchResult: 0,
+			teamId1: value[1],
+			teamId2: value[2],
+			teamName1: regTeams.get(value[1]),
+			teamName2: regTeams.get(value[2]),
+			teamClass1: 'team' + value[1],
+			teamClass2: 'team' + value[2],
+			teamKey: key
+		});
+	}
+	return unfinishedMatches;
 }
 
 function getMutualResults() {
@@ -228,56 +278,6 @@ function getScoreTable (cycles, matches, teams) {
 	//	console.log(createAllMatches(2, 5));
 	//});
 	return scoreTable;
-}
-
-function getAlreadyPlayed (data) {
-	let alreadyPlayed = new Map();
-	for (let i = 0; i < data.length; i++) {
-		alreadyPlayed.set(i, [data[i].cycle, data[i].match[0], data[i].match[1]]);
-	}
-	return alreadyPlayed;
-}
-
-function getPlanned (allMatches, alreadyPlayed) {
-	let futurePlayed = new Map(allMatches);
-	for (const [key,value] of alreadyPlayed) {
-		let comparedValue = value;
-		if (value[1] > value[2]) {
-			comparedValue = [value[0], value[2], value[1]];
-		}
-		for (const [key2,value2] of futurePlayed) {
-			if (value2.every(function(value, index) { return value === comparedValue[index]})) {
-				futurePlayed.delete(key2);
-				break;
-			}
-		}
-	}
-	return futurePlayed;
-}
-
-// Get unfinished matches
-function getUnfinishedMatches (nCycles, nTeams, data, teams) {
-	let allMatches = createAllMatches(nCycles, nTeams);
-	let alreadyPlayed = getAlreadyPlayed(data);
-	let futurePlayed = getPlanned(allMatches, alreadyPlayed);
-	let regTeams = new Map();
-	for (let i = 0; i < teams.length; i++) {
-		regTeams.set(teams[i].id, teams[i].city);
-	}
-	let unfinishedMatches = [];
-	for (const [key,value] of futurePlayed.entries()) {
-		unfinishedMatches.push({
-			matchResult: 0,
-			teamId1: value[1],
-			teamId2: value[2],
-			teamName1: regTeams.get(value[1]),
-			teamName2: regTeams.get(value[2]),
-			teamClass1: 'team' + value[1],
-			teamClass2: 'team' + value[2],
-			teamKey: key
-		});
-	}
-	return unfinishedMatches;
 }
 
 function getNameFromId (id, teams) {

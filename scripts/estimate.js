@@ -46,13 +46,11 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			$scope.jdMatches = jsonData.data.scores;
 			$scope.finishedMatches = getFinishedMatches($scope.jdMatches, $scope.jdTeams);
 			$scope.plannedMatches = getUnfinishedMatches($scope.nCycles, $scope.nTeams, $scope.jdMatches, $scope.jdTeams);
-			//$scope.futureMatches = getScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
+			//$scope.futureMatches = getScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeam
 
-			$scope.scoreTable = createSortedTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
-			//console.log($scope.newScoreTable);
-
-			$scope.testTable = createScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
-			console.log($scope.testTable.getSort());
+			self.basicTable = createScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
+			$scope.scoreTable = self.basicTable.getData();
+			//console.log(self.basicTable.getSort());
 
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");
