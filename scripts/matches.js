@@ -192,7 +192,7 @@ function createSortedTable(cycles, matches, teams) {
 	let tableView = createScoreTable(cycles, matches, teams).getData();
 
 	tableView.sort(comparePoints);
-	reArrangePosition(tableView);
+	checkPosition(tableView);
 	tableView[0].winner = getWinner(tableView);
 
 	return tableView;
@@ -216,7 +216,10 @@ function getGP(tid, tableData) {
 	return gp;
 }
 
-function reArrangePosition(tableData) {
+function checkPosition(tableData) {
+	let teamPoints = tableData.map(function(value){ return value.p });
+	console.log(teamPoints);
+
 	let reArrangeData = tableData;
 	for (let i = 0; i < reArrangeData.length; i++) {
 		reArrangeData[i].pos = i;
@@ -247,7 +250,8 @@ function getMutualResults() {
 
 // TODO: definitoricky jasné a závisiace na výsledkoch
 
-// TODO: 2. Vyšší počet bodů získaný ve vzájemných utkáních v základní části
+// TODO: 1. points
+// 2. Vyšší počet bodů získaný ve vzájemných utkáních v základní části
 // 3. Brankový rozdíl ze vzájemných utkání v základní části
 // 4. Vyšší počet vstřelených branek ve vzájemných utkáních v základní části
 // 5. Vyšší brankový rozdíl ze všech utkání v celé soutěži (včetně nadstavbové části)
