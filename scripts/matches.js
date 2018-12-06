@@ -192,7 +192,7 @@ function createSortedTable(cycles, matches, teams) {
 	let tableView = createScoreTable(cycles, matches, teams).getData();
 
 	tableView.sort(comparePoints);
-	checkPosition(tableView);
+	if (checkPoints(tableView)) {console.log('Same points')};
 	tableView[0].winner = getWinner(tableView);
 
 	return tableView;
@@ -216,15 +216,23 @@ function getGP(tid, tableData) {
 	return gp;
 }
 
-function checkPosition(tableData) {
-	let teamPoints = tableData.map(function(value){ return value.p });
-	console.log(teamPoints);
-
-	let reArrangeData = tableData;
-	for (let i = 0; i < reArrangeData.length; i++) {
-		reArrangeData[i].pos = i;
+function checkPoints(tableData) {
+	let samePoints = false;
+	tableData[0].pos = 0;
+	for (let i = 1; i < tableData.length; i++) {
+		//tableData[i].pos = tableData[i-1].pos + 1;
+		while (tableData[i].p === tableData[i-1].p) {
+			tableData[i].pos = tableData[i-1].pos;
+			samePoints = true;
+			i++;
+		}
+		tableData[i].pos = i;
 	}
-	return reArrangeData;
+	//let teamPoints = tableData.map(function(value){ return value.p });
+	//console.log(teamPoints);
+	//let teamPositions = tableData.map(function(value){ return value.pos });
+	//console.log(teamPositions);
+	return samePoints;
 }
 
 function getWinner(tableData) {
