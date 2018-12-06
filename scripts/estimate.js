@@ -50,7 +50,11 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 
 			self.basicTable = createScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
 			$scope.scoreTable = self.basicTable.getData();
-			//console.log(self.basicTable.getSort());
+
+			self.allMatches = createMatches($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
+			$scope.playedMatches = self.allMatches.getFinishedMatches();
+
+			//console.log($scope.playedMatches);
 
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");

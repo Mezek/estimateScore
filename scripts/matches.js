@@ -103,7 +103,55 @@ function createSortedTable (cycles, matches, teams) {
 	return tableSortPoints;
 }
 
-// Counters of matches
+// Factory for matches
+function createMatches (cycles, matches, teams) {
+	const numOfTeams = teams.length;
+	const numOfEvents = cycles*numOfTeams*(numOfTeams - 1)/2;
+	let allMatches = new Map();
+	let finishedMatches = new Map();
+	let unFinishedMatches = new Map();
+
+	let nKey = 0;
+	for (let i = 1; i < cycles+1; i++) {
+		for (let j = 1; j < numOfTeams; j++) {
+			for (let k = j+1; k < numOfTeams+1; k++) {
+				let uniqueKey = i + ':' + j + ':' + k;
+				allMatches.set(uniqueKey, [i, j, k]);
+				nKey++;
+			}
+		}
+	}
+	if (nKey !== numOfEvents) {
+		console.error("Check number of matches in FCN: " + createAllMatches.name);
+	}
+
+	for (let i = 1; i < matches.length; i++) {
+		let nC = matches[i].cycle;
+		let nT1 = matches[i].match[0];
+		let nT2 = matches[i].match[1];
+		let playKey = nC + ':' + nT1 + ':' + nT2;
+		finishedMatches.set(playKey, [nC, nT1, nT2]);
+	}
+
+	function getAllMatches(){
+		return allMatches;
+	}
+
+	function getFinishedMatches(){
+		return finishedMatches;
+	}
+
+	function getUnFinishedMatches(){
+		return unFinishedMatches;
+	}
+
+	return {
+		getAllMatches: getAllMatches,
+		getFinishedMatches: getFinishedMatches,
+		getUnFinishedMatches: getUnFinishedMatches
+	}
+}
+
 function createAllMatches (cycles = 1, teams = 2) {
 	const numOfEvents = cycles*teams*(teams-1)/2;
 	let allMatches = new Map();
