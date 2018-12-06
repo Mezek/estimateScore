@@ -122,10 +122,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			}
 		}
 		$scope.scoreTable = createSortedTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams);
-		//if ($scope.checkedTid !== 0) {
-			// possible mismatch of ID and TID
-			$scope.oneTeamLefts = getGP($scope.checkedTid, $scope.scoreTable);
-		//}
+		$scope.oneTeamLefts = getGP($scope.checkedTid, $scope.scoreTable);
 	};
 
 	$scope.reloadRoute = function() {

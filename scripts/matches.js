@@ -96,10 +96,6 @@ function createMatches (cycles, matches, teams) {
 	}
 }
 
-function getMutualResults() {
-
-}
-
 // Factory for Table
 function createScoreTable (cycles, matches, teams) {
 	let dataDone = matches;
@@ -192,7 +188,7 @@ function comparePoints(a,b) {
 	return 0;
 }
 
-function createSortedTable (cycles, matches, teams) {
+function createSortedTable(cycles, matches, teams) {
 	let tableView = createScoreTable(cycles, matches, teams).getData();
 
 	tableView.sort(comparePoints);
@@ -202,7 +198,7 @@ function createSortedTable (cycles, matches, teams) {
 	return tableView;
 }
 
-function getNameFromId (id, teams) {
+function getNameFromId(id, teams) {
 	let teamName = '';
 	for (let i = 0; i < teams.length; i++) {
 		if (id === teams[i].id) teamName = teams[i].city;
@@ -210,7 +206,7 @@ function getNameFromId (id, teams) {
 	return teamName;
 }
 
-function getGP (tid, tableData) {
+function getGP(tid, tableData) {
 	let gp = null;
 	for (let i = 0; i < tableData.length; i++) {
 		if (tableData[i].tid === tid) {
@@ -220,7 +216,7 @@ function getGP (tid, tableData) {
 	return gp;
 }
 
-function reArrangePosition (tableData) {
+function reArrangePosition(tableData) {
 	let reArrangeData = tableData;
 	for (let i = 0; i < reArrangeData.length; i++) {
 		reArrangeData[i].pos = i;
@@ -228,7 +224,7 @@ function reArrangePosition (tableData) {
 	return reArrangeData;
 }
 
-function getWinner (tableData) {
+function getWinner(tableData) {
 	let winResult = true;
 	for (let i = 1; i < tableData.length; i++) {
 		let td = tableData[i];
@@ -237,6 +233,11 @@ function getWinner (tableData) {
 	}
 	return winResult;
 }
+
+function getMutualResults() {
+
+}
+
 
 // TODO: function scoreSort(): URČENIE PORADIA DRUŽSTIEV V TABUĽKE
 // • vyšší počet bodov
