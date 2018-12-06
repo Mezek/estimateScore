@@ -44,17 +44,15 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			$scope.jdTeams = jsonData.data.teams;
 			$scope.nTeams = $scope.jdTeams.length;
 			$scope.jdMatches = jsonData.data.scores;
-			$scope.finishedMatches = getFinishedMatches($scope.jdMatches, $scope.jdTeams);
-			$scope.plannedMatches = getUnfinishedMatches($scope.nCycles, $scope.nTeams, $scope.jdMatches, $scope.jdTeams);
-			//$scope.futureMatches = getScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeam
 
-			self.basicTable = createScoreTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
-			$scope.scoreTable = self.basicTable.getData();
+			self.basicTable = createSortedTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
+			$scope.scoreTable = self.basicTable;
 
 			self.allMatches = createMatches($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
-			$scope.playedMatches = self.allMatches.getFinishedMatches();
+			$scope.finishedMatches = self.allMatches.createFinishedMatches();
+			$scope.plannedMatches = self.allMatches.createPlannedMatches();
 
-			//console.log($scope.playedMatches);
+			//console.log($scope.finishedMatches);
 
 		}, function (jsonData) {
 			console.warn("Error with reading of data file");
@@ -123,7 +121,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 				});
 			}
 		}
-		$scope.scoreTable = getScoreTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams);
+		$scope.scoreTable = createSortedTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams);
 		//if ($scope.checkedTid !== 0) {
 			// possible mismatch of ID and TID
 			$scope.oneTeamLefts = getGP($scope.checkedTid, $scope.scoreTable);

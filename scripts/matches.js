@@ -1,3 +1,105 @@
+
+// Factory for matches
+function createMatches (cycles, matches, teams) {
+	const numOfTeams = teams.length;
+	const numOfEvents = cycles*numOfTeams*(numOfTeams - 1)/2;
+	let allMatches = new Map();
+	let finishedMatches = new Map();
+
+	let nKey = 0;
+	for (let i = 1; i < cycles+1; i++) {
+		for (let j = 1; j < numOfTeams; j++) {
+			for (let k = j+1; k < numOfTeams+1; k++) {
+				let uniqueKey = i + ':' + j + ':' + k;
+				allMatches.set(uniqueKey, [i, j, k]);
+				nKey++;
+			}
+		}
+	}
+	if (nKey !== numOfEvents) {
+		console.error("Check number of matches in FCN: " + createMatches.name);
+	}
+
+	for (let i = 0; i < matches.length; i++) {
+		let nC = matches[i].cycle;
+		let nT1 = matches[i].match[0];
+		let nT2 = matches[i].match[1];
+		let playKey = nC + ':' + nT1 + ':' + nT2;
+		finishedMatches.set(playKey, [nC, nT1, nT2]);
+	}
+
+	function getAllMatches(){
+		return allMatches;
+	}
+
+	function getFinishedMatches(){
+		return finishedMatches;
+	}
+
+	function getUnFinishedMatches(){
+		let unFinishedMatches = new Map(getAllMatches());
+		let alreadyPlayed = new Map(getFinishedMatches());
+		alreadyPlayed.forEach(function(value, key) {
+			if (value[1] > value[2]) {
+				key = value[0] + ':' + value[2] + ':' + value[1];
+			}
+			unFinishedMatches.delete(key);
+		});
+		return unFinishedMatches;
+	}
+
+	function createFinishedMatches(){
+		let regTeams = new Map();
+		for (let i = 0; i < teams.length; i++) {
+			regTeams.set(teams[i].id, teams[i].city);
+		}
+		let playedMatches = [];
+		for (let i = 0; i < matches.length; i++) {
+			playedMatches[i] = {cycle: matches[i].cycle,
+				round: matches[i].round,
+				score1: matches[i].score[0],
+				score2: matches[i].score[1],
+				team1: regTeams.get(matches[i].match[0]),
+				team2: regTeams.get(matches[i].match[1]),
+				teamClass1: 'team' + matches[i].match[0],
+				teamClass2: 'team' + matches[i].match[1]
+			};
+		}
+		return playedMatches;
+	}
+
+	function createPlannedMatches(){
+		let futurePlay = getUnFinishedMatches();
+		let regTeams = new Map();
+		for (let i = 0; i < teams.length; i++) {
+			regTeams.set(teams[i].id, teams[i].city);
+		}
+		let futureMatches = [];
+		for (const [key,value] of futurePlay.entries()) {
+			futureMatches.push({
+				matchResult: 0,
+				teamId1: value[1],
+				teamId2: value[2],
+				teamName1: regTeams.get(value[1]),
+				teamName2: regTeams.get(value[2]),
+				teamClass1: 'team' + value[1],
+				teamClass2: 'team' + value[2],
+				teamKey: key
+			});
+		}
+		return futureMatches;
+	}
+
+	return {
+		createFinishedMatches: createFinishedMatches,
+		createPlannedMatches: createPlannedMatches
+	}
+}
+
+function getMutualResults() {
+
+}
+
 // Factory for Table
 function createScoreTable (cycles, matches, teams) {
 	let dataDone = matches;
@@ -77,14 +179,8 @@ function createScoreTable (cycles, matches, teams) {
 		return scoreTable;
 	}
 
-	function getSort(){
-		console.log("Sorting...");
-		return "SSS";
-	}
-
 	return {
 		getData: getData,
-		getSort: getSort
 	}
 }
 
@@ -97,235 +193,13 @@ function comparePoints(a,b) {
 }
 
 function createSortedTable (cycles, matches, teams) {
-	let scoreTable = createScoreTable(cycles, matches, teams);
-	let tableSortPoints = scoreTable.getData();
-	//tableSortPoints.sort(comparePoints);
-	return tableSortPoints;
-}
+	let tableView = createScoreTable(cycles, matches, teams).getData();
 
-// Factory for matches
-function createMatches (cycles, matches, teams) {
-	const numOfTeams = teams.length;
-	const numOfEvents = cycles*numOfTeams*(numOfTeams - 1)/2;
-	let allMatches = new Map();
-	let finishedMatches = new Map();
-	let unFinishedMatches = new Map();
+	tableView.sort(comparePoints);
+	reArrangePosition(tableView);
+	tableView[0].winner = getWinner(tableView);
 
-	let nKey = 0;
-	for (let i = 1; i < cycles+1; i++) {
-		for (let j = 1; j < numOfTeams; j++) {
-			for (let k = j+1; k < numOfTeams+1; k++) {
-				let uniqueKey = i + ':' + j + ':' + k;
-				allMatches.set(uniqueKey, [i, j, k]);
-				nKey++;
-			}
-		}
-	}
-	if (nKey !== numOfEvents) {
-		console.error("Check number of matches in FCN: " + createAllMatches.name);
-	}
-
-	for (let i = 1; i < matches.length; i++) {
-		let nC = matches[i].cycle;
-		let nT1 = matches[i].match[0];
-		let nT2 = matches[i].match[1];
-		let playKey = nC + ':' + nT1 + ':' + nT2;
-		finishedMatches.set(playKey, [nC, nT1, nT2]);
-	}
-
-	function getAllMatches(){
-		return allMatches;
-	}
-
-	function getFinishedMatches(){
-		return finishedMatches;
-	}
-
-	function getUnFinishedMatches(){
-		return unFinishedMatches;
-	}
-
-	return {
-		getAllMatches: getAllMatches,
-		getFinishedMatches: getFinishedMatches,
-		getUnFinishedMatches: getUnFinishedMatches
-	}
-}
-
-function createAllMatches (cycles = 1, teams = 2) {
-	const numOfEvents = cycles*teams*(teams-1)/2;
-	let allMatches = new Map();
-	let nKey = 0;
-	for(let i = 1; i < cycles+1; i++) {
-		for(let j = 1; j < teams; j++) {
-			for(let k = j+1; k < teams+1; k++) {
-				allMatches.set(nKey, [i, j, k]);
-				nKey++;
-			}
-		}
-	}
-	if (nKey !== numOfEvents) {
-		console.error("Check number of matches in FCN: " + createAllMatches.name);
-	}
-	return allMatches;
-}
-
-// Get finished matches
-function getFinishedMatches (matches, teams) {
-	let regTeams = new Map();
-	for(let i = 0; i < teams.length; i++) {
-		regTeams.set(teams[i].id, teams[i].city);
-	}
-	let finishedMatches = [];
-	for (let i = 0; i < matches.length; i++) {
-		finishedMatches[i] = {cycle: matches[i].cycle,
-			round: matches[i].round,
-			score1: matches[i].score[0],
-			score2: matches[i].score[1],
-			team1: regTeams.get(matches[i].match[0]),
-			team2: regTeams.get(matches[i].match[1]),
-			teamClass1: 'team' + matches[i].match[0],
-			teamClass2: 'team' + matches[i].match[1]
-		};
-	}
-	return finishedMatches;
-}
-
-function getAlreadyPlayed (data) {
-	let alreadyPlayed = new Map();
-	for (let i = 0; i < data.length; i++) {
-		alreadyPlayed.set(i, [data[i].cycle, data[i].match[0], data[i].match[1]]);
-	}
-	return alreadyPlayed;
-}
-
-function getPlanned (allMatches, alreadyPlayed) {
-	let futurePlayed = new Map(allMatches);
-	for (const [key,value] of alreadyPlayed) {
-		let comparedValue = value;
-		if (value[1] > value[2]) {
-			comparedValue = [value[0], value[2], value[1]];
-		}
-		for (const [key2,value2] of futurePlayed) {
-			if (value2.every(function(value, index) { return value === comparedValue[index]})) {
-				futurePlayed.delete(key2);
-				break;
-			}
-		}
-	}
-	return futurePlayed;
-}
-
-// Get unfinished matches
-function getUnfinishedMatches (nCycles, nTeams, data, teams) {
-	let allMatches = createAllMatches(nCycles, nTeams);
-	let alreadyPlayed = getAlreadyPlayed(data);
-	let futurePlayed = getPlanned(allMatches, alreadyPlayed);
-	let regTeams = new Map();
-	for (let i = 0; i < teams.length; i++) {
-		regTeams.set(teams[i].id, teams[i].city);
-	}
-	let unfinishedMatches = [];
-	for (const [key,value] of futurePlayed.entries()) {
-		unfinishedMatches.push({
-			matchResult: 0,
-			teamId1: value[1],
-			teamId2: value[2],
-			teamName1: regTeams.get(value[1]),
-			teamName2: regTeams.get(value[2]),
-			teamClass1: 'team' + value[1],
-			teamClass2: 'team' + value[2],
-			teamKey: key
-		});
-	}
-	return unfinishedMatches;
-}
-
-function getMutualResults() {
-
-}
-
-function getScoreTable (cycles, matches, teams) {
-	let dataDone = matches;
-	let scoreTable = [];
-	let nRound = [];
-	let nWin = [];
-	let nLost = [];
-	let nDrawn = [];
-	let nFor = [];
-	let nAst = [];
-	let nGD = [];
-	let nPts = [];
-	let nPM = [];
-	for (let i = 0; i < teams.length; i++) {
-		nRound[i] = 0;
-		nWin[i] = 0;
-		nLost[i] = 0;
-		nDrawn[i] = 0;
-		nFor[i] = 0;
-		nAst[i] = 0;
-		nPM[i] = 0;
-		for (let j = 0; j < dataDone.length; j++) {
-			if (dataDone[j].match[0] === teams[i].id) {
-				nRound[i] = nRound[i] + 1;
-				let doma = dataDone[j].score[0];
-				let host = dataDone[j].score[1];
-				nFor[i] += doma;
-				nAst[i] += host;
-				if ( doma > host ) {
-					nWin[i] = nWin[i] + 1;
-					nPM[i] += 0;
-				}
-				if ( doma === host ) {
-					nDrawn[i] = nDrawn[i] + 1;
-					nPM[i] -= 2;
-				}
-				if ( doma < host ) {
-					nLost[i] = nLost[i] + 1;
-					nPM[i] -= 3;
-				}
-			}
-			if (dataDone[j].match[1] === teams[i].id) {
-				nRound[i] = nRound[i] + 1;
-				let doma = dataDone[j].score[1];
-				let host = dataDone[j].score[0];
-				nFor[i] += doma;
-				nAst[i] += host;
-				if ( doma > host ) {
-					nWin[i] = nWin[i] + 1;
-					nPM[i] += 3;
-				}
-				if ( doma === host ) {
-					nDrawn[i] = nDrawn[i] + 1;
-					nPM[i] += 1;
-				}
-				if ( doma < host ) {
-					nLost[i] = nLost[i] + 1;
-					nPM[i] += 0;
-				}
-			}
-		}
-		//if (nFor[i] < 10) nFor[i] = "\xa0\xa0" + nFor[i];
-		//if (nAst[i] < 10) nAst[i] = "\xa0\xa0" + nAst[i];
-		nGD[i] = nFor[i] - nAst[i];
-		nPts[i] = 3*nWin[i] + nDrawn[i];
-	}
-	let nAG = cycles*(teams.length - 1);
-	for (let i = 0; i < teams.length; i++) {
-		scoreTable[i] = { pos: 0, tid: teams[i].id,
-			cs: 'team' + teams[i].id, club: teams[i].name,
-			allg: nAG, gp: nRound[i], w: nWin[i], d: nDrawn[i],
-			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i],
-			winner: false };
-	}
-	// prepared for more sophisticated score sort
-	scoreTable.sort(comparePoints);
-	scoreTable = reArrangePos(scoreTable);
-	scoreTable[0].winner = getWinner(scoreTable);
-	//$.getScript("scripts/matches.js", function() {
-	//	console.log(createAllMatches(2, 5));
-	//});
-	return scoreTable;
+	return tableView;
 }
 
 function getNameFromId (id, teams) {
@@ -346,7 +220,7 @@ function getGP (tid, tableData) {
 	return gp;
 }
 
-function reArrangePos (tableData) {
+function reArrangePosition (tableData) {
 	let reArrangeData = tableData;
 	for (let i = 0; i < reArrangeData.length; i++) {
 		reArrangeData[i].pos = i;
