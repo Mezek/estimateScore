@@ -175,8 +175,14 @@ function createScoreTable (cycles, matches, teams) {
 		return scoreTable;
 	}
 
+	function hasDuplicates(){
+		let teamPositions = scoreTable.map(function(value){ return value.pos });
+		return (new Set(teamPositions)).size !== teamPositions.length;
+	}
+
 	return {
 		getData: getData,
+		hasDuplicates: hasDuplicates
 	}
 }
 
@@ -188,11 +194,25 @@ function comparePoints(a,b) {
 	return 0;
 }
 
+function comparePositions(a,b) {
+	if (a.pos < b.pos)
+		return -1;
+	if (a.pos > b.pos)
+		return +1;
+	return 0;
+}
+
 function createSortedTable(cycles, matches, teams) {
-	let tableView = createScoreTable(cycles, matches, teams).getData();
+	let scoreTable = createScoreTable(cycles, matches, teams);
+	let tableView = scoreTable.getData();
 
 	tableView.sort(comparePoints);
-	if (checkPoints(tableView)) {console.log('Same points')};
+	checkPoints(tableView);
+
+	if (scoreTable.hasDuplicates()) {console.log('Same points')};
+
+	tableView.sort(comparePositions);
+
 	tableView[0].winner = getWinner(tableView);
 
 	return tableView;
@@ -217,13 +237,10 @@ function getGP(tid, tableData) {
 }
 
 function checkPoints(tableData) {
-	let samePoints = false;
 	tableData[0].pos = 0;
 	for (let i = 1; i < tableData.length; i++) {
-		//tableData[i].pos = tableData[i-1].pos + 1;
 		while (tableData[i].p === tableData[i-1].p) {
 			tableData[i].pos = tableData[i-1].pos;
-			samePoints = true;
 			i++;
 		}
 		tableData[i].pos = i;
@@ -232,11 +249,7 @@ function checkPoints(tableData) {
 	//console.log(teamPoints);
 	//let teamPositions = tableData.map(function(value){ return value.pos });
 	//console.log(teamPositions);
-	return samePoints;
-}
-
-function hasDuplicates(array) {
-	return (new Set(array)).size !== array.length;
+	return tableData;
 }
 
 function hasDuplicatesValues(array) {
