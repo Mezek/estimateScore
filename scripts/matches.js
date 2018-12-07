@@ -208,7 +208,7 @@ function createScoreTable (cycles, matches, teams) {
 	}
 
 	function sortPoints(){
-		scoreTable.sort(comparePoints);
+		scoreTable.sort(perPoints);
 		checkPoints();
 		return hasDuplicates();
 	}
@@ -221,7 +221,7 @@ function createScoreTable (cycles, matches, teams) {
 	}
 }
 
-function comparePoints(a,b) {
+function perPoints(a, b) {
 	if (a.p < b.p)
 		return +1;
 	if (a.p > b.p)
@@ -229,7 +229,7 @@ function comparePoints(a,b) {
 	return 0;
 }
 
-function comparePositions(a,b) {
+function perPositions(a,b) {
 	if (a.pos < b.pos)
 		return -1;
 	if (a.pos > b.pos)
@@ -242,7 +242,7 @@ function createSortedTable(cycles, matches, teams) {
 
 	if (tableView.sortPoints()) {console.log('Same points')}
 
-	//tableView.sort(comparePositions);
+	//tableView.sort(perPositions);
 
 	tableView.getWinner();
 
