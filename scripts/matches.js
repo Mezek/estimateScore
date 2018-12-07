@@ -177,7 +177,7 @@ function createScoreTable (cycles, matches, teams) {
 		}
 	}
 
-	function checkPoints() {
+	function getPositions() {
 		scoreTable[0].pos = 0;
 		for (let i = 1; i < scoreTable.length; i++) {
 			while (scoreTable[i].p === scoreTable[i-1].p) {
@@ -198,9 +198,8 @@ function createScoreTable (cycles, matches, teams) {
 	}
 
 	function getDuplicateValues(){
-		let teamPositions = scoreTable.map(function(value){ return value.pos });
-		console.log(teamPositions);
-
+		//let teamPositions = scoreTable.map(function(value){ return value.pos });
+		//console.log(teamPositions);
 		let sameValues = [];
 		for (let i = 1; i < scoreTable.length; i++) {
 			let oneShot = [];
@@ -208,9 +207,9 @@ function createScoreTable (cycles, matches, teams) {
 				oneShot.push(scoreTable[i].pos);
 				i++;
 			}
-			if (oneShot.length !== 0) {sameValues.push(oneShot)}
+			if (oneShot.length) {sameValues.push(oneShot)}
 		}
-		return sameValues;
+		if (sameValues.length) {return sameValues}
 	}
 
 	function getWinner(){
@@ -225,14 +224,14 @@ function createScoreTable (cycles, matches, teams) {
 
 	function sortPoints(){
 		scoreTable.sort(perPoints);
-		checkPoints();
-		return hasDuplicates();
 	}
 
 	return {
 		getData: getData,
-		getWinner: getWinner,
 		getDuplicateValues: getDuplicateValues,
+		getPositions: getPositions,
+		getWinner: getWinner,
+		hasDuplicates: hasDuplicates,
 		sortPoints: sortPoints
 	}
 }
@@ -256,9 +255,9 @@ function perPositions(a,b) {
 function createSortedTable(cycles, matches, teams) {
 	let tableView = createScoreTable(cycles, matches, teams);
 
-	if (tableView.sortPoints()) { tableView.getDuplicateValues() }
-
-	console.log(tableView.getDuplicateValues());
+	tableView.sortPoints();
+	tableView.getPositions();
+	if (tableView.hasDuplicates()) { console.log(tableView.getDuplicateValues()) }
 
 	tableView.getWinner();
 
