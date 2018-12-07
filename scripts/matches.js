@@ -235,6 +235,22 @@ function checkPoints(tableData) {
 	return samePoints;
 }
 
+function hasDuplicates(array) {
+	return (new Set(array)).size !== array.length;
+}
+
+function hasDuplicatesValues(array) {
+	var valuesSoFar = [];
+	for (var i = 0; i < array.length; ++i) {
+		var value = array[i];
+		if (valuesSoFar.indexOf(value) !== -1) {
+			return true;
+		}
+		valuesSoFar.push(value);
+	}
+	return false;
+}
+
 function getWinner(tableData) {
 	let winResult = true;
 	for (let i = 1; i < tableData.length; i++) {
