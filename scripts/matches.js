@@ -197,6 +197,22 @@ function createScoreTable (cycles, matches, teams) {
 		return (new Set(teamPositions)).size !== teamPositions.length;
 	}
 
+	function getDuplicateValues(){
+		let teamPositions = scoreTable.map(function(value){ return value.pos });
+		console.log(teamPositions);
+
+		let sameValues = [];
+		for (let i = 1; i < scoreTable.length; i++) {
+			let oneShot = [];
+			while (scoreTable[i].pos === scoreTable[i-1].pos) {
+				oneShot.push(scoreTable[i].pos);
+				i++;
+			}
+			if (oneShot.length !== 0) {sameValues.push(oneShot)}
+		}
+		return sameValues;
+	}
+
 	function getWinner(){
 		let winResult = true;
 		for (let i = 1; i < scoreTable.length; i++) {
@@ -216,7 +232,7 @@ function createScoreTable (cycles, matches, teams) {
 	return {
 		getData: getData,
 		getWinner: getWinner,
-		hasDuplicates: hasDuplicates,
+		getDuplicateValues: getDuplicateValues,
 		sortPoints: sortPoints
 	}
 }
@@ -240,9 +256,9 @@ function perPositions(a,b) {
 function createSortedTable(cycles, matches, teams) {
 	let tableView = createScoreTable(cycles, matches, teams);
 
-	if (tableView.sortPoints()) {console.log('Same points')}
+	if (tableView.sortPoints()) { tableView.getDuplicateValues() }
 
-	//tableView.sort(perPositions);
+	console.log(tableView.getDuplicateValues());
 
 	tableView.getWinner();
 
@@ -267,10 +283,10 @@ function getGP(tid, tableData) {
 	return gp;
 }
 
-function hasDuplicatesValues(array) {
+function hasDuplicatesValues(tableData) {
 	let valuesSoFar = [];
-	for (let i = 0; i < array.length; ++i) {
-		let value = array[i];
+	for (let i = 0; i < tableData.length; ++i) {
+		let value = tableData[i];
 		if (valuesSoFar.indexOf(value) !== -1) {
 			return true;
 		}
@@ -280,7 +296,6 @@ function hasDuplicatesValues(array) {
 }
 
 function getMutualResults() {
-
 }
 
 
