@@ -46,7 +46,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			$scope.jdMatches = jsonData.data.scores;
 
 			self.basicTable = createSortedTable($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
-			$scope.scoreTable = self.basicTable;
+			$scope.scoreTable = self.basicTable.getData();
 
 			self.allMatches = createMatches($scope.nCycles, $scope.jdMatches, $scope.jdTeams);
 			$scope.finishedMatches = self.allMatches.createFinishedMatches();
@@ -121,7 +121,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 				});
 			}
 		}
-		$scope.scoreTable = createSortedTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams);
+		$scope.scoreTable = createSortedTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams).getData();
 		$scope.oneTeamLefts = getGP($scope.checkedTid, $scope.scoreTable);
 	};
 

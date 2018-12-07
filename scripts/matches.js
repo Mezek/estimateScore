@@ -171,6 +171,23 @@ function createScoreTable (cycles, matches, teams) {
 			winner: false };
 	}
 
+	function reArrangePositions(){
+		for (let i = 0; i < scoreTable.length; i++) {
+			scoreTable[i].pos = i;
+		}
+	}
+
+	function checkPoints() {
+		scoreTable[0].pos = 0;
+		for (let i = 1; i < scoreTable.length; i++) {
+			while (scoreTable[i].p === scoreTable[i-1].p) {
+				scoreTable[i].pos = scoreTable[i-1].pos;
+				i++;
+			}
+			scoreTable[i].pos = i;
+		}
+	}
+
 	function getData(){
 		return scoreTable;
 	}
@@ -180,9 +197,27 @@ function createScoreTable (cycles, matches, teams) {
 		return (new Set(teamPositions)).size !== teamPositions.length;
 	}
 
+	function getWinner(){
+		let winResult = true;
+		for (let i = 1; i < scoreTable.length; i++) {
+			let td = scoreTable[i];
+			let possiblePoints = td.p + 3*(td.allg - td.gp);
+			if (possiblePoints > scoreTable[0].p) winResult = false;
+		}
+		scoreTable[0].winner = winResult;
+	}
+
+	function sortPoints(){
+		scoreTable.sort(comparePoints);
+		checkPoints();
+		return hasDuplicates();
+	}
+
 	return {
 		getData: getData,
-		hasDuplicates: hasDuplicates
+		getWinner: getWinner,
+		hasDuplicates: hasDuplicates,
+		sortPoints: sortPoints
 	}
 }
 
@@ -203,17 +238,13 @@ function comparePositions(a,b) {
 }
 
 function createSortedTable(cycles, matches, teams) {
-	let scoreTable = createScoreTable(cycles, matches, teams);
-	let tableView = scoreTable.getData();
+	let tableView = createScoreTable(cycles, matches, teams);
 
-	tableView.sort(comparePoints);
-	checkPoints(tableView);
+	if (tableView.sortPoints()) {console.log('Same points')}
 
-	if (scoreTable.hasDuplicates()) {console.log('Same points')};
+	//tableView.sort(comparePositions);
 
-	tableView.sort(comparePositions);
-
-	tableView[0].winner = getWinner(tableView);
+	tableView.getWinner();
 
 	return tableView;
 }
@@ -236,42 +267,16 @@ function getGP(tid, tableData) {
 	return gp;
 }
 
-function checkPoints(tableData) {
-	tableData[0].pos = 0;
-	for (let i = 1; i < tableData.length; i++) {
-		while (tableData[i].p === tableData[i-1].p) {
-			tableData[i].pos = tableData[i-1].pos;
-			i++;
-		}
-		tableData[i].pos = i;
-	}
-	//let teamPoints = tableData.map(function(value){ return value.p });
-	//console.log(teamPoints);
-	//let teamPositions = tableData.map(function(value){ return value.pos });
-	//console.log(teamPositions);
-	return tableData;
-}
-
 function hasDuplicatesValues(array) {
-	var valuesSoFar = [];
-	for (var i = 0; i < array.length; ++i) {
-		var value = array[i];
+	let valuesSoFar = [];
+	for (let i = 0; i < array.length; ++i) {
+		let value = array[i];
 		if (valuesSoFar.indexOf(value) !== -1) {
 			return true;
 		}
 		valuesSoFar.push(value);
 	}
 	return false;
-}
-
-function getWinner(tableData) {
-	let winResult = true;
-	for (let i = 1; i < tableData.length; i++) {
-		let td = tableData[i];
-		let possiblePoints = td.p + 3*(td.allg - td.gp);
-		if (possiblePoints > tableData[0].p) winResult = false;
-	}
-	return winResult;
 }
 
 function getMutualResults() {
