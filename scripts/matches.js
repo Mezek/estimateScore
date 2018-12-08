@@ -171,19 +171,8 @@ function createScoreTable (cycles, matches, teams) {
 			winner: false };
 	}
 
-	function reArrangePositions(){
+	function arrangePositions(){
 		for (let i = 0; i < scoreTable.length; i++) {
-			scoreTable[i].pos = i;
-		}
-	}
-
-	function getPositions() {
-		scoreTable[0].pos = 0;
-		for (let i = 1; i < scoreTable.length; i++) {
-			while (scoreTable[i].p === scoreTable[i-1].p) {
-				scoreTable[i].pos = scoreTable[i-1].pos;
-				i++;
-			}
 			scoreTable[i].pos = i;
 		}
 	}
@@ -222,17 +211,38 @@ function createScoreTable (cycles, matches, teams) {
 		scoreTable[0].winner = winResult;
 	}
 
+	function setPointsToPositions() {
+		scoreTable[0].pos = 0;
+		for (let i = 1; i < scoreTable.length; i++) {
+			while (scoreTable[i].p === scoreTable[i-1].p) {
+				scoreTable[i].pos = scoreTable[i-1].pos;
+				i++;
+			}
+			scoreTable[i].pos = i;
+		}
+	}
+
 	function sortPoints(){
 		scoreTable.sort(perPoints);
+		setPointsToPositions();
+	}
+
+	function sortMutualResults(){
+		let mutual = getDuplicateValues();
+		for (let i = 0; i < mutual.length; i++) {
+			let mutRes = mutual[i];
+			if ( mutRes.length === 1) {
+				console.log(mutRes[0]);
+			} else {console.warn(sortMutualResults.name + ": Array is longer")}
+		}
 	}
 
 	return {
 		getData: getData,
-		getDuplicateValues: getDuplicateValues,
-		getPositions: getPositions,
 		getWinner: getWinner,
 		hasDuplicates: hasDuplicates,
-		sortPoints: sortPoints
+		sortPoints: sortPoints,
+		sortMutualResults: sortMutualResults
 	}
 }
 
@@ -256,8 +266,7 @@ function createSortedTable(cycles, matches, teams) {
 	let tableView = createScoreTable(cycles, matches, teams);
 
 	tableView.sortPoints();
-	tableView.getPositions();
-	if (tableView.hasDuplicates()) { console.log(tableView.getDuplicateValues()) }
+	if (tableView.hasDuplicates()) { tableView.sortMutualResults() }
 
 	tableView.getWinner();
 
@@ -281,22 +290,6 @@ function getGP(tid, tableData) {
 	}
 	return gp;
 }
-
-function hasDuplicatesValues(tableData) {
-	let valuesSoFar = [];
-	for (let i = 0; i < tableData.length; ++i) {
-		let value = tableData[i];
-		if (valuesSoFar.indexOf(value) !== -1) {
-			return true;
-		}
-		valuesSoFar.push(value);
-	}
-	return false;
-}
-
-function getMutualResults() {
-}
-
 
 // TODO: function scoreSort(): URČENIE PORADIA DRUŽSTIEV V TABUĽKE
 // • vyšší počet bodov
