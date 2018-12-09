@@ -98,7 +98,7 @@ function createMatches (cycles, matches, teams) {
 
 // Factory for Table
 function createScoreTable (cycles, matches, teams) {
-	let dataDone = matches;
+	let matchList = matches;
 	let scoreTable = [];
 	let nRound = [];
 	let nWin = [];
@@ -117,11 +117,11 @@ function createScoreTable (cycles, matches, teams) {
 		nFor[i] = 0;
 		nAst[i] = 0;
 		nPM[i] = 0;
-		for (let j = 0; j < dataDone.length; j++) {
-			if (dataDone[j].match[0] === teams[i].id) {
+		for (let j = 0; j < matchList.length; j++) {
+			if (matchList[j].match[0] === teams[i].id) {
 				nRound[i] = nRound[i] + 1;
-				let doma = dataDone[j].score[0];
-				let host = dataDone[j].score[1];
+				let doma = matchList[j].score[0];
+				let host = matchList[j].score[1];
 				nFor[i] += doma;
 				nAst[i] += host;
 				if ( doma > host ) {
@@ -137,10 +137,10 @@ function createScoreTable (cycles, matches, teams) {
 					nPM[i] -= 3;
 				}
 			}
-			if (dataDone[j].match[1] === teams[i].id) {
+			if (matchList[j].match[1] === teams[i].id) {
 				nRound[i] = nRound[i] + 1;
-				let doma = dataDone[j].score[1];
-				let host = dataDone[j].score[0];
+				let doma = matchList[j].score[1];
+				let host = matchList[j].score[0];
 				nFor[i] += doma;
 				nAst[i] += host;
 				if ( doma > host ) {
@@ -232,7 +232,9 @@ function createScoreTable (cycles, matches, teams) {
 		for (let i = 0; i < mutual.length; i++) {
 			let mutRes = mutual[i];
 			if ( mutRes.length === 1) {
-				console.log(mutRes[0]);
+				let teamAid = scoreTable[mutRes[0]].tid;
+				let teamBid = scoreTable[mutRes[0]+1].tid;
+				console.log(teamAid + " " + teamBid);
 			} else {console.warn(sortMutualResults.name + ": Array is longer")}
 		}
 	}
