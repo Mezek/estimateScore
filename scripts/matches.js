@@ -227,14 +227,24 @@ function createScoreTable (cycles, matches, teams) {
 		setPointsToPositions();
 	}
 
+	function getMutual(a, b){
+		let res = [];
+		for (let i = 0; i < matchList.length; i++) {
+			if (matchList[i].match[0] === a) {res.push(i);}
+			if (matchList[i].match[1] === a) {res.push(i);}
+		}
+		return res;
+	}
+
 	function sortMutualResults(){
 		let mutual = getDuplicateValues();
 		for (let i = 0; i < mutual.length; i++) {
-			let mutRes = mutual[i];
-			if ( mutRes.length === 1) {
-				let teamAid = scoreTable[mutRes[0]].tid;
-				let teamBid = scoreTable[mutRes[0]+1].tid;
-				console.log(teamAid + " " + teamBid);
+			let mutTeam = mutual[i];
+			if ( mutTeam.length === 1) {
+				let teamAid = scoreTable[mutTeam[0]].tid;
+				let teamBid = scoreTable[mutTeam[0]+1].tid;
+				let mutResult = getMutual(teamAid, teamBid);
+				console.log(mutResult);
 			} else {console.warn(sortMutualResults.name + ": Array is longer")}
 		}
 	}
