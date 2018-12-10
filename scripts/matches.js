@@ -228,12 +228,45 @@ function createScoreTable (cycles, matches, teams) {
 	}
 
 	function getMutual(a, b){
-		let res = [];
+		let mWin = 0;
+		let mLost = 0;
+		let mDrawn = 0;
+		let nFor = 0;
+		let nAst = 0;
 		for (let i = 0; i < matchList.length; i++) {
-			if (matchList[i].match[0] === a) {res.push(i);}
-			if (matchList[i].match[1] === a) {res.push(i);}
+			let mItem = matchList[i];
+			if (mItem.match[0] === a && mItem.match[1] === b) {
+				let doma = mItem.score[0];
+				let host = mItem.score[1];
+				if (doma > host) {
+					mWin++;
+				}
+				if (doma = host) {
+					mDrawn++;
+				}
+				if (doma < host) {
+					mLost++;
+				}
+				nFor += doma;
+				nAst += host;
+			}
+			if (mItem.match[0] === b && mItem.match[1] === a) {
+				let host = mItem.score[0];
+				let doma = mItem.score[1];
+				if (doma > host) {
+					mWin++;
+				}
+				if (doma = host) {
+					mDrawn++;
+				}
+				if (doma < host) {
+					mLost++;
+				}
+				nFor += doma;
+				nAst += host;
+			}
 		}
-		return res;
+		return [mWin, mDrawn, mLost, mFor, mAst];
 	}
 
 	function sortMutualResults(){
