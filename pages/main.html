@@ -38,7 +38,7 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="row in scoreTable" ng-class="{'clicked': (clickTeam == '{{row.cs}}'), 'not-clicked': (clickTeam != '{{row.cs}}')}">
-								<td>{{$index + 1}}</td>
+								<td>{{$index + 1}} {{row.pos}}</td>
 								<td>{{row.club}}</td>
 								<td>{{row.gp}}</td>
 								<td>{{row.w}}</td>
