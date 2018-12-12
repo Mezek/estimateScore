@@ -9,7 +9,7 @@ function createMatches (cycles, matches, teams) {
 	let nKey = 0;
 	for (let i = 1; i < cycles+1; i++) {
 		for (let j = 1; j < numOfTeams; j++) {
-			for (let k = j+1; k < numOfTeams+1; k++) {
+			for (let k = j + 1; k < numOfTeams + 1; k++) {
 				let uniqueKey = i + ':' + j + ':' + k;
 				allMatches.set(uniqueKey, [i, j, k]);
 				nKey++;
@@ -272,6 +272,13 @@ function createScoreTable (cycles, matches, teams) {
 	function sortMutualResults(){
 		let duplicates = getDuplicateValues();
 		for (let i = 0; i < duplicates.length; i++) {
+			let oneDuplicate = duplicates[i];
+			for (let j = 0; j < oneDuplicate.length - 1; j++) {
+				for (let k = j + 1; k < oneDuplicate.length; k++) {
+					let mutualResult = getMutual(scoreTable[oneDuplicate[j]], scoreTable[oneDuplicate[k]]);
+					let diffPoints = 3*(mutualResult[0] - mutualResult[2]);
+				}
+			}
 			let mutTeam = duplicates[i];
 			if ( mutTeam.length === 1) {
 				let teamAid = scoreTable[mutTeam[0]].tid;
@@ -308,13 +315,15 @@ function perPoints(a, b) {
 	return 0;
 }
 
-function perPositions(a,b) {
+function perPositions(a, b) {
 	if (a.pos < b.pos)
 		return -1;
 	if (a.pos > b.pos)
 		return +1;
 	return 0;
 }
+
+function sortFloat(a,b) { return a - b; }
 
 function createSortedTable(cycles, matches, teams) {
 	let tableView = createScoreTable(cycles, matches, teams);
