@@ -191,12 +191,12 @@ function createScoreTable (cycles, matches, teams) {
 		//console.log(teamPositions);
 		let sameValues = [];
 		for (let i = 1; i < scoreTable.length; i++) {
-			let oneShot = [];
+			let onePosition = [];
 			while (scoreTable[i].pos === scoreTable[i-1].pos) {
-				oneShot.push(scoreTable[i].pos);
+				onePosition.push(scoreTable[i].pos);
 				i++;
 			}
-			if (oneShot.length) {sameValues.push(oneShot)}
+			if (onePosition.length) {sameValues.push(onePosition)}
 		}
 		if (sameValues.length) {return sameValues}
 	}
@@ -272,13 +272,23 @@ function createScoreTable (cycles, matches, teams) {
 	function sortMutualResults(){
 		let duplicates = getDuplicateValues();
 		for (let i = 0; i < duplicates.length; i++) {
+			let oneSpace = duplicates[i][0];
+			//for (let j = 0; j < oneDuplicate.length; j++) {}
 			let oneDuplicate = duplicates[i];
-			for (let j = 0; j < oneDuplicate.length - 1; j++) {
-				for (let k = j + 1; k < oneDuplicate.length; k++) {
-					let mutualResult = getMutual(scoreTable[oneDuplicate[j]], scoreTable[oneDuplicate[k]]);
-					let diffPoints = 3*(mutualResult[0] - mutualResult[2]);
+			/**for (let j = 0; j < oneDuplicate.length; j++) {
+				for (let k = j + 1; k < oneDuplicate.length + 1; k++) {
+					let mutualResult = getMutual(scoreTable[oneDuplicate[0]].tid, scoreTable[oneDuplicate[0]+j].tid);
+					console.log(scoreTable[oneDuplicate[j]].club, scoreTable[oneDuplicate[k]].club);
+					let diffPoints = mutualResult[0] - mutualResult[2];
+					if (diffPoints > 0) {
+						scoreTable[oneDuplicate[k]].pos++;
+					}
+					if (diffPoints < 0) {
+						scoreTable[oneDuplicate[j]].pos++;
+					}
+					console.log(diffPoints, mutualResult);
 				}
-			}
+			}*/
 			let mutTeam = duplicates[i];
 			if ( mutTeam.length === 1) {
 				let teamAid = scoreTable[mutTeam[0]].tid;
