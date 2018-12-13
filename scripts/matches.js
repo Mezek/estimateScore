@@ -196,7 +196,14 @@ function createScoreTable (cycles, matches, teams) {
 				onePosition.push(scoreTable[i].pos);
 				i++;
 			}
-			if (onePosition.length) {sameValues.push(onePosition)}
+			if (onePosition.length) {
+				let lastValue = onePosition[0];
+				onePosition.push(lastValue);
+				for (let j = 0; j < onePosition.length; j++) {
+					onePosition[j] = onePosition[j] + j;
+				}
+				sameValues.push(onePosition);
+			}
 		}
 		if (sameValues.length) {return sameValues}
 	}
@@ -272,12 +279,10 @@ function createScoreTable (cycles, matches, teams) {
 	function sortMutualResults(){
 		let duplicates = getDuplicateValues();
 		for (let i = 0; i < duplicates.length; i++) {
-			let oneSpace = duplicates[i][0];
-			//for (let j = 0; j < oneDuplicate.length; j++) {}
 			let oneDuplicate = duplicates[i];
-			/**for (let j = 0; j < oneDuplicate.length; j++) {
-				for (let k = j + 1; k < oneDuplicate.length + 1; k++) {
-					let mutualResult = getMutual(scoreTable[oneDuplicate[0]].tid, scoreTable[oneDuplicate[0]+j].tid);
+			for (let j = 0; j < oneDuplicate.length - 1; j++) {
+				for (let k = j + 1; k < oneDuplicate.length; k++) {
+					let mutualResult = getMutual(scoreTable[oneDuplicate[j]].tid, scoreTable[oneDuplicate[k]].tid);
 					console.log(scoreTable[oneDuplicate[j]].club, scoreTable[oneDuplicate[k]].club);
 					let diffPoints = mutualResult[0] - mutualResult[2];
 					if (diffPoints > 0) {
@@ -288,22 +293,22 @@ function createScoreTable (cycles, matches, teams) {
 					}
 					console.log(diffPoints, mutualResult);
 				}
-			}*/
-			let mutTeam = duplicates[i];
-			if ( mutTeam.length === 1) {
+			}
+			/**let mutTeam = duplicates[i];
+			if ( mutTeam.length === 2) {
 				let teamAid = scoreTable[mutTeam[0]].tid;
-				let teamBid = scoreTable[mutTeam[0]+1].tid;
-				console.log(scoreTable[mutTeam[0]].club, scoreTable[mutTeam[0]+1].club);
+				let teamBid = scoreTable[mutTeam[1]].tid;
+				console.log(scoreTable[mutTeam[0]].club, scoreTable[mutTeam[1]].club);
 				let mutResult = getMutual(teamAid, teamBid);
 				let diffPoints = 3*(mutResult[0] - mutResult[2]);
 				if (diffPoints > 0) {
-					scoreTable[mutTeam[0]+1].pos++;
+					scoreTable[mutTeam[1]].pos++;
 				}
 				if (diffPoints < 0) {
 					scoreTable[mutTeam[0]].pos++;
 				}
 				console.log(diffPoints, mutResult);
-			} else {console.warn(sortMutualResults.name + ": Array is longer")}
+			} else {console.warn(sortMutualResults.name + ": Array is longer")}*/
 		}
 		scoreTable.sort(perPositions);
 	}
