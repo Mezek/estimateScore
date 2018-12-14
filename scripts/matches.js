@@ -219,6 +219,8 @@ function createScoreTable (cycles, matches, teams) {
 	function setPointsToPositions() {
 		scoreTable[0].pos = 0;
 		for (let i = 1; i < scoreTable.length; i++) {
+			//some points are not correctly added
+			console.log(i, scoreTable[i].p);
 			while (scoreTable[i].p === scoreTable[i-1].p) {
 				scoreTable[i].pos = scoreTable[i-1].pos;
 				i++;
