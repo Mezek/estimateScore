@@ -281,7 +281,6 @@ function createScoreTable (cycles, matches, teams) {
 			for (let j = 0; j < oneSet.length - 1; j++) {
 				for (let k = j + 1; k < oneSet.length; k++) {
 					let mutualResult = getMutual(scoreTable[oneSet[j]].tid, scoreTable[oneSet[k]].tid);
-					//console.log(scoreTable[oneSet[j]].club, scoreTable[oneSet[k]].club);
 					let diffPoints = mutualResult[0] - mutualResult[2];
 					if (diffPoints > 0) {
 						scoreTable[oneSet[k]].pos++;
@@ -289,7 +288,6 @@ function createScoreTable (cycles, matches, teams) {
 					if (diffPoints < 0) {
 						scoreTable[oneSet[j]].pos++;
 					}
-					//console.log(diffPoints, mutualResult);
 				}
 			}
 		}
@@ -298,7 +296,23 @@ function createScoreTable (cycles, matches, teams) {
 
 	function sortMutualGools(){
 		let duplicates = getDuplicateValues();
-		console.log(duplicates);
+		for (let i = 0; i < duplicates.length; i++) {
+			let oneSet = duplicates[i];
+			for (let j = 0; j < oneSet.length - 1; j++) {
+				for (let k = j + 1; k < oneSet.length; k++) {
+					let mutualResult = getMutual(scoreTable[oneSet[j]].tid, scoreTable[oneSet[k]].tid);
+					console.log(scoreTable[oneSet[j]].club, scoreTable[oneSet[k]].club);
+					if (mutualResult[3] > mutualResult[4]) {
+						scoreTable[oneSet[k]].pos++;
+					}
+					if (mutualResult[3] < mutualResult[4]) {
+						scoreTable[oneSet[j]].pos++;
+					}
+					console.log(mutualResult);
+				}
+			}
+		}
+		scoreTable.sort(perPositions);
 	}
 
 	return {
@@ -335,6 +349,7 @@ function createSortedTable(cycles, matches, teams) {
 	tableView.sortPoints();
 	if (tableView.hasDuplicates()) { tableView.sortMutualPoints() }
 	if (tableView.hasDuplicates()) { tableView.sortMutualGools() }
+	if (tableView.hasDuplicates()) { console.warn("More duplicates") }
 
 	tableView.getWinner();
 
