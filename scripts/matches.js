@@ -190,9 +190,8 @@ function createScoreTable (cycles, matches, teams) {
 		let sameValues = [];
 		for (let i = 1; i < scoreTable.length; i++) {
 			let onePosition = [];
-			while (scoreTable[i].pos === scoreTable[i-1].pos) {
+			if (scoreTable[i].pos === scoreTable[i-1].pos) {
 				onePosition.push(scoreTable[i].pos);
-				i++;
 			}
 			if (onePosition.length) {
 				let lastValue = onePosition[0];
@@ -219,13 +218,12 @@ function createScoreTable (cycles, matches, teams) {
 	function setPointsToPositions() {
 		scoreTable[0].pos = 0;
 		for (let i = 1; i < scoreTable.length; i++) {
-			//some points are not correctly added
-			console.log(i, scoreTable[i].p);
-			while (scoreTable[i].p === scoreTable[i-1].p) {
+			if (scoreTable[i].p === scoreTable[i-1].p) {
 				scoreTable[i].pos = scoreTable[i-1].pos;
-				i++;
+			} else {
+				scoreTable[i].pos = i;
 			}
-			scoreTable[i].pos = i;
+			console.log(i, scoreTable[i].pos, scoreTable[i].p);
 		}
 	}
 
