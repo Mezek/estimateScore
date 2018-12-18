@@ -223,7 +223,7 @@ function createScoreTable (cycles, matches, teams) {
 			} else {
 				scoreTable[i].pos = i;
 			}
-			console.log(i, scoreTable[i].pos, scoreTable[i].p);
+			//console.log(i, scoreTable[i].pos, scoreTable[i].p);
 		}
 	}
 
@@ -301,11 +301,12 @@ function createScoreTable (cycles, matches, teams) {
 			for (let j = 0; j < oneSet.length - 1; j++) {
 				for (let k = j + 1; k < oneSet.length; k++) {
 					let mutualResult = getMutual(scoreTable[oneSet[j]].tid, scoreTable[oneSet[k]].tid);
+					let goalDiff = mutualResult[3] - mutualResult[4];
 					console.log(scoreTable[oneSet[j]].club, scoreTable[oneSet[k]].club);
-					if (mutualResult[3] > mutualResult[4]) {
+					if (goalDiff > 0) {
 						scoreTable[oneSet[k]].pos++;
 					}
-					if (mutualResult[3] < mutualResult[4]) {
+					if (goalDiff < 0) {
 						scoreTable[oneSet[j]].pos++;
 					}
 					console.log(mutualResult);
@@ -322,14 +323,14 @@ function createScoreTable (cycles, matches, teams) {
 			for (let j = 0; j < oneSet.length - 1; j++) {
 				for (let k = j + 1; k < oneSet.length; k++) {
 					let mutualResult = getMutual(scoreTable[oneSet[j]].tid, scoreTable[oneSet[k]].tid);
-					//console.log(scoreTable[oneSet[j]].club, scoreTable[oneSet[k]].club);
+					console.log(scoreTable[oneSet[j]].club, scoreTable[oneSet[k]].club);
 					if (mutualResult[3] > mutualResult[4]) {
 						scoreTable[oneSet[k]].pos++;
 					}
 					if (mutualResult[3] < mutualResult[4]) {
 						scoreTable[oneSet[j]].pos++;
 					}
-					//console.log(mutualResult);
+					console.log(mutualResult);
 				}
 			}
 		}
@@ -369,9 +370,18 @@ function createSortedTable(cycles, matches, teams) {
 	let tableView = createScoreTable(cycles, matches, teams);
 
 	tableView.sortPoints();
-	if (tableView.hasDuplicates()) { tableView.sortMutualPoints() }
-	if (tableView.hasDuplicates()) { tableView.sortMutualGoolDiffs() }
-	if (tableView.hasDuplicates()) { tableView.sortMutualGoolMeans()  }
+	if (tableView.hasDuplicates()) {
+		console.log("Sort mutual points:");
+		tableView.sortMutualPoints();
+	}
+	if (tableView.hasDuplicates()) {
+		console.log("Sort mutual gools:");
+		tableView.sortMutualGoolDiffs();
+	}
+	if (tableView.hasDuplicates()) {
+		console.log("Sort mutual means:");
+		tableView.sortMutualGoolMeans();
+	}
 	if (tableView.hasDuplicates()) { console.warn("More duplicates") }
 
 	tableView.getWinner();
