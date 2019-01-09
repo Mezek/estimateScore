@@ -277,6 +277,7 @@ function createScoreTable (cycles, matches, teams) {
 
 	function sortMutualPoints(){
 		let duplicates = getDuplicateValues();
+		console.log(duplicates);
 		for (let i = 0; i < duplicates.length; i++) {
 			let oneSet = duplicates[i];
 			for (let j = 0; j < oneSet.length - 1; j++) {
@@ -379,14 +380,14 @@ function createSortedTable(cycles, matches, teams) {
 		console.log("Sort mutual points:");
 		tableView.sortMutualPoints();
 	}
-	if (tableView.hasDuplicates()) {
+	/*if (tableView.hasDuplicates()) {
 		console.log("Sort mutual gools:");
 		tableView.sortMutualGoolDiffs();
 	}
 	if (tableView.hasDuplicates()) {
 		console.log("Sort mutual means:");
 		//tableView.sortMutualGoolMeans();
-	}
+	}*/
 	if (tableView.hasDuplicates()) { console.warn("More duplicates") }
 
 	tableView.getWinner();
@@ -420,7 +421,8 @@ function getGP(tid, tableData) {
 
 // TODO: definitoricky jasné a závisiace na výsledkoch
 
-// TODO: 1. points
+// TODO: points vs teams
+// 1. points
 // 2. Vyšší počet bodů získaný ve vzájemných utkáních v základní části
 // 3. Brankový rozdíl ze vzájemných utkání v základní části
 // 4. Vyšší počet vstřelených branek ve vzájemných utkáních v základní části
