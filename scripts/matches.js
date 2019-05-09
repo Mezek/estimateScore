@@ -280,6 +280,10 @@ function createScoreTable (cycles, matches, teams) {
 		console.log(duplicates);
 		for (let i = 0; i < duplicates.length; i++) {
 			let oneSet = duplicates[i];
+			let mutTeams = [];
+			for (let j = 0; j < oneSet.length; j++) {
+				mutTeams.push([scoreTable[oneSet[j]].tid, 0]);
+			}
 			for (let j = 0; j < oneSet.length - 1; j++) {
 				for (let k = j + 1; k < oneSet.length; k++) {
 					let mutualResult = getMutual(scoreTable[oneSet[j]].tid, scoreTable[oneSet[k]].tid);
@@ -293,6 +297,7 @@ function createScoreTable (cycles, matches, teams) {
 					}
 				}
 			}
+			console.log(mutTeams);
 		}
 		scoreTable.sort(perPositions);
 	}
@@ -419,12 +424,11 @@ function getGP(tid, tableData) {
 // • gólový rozdiel, potom gólový pomer zo súčtu daných a inkasovaných gólov vo vzájomných zápasoch
 // • gólový rozdiel a následne pomer zo všetkých zápasov
 
-// TODO: definitoricky jasné a závisiace na výsledkoch
-
 // TODO: points vs teams
-// 1. points
-// 2. Vyšší počet bodů získaný ve vzájemných utkáních v základní části
-// 3. Brankový rozdíl ze vzájemných utkání v základní části
-// 4. Vyšší počet vstřelených branek ve vzájemných utkáních v základní části
-// 5. Vyšší brankový rozdíl ze všech utkání v celé soutěži (včetně nadstavbové části)
-// 6. Vyšší počet vstřelených branek v celé soutěži
+// 1. Vyšší počet bodov vo všetkých zápasoch
+// 2. Vyšší počet bodov vo vzájomných zápasoch
+// 3. Vyššie celkové skóre vo vzájomných zápasoch (skóre)
+// 4. Vyšší počet strelených gólov vo vzájomných zápasoch
+// 5. Vyšše celkové skóre vo všetkých zápasoch
+// 6. Vyšší počet strelených gólov vo všetkých zápasoch
+// 7. Nižší počet trestných minút
