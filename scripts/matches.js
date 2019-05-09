@@ -288,13 +288,8 @@ function createScoreTable (cycles, matches, teams) {
 				for (let k = j + 1; k < oneSet.length; k++) {
 					let mutualResult = getMutual(scoreTable[oneSet[j]].tid, scoreTable[oneSet[k]].tid);
 					console.log(scoreTable[oneSet[j]].club, scoreTable[oneSet[k]].club, mutualResult);
-					let diffPoints = mutualResult[0] - mutualResult[2];
-					if (diffPoints > 0) {
-						scoreTable[oneSet[k]].pos++;
-					}
-					if (diffPoints < 0) {
-						scoreTable[oneSet[j]].pos++;
-					}
+					mutTeams[j][1] += 3*mutualResult[0] + mutualResult[1];
+					mutTeams[k][1] += 3*mutualResult[2] + mutualResult[1];
 				}
 			}
 			console.log(mutTeams);
