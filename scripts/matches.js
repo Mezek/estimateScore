@@ -167,7 +167,7 @@ function createScoreTable (cycles, matches, teams) {
 		scoreTable[i] = { pos: 0, tid: teams[i].id,
 			cs: 'team' + teams[i].id, club: teams[i].name,
 			allg: nAG, gp: nRound[i], w: nWin[i], d: nDrawn[i],
-			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], p: nPts[i], pm: nPM[i],
+			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], pts: nPts[i], pm: nPM[i],
 			winner: false };
 	}
 
@@ -210,8 +210,8 @@ function createScoreTable (cycles, matches, teams) {
 		let winResult = true;
 		for (let i = 1; i < scoreTable.length; i++) {
 			let td = scoreTable[i];
-			let possiblePoints = td.p + 3*(td.allg - td.gp);
-			if (possiblePoints > scoreTable[0].p) winResult = false;
+			let possiblePoints = td.pts + 3*(td.allg - td.gp);
+			if (possiblePoints > scoreTable[0].pts) winResult = false;
 		}
 		scoreTable[0].winner = winResult;
 	}
@@ -219,12 +219,12 @@ function createScoreTable (cycles, matches, teams) {
 	function setPointsToPositions() {
 		scoreTable[0].pos = 0;
 		for (let i = 1; i < scoreTable.length; i++) {
-			if (scoreTable[i].p === scoreTable[i-1].p) {
+			if (scoreTable[i].pts === scoreTable[i-1].pts) {
 				scoreTable[i].pos = scoreTable[i-1].pos;
 			} else {
 				scoreTable[i].pos = i;
 			}
-			//console.log(i, scoreTable[i].pos, scoreTable[i].p);
+			//console.log(i, scoreTable[i].pos, scoreTable[i].pts);
 		}
 	}
 
@@ -277,19 +277,32 @@ function createScoreTable (cycles, matches, teams) {
 
 	function sortMutualPoints(){
 		let duplicates = getDuplicateValues();
-		console.log(duplicates);
 		for (let i = 0; i < duplicates.length; i++) {
 			let oneSet = duplicates[i];
 			let mutTeams = [];
 			for (let j = 0; j < oneSet.length; j++) {
-				mutTeams.push([scoreTable[oneSet[j]].tid, 0]);
+				mutTeams[j] = {mid: scoreTable[oneSet[j]].tid, pts: 0};
 			}
 			for (let j = 0; j < oneSet.length - 1; j++) {
 				for (let k = j + 1; k < oneSet.length; k++) {
 					let mutualResult = getMutual(scoreTable[oneSet[j]].tid, scoreTable[oneSet[k]].tid);
-					console.log(scoreTable[oneSet[j]].club, scoreTable[oneSet[k]].club, mutualResult);
-					mutTeams[j][1] += 3*mutualResult[0] + mutualResult[1];
-					mutTeams[k][1] += 3*mutualResult[2] + mutualResult[1];
+					console.log(scoreTable[oneSet[j]].tid, scoreTable[oneSet[j]].club,
+								scoreTable[oneSet[k]].tid, scoreTable[oneSet[k]].club, mutualResult);
+					mutTeams[j].pts += 3*mutualResult[0] + mutualResult[1];
+					mutTeams[k].pts += 3*mutualResult[2] + mutualResult[1];
+				}
+			}
+			mutTeams.sort(perPoints);
+			for (let j = 0; j < oneSet.length - 1; j++) {
+				if (mutTeams[j + 1].pts < mutTeams[j].pts) {
+					console.log("j = ", j, mutTeams[j].mid);
+					console.log(scoreTable[mutTeams[j].mid].pos,
+						        scoreTable[mutTeams[j].mid].club,
+								scoreTable[mutTeams[j+1].mid].pos,
+								scoreTable[mutTeams[j+1].mid].club);
+					//scoreTable[mutTeams[j + 1].mid - 1].pos++;
+				} else {
+					//scoreTable[mutTeams[j + 1].mid - 1].pos = scoreTable[mutTeams[j].mid - 1].pos;
 				}
 			}
 			console.log(mutTeams);
@@ -355,9 +368,9 @@ function createScoreTable (cycles, matches, teams) {
 }
 
 function perPoints(a, b) {
-	if (a.p < b.p)
+	if (a.pts < b.pts)
 		return +1;
-	if (a.p > b.p)
+	if (a.pts > b.pts)
 		return -1;
 	return 0;
 }
