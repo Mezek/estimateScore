@@ -275,7 +275,6 @@ function createScoreTable (cycles, matches, teams) {
 
 	function sortMutualPoints(){
 		let duplicates = getDuplicateValues();
-		//console.log(duplicates);
 		for (let i = 0; i < duplicates.length; i++) {
 			let mutTeams = [];
 			for (let j = 0; j < scoreTable.length; j++) {
@@ -292,24 +291,38 @@ function createScoreTable (cycles, matches, teams) {
 			}
 			mutTeams.sort(perPoints);
 			for (let j = 0; j < mutTeams.length - 1; j++) {
-				//scoreTable[mutTeams[0].mid].pos = mutTeams[0].mpos + j;
 				if (mutTeams[j + 1].pts < mutTeams[j].pts) {
 					scoreTable[mutTeams[j + 1].row].pos = scoreTable[mutTeams[j].row].pos + 1;
 				} else {
 					scoreTable[mutTeams[j + 1].row].pos = scoreTable[mutTeams[j].row].pos;
 				}
 			}
-			//console.log(mutTeams);
+			console.log(mutTeams);
 		}
 		scoreTable.sort(perPositions);
 	}
 
 	function sortMutualGoolDiffs(){
 		let duplicates = getDuplicateValues();
+		console.log(duplicates);
 		for (let i = 0; i < duplicates.length; i++) {
-			let oneSet = duplicates[i];
-			let sortable = [];
-			for (let j = 0; j < oneSet.length - 1; j++) {
+			let mutTeams = [];
+			for (let j = 0; j < scoreTable.length; j++) {
+				if (scoreTable[j].pos == duplicates[i]) {
+					mutTeams.push({mid: scoreTable[j].tid, row: j, gd: 0, name: scoreTable[j].club});
+				}
+			}
+			for (let j = 0; j < mutTeams.length - 1; j++) {
+				for (let k = j + 1; k < mutTeams.length; k++) {
+					let mutualResult = getMutual(mutTeams[j].mid, mutTeams[k].mid);
+					mutTeams[j].gd += mutualResult[3] - mutualResult[4];
+					mutTeams[k].gd += mutualResult[4] - mutualResult[3];
+				}
+			}
+			for (let j = 0; j < mutTeams.length; j++) {
+				//mutTeams[j].gd = mutTeams[j].gwin - mutTeams[j].glost;
+			}
+			/*for (let j = 0; j < scoreTable.length - 1; j++) {
 				for (let k = j + 1; k < oneSet.length; k++) {
 					let mutualResult = getMutual(scoreTable[oneSet[j]].tid, scoreTable[oneSet[k]].tid);
 					sortable.push([j, mutualResult[3] - mutualResult[4]]);
@@ -325,9 +338,10 @@ function createScoreTable (cycles, matches, teams) {
 						scoreTable[oneSet[j]].pos++;
 					}
 				}
-			}
+			} */
+			console.log(mutTeams);
 		}
-		scoreTable.sort(perPositions);
+		//scoreTable.sort(perPositions);
 	}
 
 	function sortMutualGoolMeans(){
@@ -384,13 +398,13 @@ function createSortedTable(cycles, matches, teams) {
 
 	tableView.sortPoints();
 	if (tableView.hasDuplicates()) {
-		console.log("Sort mutual points:");
+		//console.log("Sort mutual points:");
 		tableView.sortMutualPoints();
 	}
-	/*if (tableView.hasDuplicates()) {
+	if (tableView.hasDuplicates()) {
 		console.log("Sort mutual gools:");
 		tableView.sortMutualGoolDiffs();
-	}
+	}/*
 	if (tableView.hasDuplicates()) {
 		console.log("Sort mutual means:");
 		//tableView.sortMutualGoolMeans();
