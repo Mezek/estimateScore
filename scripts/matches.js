@@ -109,6 +109,8 @@ function createScoreTable (cycles, matches, teams) {
 	let nGD = [];
 	let nPts = [];
 	let nPM = [];
+	let nL = 5;
+	let lastList = [];
 	for (let i = 0; i < teams.length; i++) {
 		nRound[i] = 0;
 		nWin[i] = 0;
@@ -117,6 +119,7 @@ function createScoreTable (cycles, matches, teams) {
 		nFor[i] = 0;
 		nAst[i] = 0;
 		nPM[i] = 0;
+		lastList[i] = [];
 		for (let j = 0; j < matchList.length; j++) {
 			if (matchList[j].match[0] === teams[i].id) {
 				nRound[i] = nRound[i] + 1;
@@ -127,14 +130,17 @@ function createScoreTable (cycles, matches, teams) {
 				if ( doma > host ) {
 					nWin[i] = nWin[i] + 1;
 					nPM[i] += 0;
+					lastList[i].push('W');
 				}
 				if ( doma === host ) {
 					nDrawn[i] = nDrawn[i] + 1;
 					nPM[i] -= 2;
+					lastList[i].push('D');
 				}
 				if ( doma < host ) {
 					nLost[i] = nLost[i] + 1;
 					nPM[i] -= 3;
+					lastList[i].push('L');
 				}
 			}
 			if (matchList[j].match[1] === teams[i].id) {
@@ -146,14 +152,17 @@ function createScoreTable (cycles, matches, teams) {
 				if ( doma > host ) {
 					nWin[i] = nWin[i] + 1;
 					nPM[i] += 3;
+					lastList[i].push('W');
 				}
 				if ( doma === host ) {
 					nDrawn[i] = nDrawn[i] + 1;
 					nPM[i] += 1;
+					lastList[i].push('D');
 				}
 				if ( doma < host ) {
 					nLost[i] = nLost[i] + 1;
 					nPM[i] += 0;
+					lastList[i].push('L');
 				}
 			}
 		}
@@ -161,6 +170,16 @@ function createScoreTable (cycles, matches, teams) {
 		//if (nAst[i] < 10) nAst[i] = "\xa0\xa0" + nAst[i];
 		nGD[i] = nFor[i] - nAst[i];
 		nPts[i] = 3*nWin[i] + nDrawn[i];
+		if (i == 0) { 
+			lastList[i] = lastList[i].slice((lastList[i].length - 3), lastList[i].length);
+			let lLsize = lastList[i].length;
+			while (lLsize < nL) {
+				lastList[i].push(0);
+				lLsize++;
+				console.log('A', lLsize);
+			}
+		}
+		lastList[i] = lastList[i].slice((lastList[i].length - nL), lastList[i].length);
 	}
 	let nAG = cycles*(teams.length - 1);
 	for (let i = 0; i < teams.length; i++) {
@@ -168,6 +187,7 @@ function createScoreTable (cycles, matches, teams) {
 			cs: 'team' + teams[i].id, club: teams[i].name,
 			allg: nAG, gp: nRound[i], w: nWin[i], d: nDrawn[i],
 			l: nLost[i], f: nFor[i], a: nAst[i], gd: nGD[i], pts: nPts[i], pm: nPM[i],
+			last: lastList[i],
 			winner: false };
 	}
 

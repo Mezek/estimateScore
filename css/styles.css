@@ -106,22 +106,27 @@ h2, h1 {
 .match-win:hover {
     background-color: #ed9209;
 }
-.match-win, .match-unset:active {
+.match-win, .match-unset:active, .last-win {
     background-color: #ff9900;
 }
 
 .match-deuce:hover {
     background-color: #ff3bbf;
 }
-.match-deuce, .match-win:active {
+.match-deuce, .match-win:active, .last-deuce {
     background-color: #ff66cc;
 }
 
 .match-lost:hover {
     background-color: #1372ff;
 }
-.match-lost, .match-deuce:active {
+.match-lost, .match-deuce:active, .last-lost {
     background-color: #3c8afc;
+}
+
+.last-win, .last-lost, .last-deuce {
+    text-align: center;
+    padding: 3px;
 }
 
 .footer {

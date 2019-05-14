@@ -48,7 +48,9 @@
 								<td>{{row.f}} : {{row.a}}</td>
 								<td>{{row.pts}}</td>
 								<td>&nbsp;</td>
-								<td ng-repeat="x in [].constructor(5) track by $index">{{$index}}</td>
+								<td ng-repeat="x in [].constructor(5) track by $index" ng-class="{'last-win': ('W' == '{{row.last[$index]}}'), 
+									'last-lost': ('L' == '{{row.last[$index]}}'),
+									'last-deuce': ('D' == '{{row.last[$index]}}')}">{{row.last[$index]}}</td>
 								<td><div id={{row.cs}} ng-show="{{row.winner}}"><img src="./pages/trophy_gold.png" width="24"></div></td>
 								<td>
 									<div class="onoffswitch">
