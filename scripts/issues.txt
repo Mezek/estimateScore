@@ -1,2 +1,2 @@
-- Compare teams with the same score.
 - Five last matches status.
+- Probability of next result.

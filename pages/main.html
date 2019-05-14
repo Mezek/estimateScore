@@ -32,6 +32,7 @@
 								<th>F:A</th><!-- For --> <!-- Against -->
 								<th>P</th><!-- Points -->
 								<th>&nbsp;</th>
+								<th colspan="5">Last results</th>
 								<th>&nbsp;</th>
 								<th>Home team</th>
 							</tr>
@@ -47,6 +48,7 @@
 								<td>{{row.f}} : {{row.a}}</td>
 								<td>{{row.pts}}</td>
 								<td>&nbsp;</td>
+								<td ng-repeat="x in [].constructor(5) track by $index">{{$index}}</td>
 								<td><div id={{row.cs}} ng-show="{{row.winner}}"><img src="./pages/trophy_gold.png" width="24"></div></td>
 								<td>
 									<div class="onoffswitch">
