@@ -297,14 +297,12 @@ function createScoreTable (cycles, matches, teams) {
 					scoreTable[mutTeams[j + 1].row].pos = scoreTable[mutTeams[j].row].pos;
 				}
 			}
-			console.log(mutTeams);
 		}
 		scoreTable.sort(perPositions);
 	}
 
 	function sortMutualGoolDiffs(){
 		let duplicates = getDuplicateValues();
-		console.log(duplicates);
 		for (let i = 0; i < duplicates.length; i++) {
 			let mutTeams = [];
 			for (let j = 0; j < scoreTable.length; j++) {
@@ -327,14 +325,12 @@ function createScoreTable (cycles, matches, teams) {
 					scoreTable[mutTeams[j + 1].row].pos = scoreTable[mutTeams[j].row].pos;
 				}
 			}
-			console.log(mutTeams);
 		}
 		scoreTable.sort(perPositions);
 	}
 
 	function sortMutualGoolMeans(){
 		let duplicates = getDuplicateValues();
-		console.log(duplicates);
 		for (let i = 0; i < duplicates.length; i++) {
 			let mutTeams = [];
 			for (let j = 0; j < scoreTable.length; j++) {
@@ -358,7 +354,53 @@ function createScoreTable (cycles, matches, teams) {
 					scoreTable[mutTeams[j + 1].row].pos = scoreTable[mutTeams[j].row].pos;
 				}
 			}
-			console.log(mutTeams);
+		}
+		scoreTable.sort(perPositions);
+	}
+
+	function sortGoolDiffs(){
+		let duplicates = getDuplicateValues();
+		for (let i = 0; i < duplicates.length; i++) {
+			let mutTeams = [];
+			for (let j = 0; j < scoreTable.length; j++) {
+				if (scoreTable[j].pos == duplicates[i]) {
+					mutTeams.push({mid: scoreTable[j].tid, row: j,
+						pts: scoreTable[j].f - scoreTable[j].a,
+						name: scoreTable[j].club});
+				}
+			}
+			mutTeams.sort(perPoints);
+			for (let j = 0; j < mutTeams.length - 1; j++) {
+				if (mutTeams[j + 1].pts < mutTeams[j].pts) {
+					scoreTable[mutTeams[j + 1].row].pos = scoreTable[mutTeams[j].row].pos + 1;
+				} else {
+					scoreTable[mutTeams[j + 1].row].pos = scoreTable[mutTeams[j].row].pos;
+				}
+			}
+			//console.log(mutTeams);
+		}
+		scoreTable.sort(perPositions);
+	}
+	
+	function sortGoolMeans() {
+		let duplicates = getDuplicateValues();
+		for (let i = 0; i < duplicates.length; i++) {
+			let mutTeams = [];
+			for (let j = 0; j < scoreTable.length; j++) {
+				if (scoreTable[j].pos == duplicates[i]) {
+					mutTeams.push({mid: scoreTable[j].tid, row: j,
+						pts: scoreTable[j].f / scoreTable[j].a,
+						name: scoreTable[j].club});
+				}
+			}
+			mutTeams.sort(perPoints);
+			for (let j = 0; j < mutTeams.length - 1; j++) {
+				if (mutTeams[j + 1].pts < mutTeams[j].pts) {
+					scoreTable[mutTeams[j + 1].row].pos = scoreTable[mutTeams[j].row].pos + 1;
+				} else {
+					scoreTable[mutTeams[j + 1].row].pos = scoreTable[mutTeams[j].row].pos;
+				}
+			}
 		}
 		scoreTable.sort(perPositions);
 	}
@@ -370,7 +412,9 @@ function createScoreTable (cycles, matches, teams) {
 		sortPoints: sortPoints,
 		sortMutualPoints: sortMutualPoints,
 		sortMutualGoolDiffs: sortMutualGoolDiffs,
-		sortMutualGoolMeans: sortMutualGoolMeans
+		sortMutualGoolMeans: sortMutualGoolMeans,
+		sortGoolDiffs: sortGoolDiffs,
+		sortGoolMeans: sortGoolMeans
 	}
 }
 
@@ -390,8 +434,6 @@ function perPositions(a, b) {
 	return 0;
 }
 
-function sortFloat(a, b) { return a - b; }
-
 function createSortedTable(cycles, matches, teams) {
 	let tableView = createScoreTable(cycles, matches, teams);
 
@@ -407,6 +449,14 @@ function createSortedTable(cycles, matches, teams) {
 	if (tableView.hasDuplicates()) {
 		//console.log("Sort mutual means:");
 		tableView.sortMutualGoolMeans();
+	}
+	if (tableView.hasDuplicates()) {
+		//console.log("Sort goal diffs:");
+		tableView.sortGoolDiffs();
+	}
+	if (tableView.hasDuplicates()) {
+		//console.log("Sort goal means:");
+		tableView.sortGoolMeans();
 	}
 	if (tableView.hasDuplicates()) { console.warn("More duplicates") }
 
