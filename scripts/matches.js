@@ -170,16 +170,15 @@ function createScoreTable (cycles, matches, teams) {
 		//if (nAst[i] < 10) nAst[i] = "\xa0\xa0" + nAst[i];
 		nGD[i] = nFor[i] - nAst[i];
 		nPts[i] = 3*nWin[i] + nDrawn[i];
-		if (i == 0) { 
-			lastList[i] = lastList[i].slice((lastList[i].length - 3), lastList[i].length);
-			let lLsize = lastList[i].length;
-			while (lLsize < nL) {
-				lastList[i].push(0);
-				lLsize++;
-				console.log('A', lLsize);
-			}
+
+		let lLSize = lastList[i].length;
+		while (lLSize < nL) {
+			lastList[i].reverse();
+			lastList[i].push(0);
+			lastList[i].reverse();
+			lLSize++;
 		}
-		lastList[i] = lastList[i].slice((lastList[i].length - nL), lastList[i].length);
+		lastList[i] = lastList[i].slice((lastList[i].length - nL), lastList[i].length).reverse();
 	}
 	let nAG = cycles*(teams.length - 1);
 	for (let i = 0; i < teams.length; i++) {

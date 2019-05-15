@@ -106,27 +106,39 @@ h2, h1 {
 .match-win:hover {
     background-color: #ed9209;
 }
-.match-win, .match-unset:active, .last-win {
+.match-win, .match-unset:active {
     background-color: #ff9900;
+}
+.last-win {
+    color: #ff9900;
 }
 
 .match-deuce:hover {
     background-color: #ff3bbf;
 }
-.match-deuce, .match-win:active, .last-deuce {
+.match-deuce, .match-win:active {
     background-color: #ff66cc;
+}
+.last-deuce {
+    color: #ff66cc;
 }
 
 .match-lost:hover {
     background-color: #1372ff;
 }
-.match-lost, .match-deuce:active, .last-lost {
+.match-lost, .match-deuce:active {
     background-color: #3c8afc;
 }
+.last-lost {
+    color: #3c8afc;
+}
+.last-none {
+    color: #999999;
+}
 
-.last-win, .last-lost, .last-deuce {
+.last-win, .last-lost, .last-deuce, .last-none {
     text-align: center;
-    padding: 3px;
+    font-weight: bold;
 }
 
 .footer {
