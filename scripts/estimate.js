@@ -103,6 +103,21 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 		$scope.clickResult++;
 		if ($scope.clickResult === 4)
 			$scope.clickResult = 0;
+		if ($scope.clickResult === 0) {
+			$scope.clickGoal1 = 0;
+			$scope.clickGoal2 = 0;
+		}
+		if ($scope.clickResult === 1 && $scope.clickGoal2 >= $scope.clickGoal1) {
+			if ($scope.clickGoal1 === 0) $scope.clickGoal1 = 1;
+			$scope.clickGoal2 = $scope.clickGoal1 - 1;
+		}
+		if ($scope.clickResult === 2) {
+			$scope.clickGoal2 = $scope.clickGoal1;
+		}
+		if ($scope.clickResult === 3 && $scope.clickGoal2 <= $scope.clickGoal1) {
+			if ($scope.clickGoa2 === 0) $scope.clickGoal2 = 1;
+			$scope.clickGoal1 = $scope.clickGoal2 - 1;
+		}
 		$scope.lastValue = valIndex;
 		$scope.isResult[valIndex] = $scope.clickResult;
 		oneMatch.matchResult = $scope.clickResult;
@@ -129,8 +144,36 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 	};
 
 	$scope.setG1Up = function() {
-		if ($scope.clickResult === 1)
+		if ($scope.clickResult != 0) {
 			$scope.clickGoal1++;
+			if ($scope.clickResult === 1 && $scope.clickGoal2 >= $scope.clickGoal1) {
+				$scope.clickGoal2 = $scope.clickGoal1 - 1;
+			}
+			if ($scope.clickResult === 2) {
+				$scope.clickGoal2 = $scope.clickGoal1;
+			}
+			if ($scope.clickResult === 3 && $scope.clickGoal1 >= $scope.clickGoal2) {
+				$scope.clickGoal1 = $scope.clickGoal2 - 1;
+			}
+		}
+	}
+
+	$scope.setG1Down = function() {
+		if ($scope.clickResult != 0 && $scope.clickGoal1 > 0) {
+			$scope.clickGoal1--;
+			if ($scope.clickResult === 1 && $scope.clickGoal1 === 0) {
+				$scope.clickGoal1 = 1;
+			} 
+			if ($scope.clickResult === 1 && $scope.clickGoal2 > $scope.clickGoal1) {
+				$scope.clickGoal2 = $scope.clickGoal1 - 1;
+			}
+			if ($scope.clickResult === 2) {
+				$scope.clickGoal2 = $scope.clickGoal1;
+			}
+			if ($scope.clickResult === 3 && $scope.clickGoal1 >= $scope.clickGoal2) {
+				$scope.clickGoal1 = $scope.clickGoal2 - 1;
+			}
+		}
 	}
 
 	$scope.reloadRoute = function() {
