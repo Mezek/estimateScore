@@ -78,6 +78,8 @@ function createMatches (cycles, matches, teams) {
 		for (const [key,value] of futurePlay.entries()) {
 			futureMatches.push({
 				matchResult: 0,
+				goal1: 0,
+				goal2: 0,
 				teamId1: value[1],
 				teamId2: value[2],
 				teamName1: regTeams.get(value[1]),

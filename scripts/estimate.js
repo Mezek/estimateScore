@@ -90,6 +90,8 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 	};
 
 	$scope.clickResult = 0;
+	$scope.clickGoal1 = 0;
+	$scope.clickGoal2 = 0;
 	$scope.lastValue = -1;
 	$scope.isResult = [];
 	$scope.futureMatches = new Map();
@@ -109,6 +111,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 		$scope.enhTabData = Array.from($scope.jdMatches);
 		for (const [key,value] of $scope.futureMatches){
 			if (value.matchResult !== 0) {
+				console.log(value);
 				let goal1 = 0;
 				let goal2 = 0;
 				if (value.matchResult === 1) { goal1 = 1; goal2 = 0; }
@@ -124,6 +127,11 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 		$scope.scoreTable = createSortedTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams).getData();
 		$scope.oneTeamLefts = getGP($scope.checkedTid, $scope.scoreTable);
 	};
+
+	$scope.setG1Up = function() {
+		if ($scope.clickResult === 1)
+			$scope.clickGoal1++;
+	}
 
 	$scope.reloadRoute = function() {
 		$route.reload();

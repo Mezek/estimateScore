@@ -1,2 +1,2 @@
-- Five last matches status.
-- Probability of next result.
+- Set number of goals for planned matches
+- Probability of next result (seems obsolete)
