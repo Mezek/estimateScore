@@ -116,16 +116,22 @@
 		<div class="stripRow mx-5">
 			<div ng-repeat="n in plannedMatches" id="{{n.teamKey}}" class="row font-smaller80" ng-show="! showPlanned">
 				<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{n.teamClass1}}'), 'not-clicked': (clickTeam != '{{n.teamClass1}}')}">
-					<span ng-click="setG1Up(n)">&nbsp;&uarr;</span><span ng-click="setG1Down(n.teamKey)">&nbsp;&darr;&ensp;</span><span>{{n.teamName1}}</span>
+					<span>{{n.teamName1}}</span>
 				</div>
-				<div class="col-md-auto text-center match-unset" ng-click="setFutureMatch($index, n)"
-					 ng-class="{'match-win': isResult[$index] == 1,
-					 			'match-deuce': isResult[$index] == 2,
-								'match-lost': isResult[$index] == 3}">
-					{{n.goal1}} &nbsp; : &nbsp; {{n.goal2}}
+				<div class="col-md-auto text-center match-unset">
+					<span ng-click="setG1Up(n)">&uarr;&nbsp;</span>
+					<span ng-click="setG1Down(n)">&darr;&emsp;</span>
+					<span ng-click="setFutureMatch($index, n)"
+						ng-class="{'match-win': isResult[$index] == 1,
+							'match-deuce': isResult[$index] == 2,
+							'match-lost': isResult[$index] == 3}">
+						{{n.goal1}} &nbsp; : &nbsp; {{n.goal2}}
+					</span>
+					<span ng-click="setG2Up(n)">&emsp;&uarr;</span>
+					<span ng-click="setG2Down(n)">&nbsp;&darr;</span>
 				</div>
 				<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{n.teamClass2}}'), 'not-clicked': (clickTeam != '{{n.teamClass2}}')}">
-					<span>{{n.teamName2}}</span><span ng-click="setG2Up()">&ensp;&uarr;</span><span ng-click="setG2Down()">&nbsp;&darr;&nbsp;</span>
+					<span>{{n.teamName2}}</span>
 				</div>
 				<div>
 					<!-- matchLetter() -->

@@ -90,47 +90,44 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 	};
 
 	$scope.clickResult = 0;
-	$scope.clickGoal1 = 0;
-	$scope.clickGoal2 = 0;
 	//$scope.matchLetter = '';
 	$scope.lastValue = -1;
 	$scope.isResult = [];
 	$scope.futureMatches = new Map();
 
-	$scope.setFutureMatch = function(valIndex, matchData) {
-		let oneMatch = matchData;
+	$scope.setFutureMatch = function(valIndex, plannedMatch) {
 		if ($scope.lastValue !== valIndex)
-			$scope.clickResult = oneMatch.matchResult;
+			$scope.clickResult = plannedMatch.matchResult;
 		$scope.clickResult++;
 		if ($scope.clickResult === 4)
 			$scope.clickResult = 0;
 
 		switch ($scope.clickResult) {
 			case 0:
-				oneMatch.goal1 = 0;
-				oneMatch.goal2 = 0;
+				plannedMatch.goal1 = 0;
+				plannedMatch.goal2 = 0;
 				break;
 			case 1:
-				oneMatch.goal1 = 1;
-				oneMatch.goal2 = 0;
+				plannedMatch.goal1 = 1;
+				plannedMatch.goal2 = 0;
 				break;
 			case 2:
-				oneMatch.goal1 = 1;
-				oneMatch.goal2 = 1;
+				plannedMatch.goal1 = 1;
+				plannedMatch.goal2 = 1;
 				break;
 			case 3:
-				oneMatch.goal1 = 0;
-				oneMatch.goal2 = 1;
+				plannedMatch.goal1 = 0;
+				plannedMatch.goal2 = 1;
 				break;
 		}
 
 		$scope.lastValue = valIndex;
 		$scope.isResult[valIndex] = $scope.clickResult;
-		oneMatch.matchResult = $scope.clickResult;
+		plannedMatch.matchResult = $scope.clickResult;
 		if ($scope.clickResult === 0) {
-			$scope.futureMatches.delete(oneMatch.teamKey);
+			$scope.futureMatches.delete(plannedMatch.teamKey);
 		} else {
-			$scope.futureMatches.set(oneMatch.teamKey, oneMatch);
+			$scope.futureMatches.set(plannedMatch.teamKey, plannedMatch);
 		}
 
 		$scope.enhTabData = Array.from($scope.jdMatches);
@@ -154,59 +151,103 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 	};
 
 	$scope.setG1Up = function(n) {
-		n.goal1++;
-		console.log($scope.futureMatches);
+		let r = n.matchResult;
+		if (r !== 0) {
+			n.goal1++;
+			if (r === 1 && n.goal1 <= n.goal2) {
+				n.goal2 = n.goal1 - 1;
+			}
+			if (r === 2) {
+				n.goal2 = n.goal1;
+			}
+			if (r === 3 && n.goal1 >= n.goal2) {
+				n.goal2 = n.goal1 + 1;
+			}
+		}
 		$scope.enhTabData.forEach(function (item) {
 			if (item.key === n.teamKey) {
-				item.score[0] = n.goal1;
+				item.score = [n.goal1, n.goal2];
 			}
 		});
-		console.log($scope.enhTabData);
 		$scope.updateEnhTabData();
-		/*$scope.clickGoal1++;
-		$scope.enhTabData.forEach(function (item) {
-			if (item.key === key) {
-				item.score[0]++;
-				$scope.clickGoal1 = item.score[0];
-			}
-		});
-		$scope.updateEnhTabData();*/
-		/*if ($scope.clickResult !== 0) {
-			$scope.clickGoal1++;
-			if ($scope.clickResult === 1 && $scope.clickGoal2 >= $scope.clickGoal1) {
-				$scope.clickGoal2 = $scope.clickGoal1 - 1;
-			}
-			if ($scope.clickResult === 2) {
-				$scope.clickGoal2 = $scope.clickGoal1;
-			}
-			if ($scope.clickResult === 3 && $scope.clickGoal1 >= $scope.clickGoal2) {
-				$scope.clickGoal1 = $scope.clickGoal2 - 1;
-			}
-		}*/
 	};
 
-	$scope.setG1Down = function(key) {/*
-		if ($scope.clickResult !== 0 && $scope.clickGoal1 > 0) {
-			$scope.clickGoal1--;
-			if ($scope.clickResult === 1 && $scope.clickGoal1 === 0) {
-				$scope.clickGoal1 = 1;
-			} 
-			if ($scope.clickResult === 1 && $scope.clickGoal2 > $scope.clickGoal1) {
-				$scope.clickGoal2 = $scope.clickGoal1 - 1;
+	$scope.setG2Up = function(n) {
+		let r = n.matchResult;
+		if (r !== 0) {
+			n.goal2++;
+			if (r === 1 && n.goal2 >= n.goal1) {
+				n.goal1 = n.goal2 + 1;
 			}
-			if ($scope.clickResult === 2) {
-				$scope.clickGoal2 = $scope.clickGoal1;
+			if (r === 2) {
+				n.goal1 = n.goal2;
 			}
-			if ($scope.clickResult === 3 && $scope.clickGoal1 >= $scope.clickGoal2) {
-				$scope.clickGoal1 = $scope.clickGoal2 - 1;
+			if (r === 3 && n.goal2 <= n.goal1) {
+				n.goal1 = n.goal2 - 1;
 			}
-			$scope.enhTabData.forEach(function (item) {
-				if (item.key === key) {
-					item.score = [$scope.clickGoal1, $scope.clickGoal2];
-				}
-			});
-			$scope.updateEnhTabData();
-		}*/
+		}
+		$scope.enhTabData.forEach(function (item) {
+			if (item.key === n.teamKey) {
+				item.score = [n.goal1, n.goal2];
+			}
+		});
+		$scope.updateEnhTabData();
+	};
+
+	$scope.setG1Down = function(n) {
+		let r = n.matchResult;
+		if (r !== 0) {
+			n.goal1--;
+			if (n.goal1 < 0) {
+				n.goal1 = 0;
+			}
+			if (r === 1 && n.goal1 < 1) {
+				n.goal1 = 1;
+			}
+			if (r === 1 && n.goal2 >= n.goal1) {
+				n.goal2 = n.goal1 - 1;
+			}
+			if (r === 2) {
+				n.goal2 = n.goal1;
+			}
+			if (r === 3 && n.goal1 >= n.goal2) {
+				n.goal2 = n.goal1 + 1;
+			}
+		}
+		$scope.enhTabData.forEach(function (item) {
+			if (item.key === n.teamKey) {
+				item.score = [n.goal1, n.goal2];
+			}
+		});
+		$scope.updateEnhTabData();
+	};
+
+	$scope.setG2Down = function(n) {
+		let r = n.matchResult;
+		if (r !== 0) {
+			n.goal2--;
+			if (n.goal2 < 0) {
+				n.goal2 = 0;
+			}
+			if (r === 1 && n.goal2 >= n.goal1) {
+				n.goal1 = n.goal2 + 1;
+			}
+			if (r === 2) {
+				n.goal1 = n.goal2;
+			}
+			if (r === 3 && n.goal2 < 1 ) {
+				n.goal2 = 1;
+			}
+			if (r === 3 && n.goal1 >= n.goal2) {
+				n.goal1 = n.goal2 - 1;
+			}
+		}
+		$scope.enhTabData.forEach(function (item) {
+			if (item.key === n.teamKey) {
+				item.score = [n.goal1, n.goal2];
+			}
+		});
+		$scope.updateEnhTabData();
 	};
 
 	$scope.reloadRoute = function() {
