@@ -92,6 +92,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 	$scope.clickResult = 0;
 	$scope.clickGoal1 = 0;
 	$scope.clickGoal2 = 0;
+	$scope.matchLetter = '';
 	$scope.lastValue = -1;
 	$scope.isResult = [];
 	$scope.futureMatches = new Map();
@@ -103,6 +104,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 		$scope.clickResult++;
 		if ($scope.clickResult === 4)
 			$scope.clickResult = 0;
+		/*
 		if ($scope.clickResult === 0) {
 			$scope.clickGoal1 = 0;
 			$scope.clickGoal2 = 0;
@@ -118,6 +120,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			if ($scope.clickGoa2 === 0) $scope.clickGoal2 = 1;
 			$scope.clickGoal1 = $scope.clickGoal2 - 1;
 		}
+		*/
 		$scope.lastValue = valIndex;
 		$scope.isResult[valIndex] = $scope.clickResult;
 		oneMatch.matchResult = $scope.clickResult;
@@ -125,26 +128,24 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 
 		$scope.enhTabData = Array.from($scope.jdMatches);
 		for (const [key,value] of $scope.futureMatches){
-			if (value.matchResult !== 0) {
-				console.log(value);
-				let goal1 = 0;
-				let goal2 = 0;
-				if (value.matchResult === 1) { goal1 = 1; goal2 = 0; }
-				if (value.matchResult === 3) { goal1 = 0; goal2 = 1; }
+			if (value.matchResult === 0) {
+				$scope.futureMatches.delete(key);
+			} else {
 				$scope.enhTabData.push({
 					"cycle": 0,
 					"round": 0,
 					"match": [value.teamId1, value.teamId2],
-					"score": [goal1, goal2]
+					"score": [$scope.clickGoal1, $scope.clickGoal2]
 				});
 			}
 		}
+		//console.log($scope.futureMatches);
 		$scope.scoreTable = createSortedTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams).getData();
 		$scope.oneTeamLefts = getGP($scope.checkedTid, $scope.scoreTable);
 	};
 
 	$scope.setG1Up = function() {
-		if ($scope.clickResult != 0) {
+		if ($scope.clickResult !== 0) {
 			$scope.clickGoal1++;
 			if ($scope.clickResult === 1 && $scope.clickGoal2 >= $scope.clickGoal1) {
 				$scope.clickGoal2 = $scope.clickGoal1 - 1;
@@ -155,11 +156,12 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 			if ($scope.clickResult === 3 && $scope.clickGoal1 >= $scope.clickGoal2) {
 				$scope.clickGoal1 = $scope.clickGoal2 - 1;
 			}
+			$scope.scoreTable = createSortedTable($scope.nCycles, $scope.enhTabData, $scope.jdTeams).getData();
 		}
-	}
+	};
 
 	$scope.setG1Down = function() {
-		if ($scope.clickResult != 0 && $scope.clickGoal1 > 0) {
+		if ($scope.clickResult !== 0 && $scope.clickGoal1 > 0) {
 			$scope.clickGoal1--;
 			if ($scope.clickResult === 1 && $scope.clickGoal1 === 0) {
 				$scope.clickGoal1 = 1;
@@ -174,7 +176,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 				$scope.clickGoal1 = $scope.clickGoal2 - 1;
 			}
 		}
-	}
+	};
 
 	$scope.reloadRoute = function() {
 		$route.reload();

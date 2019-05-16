@@ -122,7 +122,7 @@
 					 ng-class="{'match-win': isResult[$index] == 1,
 					 			'match-deuce': isResult[$index] == 2,
 								'match-lost': isResult[$index] == 3}">
-					{{clickGoal1}} &nbsp; {{n.matchResult}} &nbsp; {{clickGoal2}}
+					{{matchLetter}} &nbsp; {{clickGoal1}} &nbsp; : &nbsp; {{clickGoal2}}
 				</div>
 				<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{n.teamClass2}}'), 'not-clicked': (clickTeam != '{{n.teamClass2}}')}">
 					<span>{{n.teamName2}}</span><span ng-click="setG2Up()">&ensp;&uarr;</span><span ng-click="setG2Down()">&nbsp;&darr;&nbsp;</span>
@@ -136,10 +136,10 @@
 		</div>
 		<br />
 		<div class="font-smaller80 mb-1 font-weight-bold">Match legend:</div>
-		<div class="border border-dark font-smaller80 p-1 match-unset">0: unset</div>
-		<div class="border-light font-smaller80 p-1 match-win">1: win</div>
-		<div class="border-light font-smaller80 p-1 match-deuce">2: draw</div>
-		<div class="border-light font-smaller80 p-1 match-lost">3: defeat</div>
+		<div class="border border-dark font-smaller80 p-1 match-unset">U: unset</div>
+		<div class="border-light font-smaller80 p-1 match-win">W: win</div>
+		<div class="border-light font-smaller80 p-1 match-deuce">D: draw</div>
+		<div class="border-light font-smaller80 p-1 match-lost">L: lose</div>
 		<br />
 		<div ng-show="showLeftMatches">
 			<h5>{{checkedName}}</h5>
