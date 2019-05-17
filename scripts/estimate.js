@@ -35,7 +35,7 @@ app.config(function($routeProvider) {
 
 app.controller('mainCtrl', function ($scope, $route, $http) {
 	let self = this;
-	$scope.msg = 'Constructing functions...';
+	$scope.msg = 'Testing functionality on following football group...';
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;

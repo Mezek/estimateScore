@@ -1,13 +1,16 @@
 <!-- team_wu15.html -->
 
-<div id="test" class="row" ng-controller="mainCtrl">
+<div id="test" class="row" ng-controller="wuCtrl">
 <div class="col">
 
 <div id="scoreTable" class="row">
 	<div class="col">
+		<div class="col-sm-12 text-right">
+			{{msg}}
+		</div>
 		<div>
 			<h3>{{ jdYears }}</h3>
-			<div class="panel panel-default">
+			<div class="panel panel-default" ng-controller="mainCtrl">
 				<div class="panel-heading"><span class="lead">{{ jdCategory }}</span></div>
 				<div class="tablecontainer">
 					<table class="table table-condensed table-hover">
@@ -57,7 +60,7 @@
 	</div>
 </div>
 
-<div class="row">
+<div class="row" ng-controller="mainCtrl">
 	<div class="col-sm-6">
 		<b>Finished matches</b>&nbsp;
 		<div class="switch-container">
