@@ -118,16 +118,18 @@
 				<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{n.teamClass1}}'), 'not-clicked': (clickTeam != '{{n.teamClass1}}')}">
 					<span>{{n.teamName1}}</span>
 				</div>
-				<div class="col-md-auto text-center match-unset">
+				<div class="col-md-auto text- right">
 					<span ng-click="setG1Up(n)">&uarr;&nbsp;</span>
-					<span ng-click="setG1Down(n)">&darr;&emsp;</span>
-					<span ng-click="setFutureMatch($index, n)"
+					<span ng-click="setG1Down(n)">&darr;</span>
+				</div>
+				<div class="col-md-auto text-center match-unset"  ng-click="setFutureMatch($index, n)"
 						ng-class="{'match-win': isResult[$index] == 1,
 							'match-deuce': isResult[$index] == 2,
 							'match-lost': isResult[$index] == 3}">
 						{{n.goal1}} &nbsp; : &nbsp; {{n.goal2}}
-					</span>
-					<span ng-click="setG2Up(n)">&emsp;&uarr;</span>
+				</div>
+				<div class="col-md-auto text-left">
+					<span ng-click="setG2Up(n)">&uarr;</span>
 					<span ng-click="setG2Down(n)">&nbsp;&darr;</span>
 				</div>
 				<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{n.teamClass2}}'), 'not-clicked': (clickTeam != '{{n.teamClass2}}')}">

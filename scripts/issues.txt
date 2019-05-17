@@ -1,2 +1,1 @@
-- Set number of goals for planned matches
 - Probability of next result (seems obsolete)

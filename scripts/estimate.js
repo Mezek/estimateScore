@@ -1,4 +1,4 @@
-var app = angular.module('estimate', ['pascalprecht.translate', 'ngRoute']);
+const app = angular.module('estimate', ['pascalprecht.translate', 'ngRoute']);
 
 app.config(function ($translateProvider) {
 	$translateProvider.translations('en', {
@@ -252,7 +252,9 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 
 	$scope.reloadRoute = function() {
 		$route.reload();
-	}
+	};
+
+	$scope.date = new Date();
 });
 
 app.controller('mainMatches', function ($scope) {
