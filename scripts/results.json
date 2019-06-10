@@ -335,6 +335,30 @@
 		},
 		{
 			"cycle": 2,
+			"round": 13,
+			"match": [8, 7],
+			"score": [0, 1]
+		},
+		{
+			"cycle": 2,
+			"round": 13,
+			"match": [1, 2],
+			"score": [10, 0]
+		},
+		{
+			"cycle": 2,
+			"round": 13,
+			"match": [4, 6],
+			"score": [4, 2]
+		},
+		{
+			"cycle": 2,
+			"round": 13,
+			"match": [5, 3],
+			"score": [1, 4]
+		},
+		{
+			"cycle": 2,
 			"round": 14,
 			"match": [8, 5],
 			"score": [0, 8]
@@ -524,30 +548,6 @@
 			"round": 21,
 			"match": [4, 2],
 			"score": [7, 1]
-		},
-		{
-			"cycle": 3,
-			"round": 13,
-			"match": [8, 7],
-			"score": [0, 1]
-		},
-		{
-			"cycle": 3,
-			"round": 13,
-			"match": [1, 2],
-			"score": [10, 0]
-		},
-		{
-			"cycle": 3,
-			"round": 13,
-			"match": [4, 6],
-			"score": [4, 2]
-		},
-		{
-			"cycle": 3,
-			"round": 13,
-			"match": [5, 3],
-			"score": [1, 4]
 		}
 	]
 }
