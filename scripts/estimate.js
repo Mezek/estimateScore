@@ -21,21 +21,26 @@ app.config(function ($translateProvider) {
 app.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'pages/main.html',
-		controller  : 'mainCtrl'
+		controller  : 'mainCtrl',
+		resultsData : 'wu1819'
 	});
-	$routeProvider.when('/team_WU15', {
+	$routeProvider.when('/team_WU15/resultsDat/:wu1920/', {
 		templateUrl : 'pages/team_WU15.html',
-		controller  : 'wuCtrl'
+		controller  : 'wuCtrl',
+		resultsData : 'wu1920'
 	});
 	$routeProvider.when('/next', {
 		templateUrl : 'pages/next.html',
-		controller  : 'nextCtrl'
+		controller  : 'nextCtrl',
+		resultsData : 'wu2021'
 	});
 });
 
-app.controller('mainCtrl', function ($scope, $route, $http) {
+app.controller('mainCtrl', ['$scope', '$route', '$http', '$routeParams', function ($scope, $route, $http, $routeParams) {
 	let self = this;
-	$scope.msg = 'Testing functionality on following football group...';
+	let controlAs = $routeParams.resultsDat;
+
+	$scope.msg = 'Testing functionality on following football group...' + controlAs;
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;
@@ -255,7 +260,7 @@ app.controller('mainCtrl', function ($scope, $route, $http) {
 	};
 
 	$scope.date = new Date();
-});
+}]);
 
 app.controller('mainMatches', function ($scope) {
 	let self = this;
