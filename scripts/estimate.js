@@ -22,17 +22,18 @@ app.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'pages/main.html',
 		controller  : 'mainCtrl',
-		resultsData : 'wu1819'
 	});
-	$routeProvider.when('/team_WU15/resultsDat/:wu1920/', {
+	$routeProvider.when('/team_WU15', {
 		templateUrl : 'pages/team_WU15.html',
-		controller  : 'wuCtrl',
-		resultsData : 'wu1920'
+		controller  : 'wuCtrl'
+	});
+	$routeProvider.when('/team_WU19/:resultsDat', {
+		templateUrl : 'pages/team_WU15.html',
+		controller  : 'wuCtrl'
 	});
 	$routeProvider.when('/next', {
 		templateUrl : 'pages/next.html',
-		controller  : 'nextCtrl',
-		resultsData : 'wu2021'
+		controller  : 'nextCtrl'
 	});
 });
 
@@ -267,10 +268,11 @@ app.controller('mainMatches', function ($scope) {
 	$scope.msg = 'Building matches';
 });
 
-app.controller('wuCtrl', function ($scope) {
+app.controller('wuCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
 	let self = this;
-	$scope.msg = 'Welcome fan of WU15!';
-});
+	let currentPar = $routeParams.resultsDat;
+	$scope.msg = 'Welcome fan of ' + currentPar + '!';
+}]);
 
 app.controller('nextCtrl', function ($scope) {
     $scope.msg = 'Next Tab message';
