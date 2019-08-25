@@ -27,9 +27,13 @@ app.config(function($routeProvider) {
 		templateUrl : 'pages/team_WU15.html',
 		controller  : 'wuCtrl'
 	});
-	$routeProvider.when('/team_WU19/:resultsDat', {
+	$routeProvider.when('/team_WU19/ResFile/:resultsDat', {
 		templateUrl : 'pages/team_WU15.html',
 		controller  : 'wuCtrl'
+	});
+	$routeProvider.when('/history', {
+		templateUrl : 'pages/history.html',
+		controller  : 'nextCtrl'
 	});
 	$routeProvider.when('/next', {
 		templateUrl : 'pages/next.html',
