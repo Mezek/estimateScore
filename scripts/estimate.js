@@ -6,39 +6,40 @@ app.config(function ($translateProvider) {
 		HEADER_DESCRIPTION: 'Developing version',
 		FOO: 'This is a paragraph.',
 		BUTTON_LANG_EN: 'english',
-		BUTTON_LANG_SK: 'slovak'
+		BUTTON_LANG_SK: 'slovensky'
 	});
 	$translateProvider.translations('sk', {
 		TITLE: 'Ahoj',
 		HEADER_DESCRIPTION: 'Pracovná verzia',
 		FOO: 'Toto je paragraf.',
-		BUTTON_LANG_EN: 'anglicky',
+		BUTTON_LANG_EN: 'english',
 		BUTTON_LANG_SK: 'slovensky'
 	});
 	$translateProvider.preferredLanguage('en');
 });
 
 app.config(function($routeProvider) {
-	$routeProvider.when('/', {
-		templateUrl : 'pages/main.html',
-		controller  : 'mainCtrl',
-	});
-	$routeProvider.when('/team_WU15', {
-		templateUrl : 'pages/team_WU15.html',
-		controller  : 'wuCtrl'
-	});
-	$routeProvider.when('/team_WU19/ResFile/:resultsDat', {
-		templateUrl : 'pages/team_WU15.html',
-		controller  : 'wuCtrl'
-	});
-	$routeProvider.when('/history', {
-		templateUrl : 'pages/history.html',
-		controller  : 'nextCtrl'
-	});
-	$routeProvider.when('/next', {
-		templateUrl : 'pages/next.html',
-		controller  : 'nextCtrl'
-	});
+	$routeProvider
+		.when('/', {
+			templateUrl : 'pages/main.html',
+			controller  : 'mainCtrl',
+		})
+		.when('/team_WU15', {
+			templateUrl : 'pages/team_WU15.html',
+			controller  : 'wuCtrl'
+		})
+		.when('/team_WU19/ResFile/:resultsDat', {
+			templateUrl : 'pages/team_WU15.html',
+			controller  : 'wuCtrl'
+		})
+		.when('/history', {
+			templateUrl : 'pages/history.html',
+			controller  : 'historyCtrl'
+		})
+		.when('/next', {
+			templateUrl : 'pages/next.html',
+			controller  : 'nextCtrl'
+		});
 });
 
 app.controller('mainCtrl', ['$scope', '$route', '$http', '$routeParams', function ($scope, $route, $http, $routeParams) {
@@ -273,7 +274,6 @@ app.controller('mainMatches', function ($scope) {
 });
 
 app.controller('wuCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
-	let self = this;
 	let currentPar = $routeParams.resultsDat;
 	$scope.msg = 'Welcome fan of ' + currentPar + '!';
 }]);
@@ -281,6 +281,11 @@ app.controller('wuCtrl', ['$scope', '$routeParams', function ($scope, $routePara
 app.controller('nextCtrl', function ($scope) {
     $scope.msg = 'Next Tab message';
 });
+
+app.controller('historyCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+	let controlAs = $routeParams.resultsDat;
+	$scope.msg = 'List of historical results ' + controlAs;
+}]);
 
 app.controller('Ctrl', function ($scope, $translate) {
 	$scope.changeLanguage = function (key) {

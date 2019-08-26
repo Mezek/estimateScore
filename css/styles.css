@@ -51,6 +51,11 @@ h2, h1 {
 	padding: 4px;
 }
 
+.minH {
+    min-height: 450px;
+}
+
+
 .tablecontainer table td, .tablecontainer table th {
 	padding: 2px;
 }

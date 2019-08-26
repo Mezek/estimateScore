@@ -1,31 +1,21 @@
 <!-- history.html -->
 
-<div id="test" class="row" ng-controller="Click">
+<div id="history" class="row" ng-controller="historyCtrl">
 	<div class="col-sm-6">
-		<h4>NEXT:</h4>
+		<h4>History:</h4>
 		{{msg}}
 	</div>
-	<div class="col-sm-6">
-		<div class="alert" ng-class="{'testClass':class_status }">{{single_message}}</div>
-			<a class="btn btn-info" ng-click="setClass()">Click Class</a>
+</div>
+
+<div class="row minH" >
+	<div class="col-sm-4 my-3">
+		<div class="list-group">
+			<a href="#!history?resultsDat=wu1819" class="list-group-item list-group-item-info">WU15: Season 2018/19</a>
+			<a href="#!history?resultsDat=wu1920" class="list-group-item">WU15: Season 2019/20</a>
+		</div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="col">
-	</div>
-</div>
-
-<div id="test" class="row">
-	<div class="col-sm-6">
-		<h2>Test</h2>
-		<div class="span4">
-			<div>
-				<h2 translate="TITLE">Hello</h2>
-				<p translate="FOO">This is a paragraph</p>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-6">
-	</div>
+	<div class="col">&nbsp;</div>
 </div>
