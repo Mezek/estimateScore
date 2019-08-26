@@ -27,12 +27,12 @@ app.config(function($routeProvider) {
 			controller  : 'mainCtrl',
 		})
 		.when('/team_WU15', {
-			templateUrl : 'pages/team_WU15.html',
-			controller  : 'wuCtrl'
+			templateUrl : 'pages/league_open.html',
+			controller  : 'leagueCtrl'
 		})
-		.when('/team_WU19/ResFile/:resultsDat', {
+		.when('/team_WU15old', {
 			templateUrl : 'pages/team_WU15.html',
-			controller  : 'wuCtrl'
+			controller  : 'leagueCtrl'
 		})
 		.when('/history', {
 			templateUrl : 'pages/history.html',
@@ -273,8 +273,8 @@ app.controller('mainMatches', function ($scope) {
 	$scope.msg = 'Building matches';
 });
 
-app.controller('wuCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
-	let currentPar = $routeParams.resultsDat;
+app.controller('leagueCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+	let currentPar = $routeParams.resultsData;
 	$scope.msg = 'Welcome fan of ' + currentPar + '!';
 }]);
 
@@ -283,7 +283,7 @@ app.controller('nextCtrl', function ($scope) {
 });
 
 app.controller('historyCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
-	let controlAs = $routeParams.resultsDat;
+	let controlAs = $routeParams.resultsData;
 	$scope.msg = 'List of historical results ' + controlAs;
 }]);
 

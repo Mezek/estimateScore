@@ -1,13 +1,14 @@
-<!-- team_wu15.html -->
+<!-- league_open.html -->
 
-<div id="test" class="row" ng-controller="wuCtrl">
-<div class="col">
+<div id="league" class="row" ng-controller="leagueCtrl">
+	<div class="col-sm-6">
+		<h4>League open:</h4>
+			{{msg}}
+	</div>
+</div>
 
 <div id="scoreTable" class="row">
 	<div class="col">
-		<div class="col-sm-12 text-right">
-			{{msg}}
-		</div>
 		<div>
 			<h3>{{ jdYears }}</h3>
 			<div class="panel panel-default" ng-controller="mainCtrl">
@@ -85,9 +86,6 @@
 
 	<div class="col-sm-6">
 	</div>
-</div>
-
-</div>
 </div>
 
 <div class="row">
