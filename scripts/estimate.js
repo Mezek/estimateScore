@@ -3,17 +3,19 @@ const app = angular.module('estimate', ['pascalprecht.translate', 'ngRoute']);
 app.config(function ($translateProvider) {
 	$translateProvider.translations('en', {
 		TITLE: 'Hello',
-		HEADER_DESCRIPTION: 'Developing version',
+		HEADER_DESCRIPTION: 'Development version',
 		FOO: 'This is a paragraph.',
 		BUTTON_LANG_EN: 'english',
-		BUTTON_LANG_SK: 'slovensky'
+		BUTTON_LANG_SK: 'slovensky',
+		BACK_TO_HOME: 'Back to Home'
 	});
 	$translateProvider.translations('sk', {
 		TITLE: 'Ahoj',
 		HEADER_DESCRIPTION: 'Pracovná verzia',
 		FOO: 'Toto je paragraf.',
 		BUTTON_LANG_EN: 'english',
-		BUTTON_LANG_SK: 'slovensky'
+		BUTTON_LANG_SK: 'slovensky',
+		BACK_TO_HOME: 'Naspäť domov'
 	});
 	$translateProvider.preferredLanguage('en');
 });
@@ -44,9 +46,7 @@ app.config(function($routeProvider) {
 
 app.controller('mainCtrl', ['$scope', '$route', '$http', '$routeParams', function ($scope, $route, $http, $routeParams) {
 	let self = this;
-	let controlAs = $routeParams.resultsDat;
-
-	$scope.msg = 'Testing functionality on following football group...' + controlAs;
+	$scope.msg = 'Testing functionality of script...';
 	$http.get("scripts/results.json")
 		.then(function (jsonData) {
 			$scope.jdCategory = jsonData.data.category;
