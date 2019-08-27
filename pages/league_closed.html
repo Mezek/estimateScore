@@ -1,9 +1,9 @@
 <!-- league_closed.html -->
 
-<div id="test" class="row" ng-controller="leagueClosedCtrl">
-	<div class="col-sm-6">
+<div id="league" class="row" ng-controller="leagueClosedCtrl">
+	<div class="col-sm-6  mt-4">
 		<h4>{{header}}</h4>
-		{{msg}}
+			{{msg}}
 	</div>
 	<div class="col-sm-6">
 		<!-- content -->
@@ -13,7 +13,8 @@
 	</div>
 </div>
 
-<div id="scoreTable" class="row" ng-controller="mainCtrl">
+<div ng-controller="mainCtrl"> <!-- wrapper -->
+<div id="scoreTable" class="row">
 	<div class="col">
 		<div>
 			<h3>{{ jdYears }}</h3>
@@ -23,7 +24,7 @@
 					<table class="table table-condensed table-hover">
 						<thead>
 							<tr>
-								<th>N</th>
+								<th>No.</th>
 								<th>Team</th>
 								<th>GP</th><!-- Played -->
 								<th>W</th><!-- Won -->
@@ -33,12 +34,15 @@
 								<th>GD</th><!-- Goal Difference -->
 								<th>+/-</th>
 								<th>P</th><!-- Points -->
+								<th>&nbsp;</th>
+								<th colspan="5">Last results</th>
+								<th>&nbsp;</th>
 								<th>Home team</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="row in scoreTable" ng-class="{'clicked': (clickTeam == '{{row.cs}}'), 'not-clicked': (clickTeam != '{{row.cs}}')}"> <!-- | orderBy:'p':true">-->
-								<td>{{ $index+1 }} {{count}}</td>
+							<tr ng-repeat="row in scoreTable" ng-class="{'clicked': (clickTeam == '{{row.cs}}'), 'not-clicked': (clickTeam != '{{row.cs}}')}">
+								<td>{{$index + 1}}</td>
 								<td>{{row.club}}</td>
 								<td>{{row.gp}}</td>
 								<td>{{row.w}}</td>
@@ -48,6 +52,12 @@
 								<td>{{row.gd}}</td>
 								<td>{{row.pm}}</td>
 								<td>{{row.pts}}</td>
+								<td>&nbsp;</td>
+								<td ng-repeat="x in [].constructor(5) track by $index" ng-class="{'last-win': ('W' == '{{row.last[$index]}}'), 
+									'last-lost': ('L' == '{{row.last[$index]}}'),
+									'last-deuce': ('D' == '{{row.last[$index]}}'),
+									'last-none': ('0' == '{{row.last[$index]}}')}">{{row.last[$index]}}</td>
+								<td><div id={{row.cs}} ng-show="{{row.winner}}"><img src="pages/trophy_gold.png" width="24"></div></td>
 								<td>
 									<div class="onoffswitch">
 										<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="tableonoffswitch{{row.tid}}"
@@ -67,31 +77,36 @@
 	</div>
 </div>
 
-<div class="row" ng-controller="mainCtrl">
-	<div class="col-sm-6">
-		<b>Finished matches</b>&nbsp;
-		<div class="switch-container">
-			<div class="onoffswitch2">
-				<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="finishedMtch"
-					   ng-init="showFinished = false" ng-click="showFinished = !showFinished" checked>
-				<label class="onoffswitch2-label" for="finishedMtch">
-					<span class="onoffswitch2-inner"></span>
-					<span class="onoffswitch2-switch"></span>
-				</label>
+<div class="row">
+	<div class="col-sm-5">
+		<div class="switches d-inline-block">
+			<b>Finished matches</b>&nbsp;
+			<div class="switch-container">
+				<div class="onoffswitch2">
+					<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="finishedMtch" 
+						ng-init="showFinished = true" ng-click="showFinished = !showFinished">
+					<label class="onoffswitch2-label" for="finishedMtch">
+						<span class="onoffswitch2-inner"></span>
+						<span class="onoffswitch2-switch"></span>
+					</label>
+				</div>
 			</div>
 		</div>
 		<br /><br />
 		<div class="stripRow mx-5">
-			<div ng-repeat="m in finishedMatches"  class="row font-smaller80" ng-show="! showFinished">
+			<div ng-repeat="m in finishedMatches" class="row font-smaller80" ng-show="! showFinished">
 				<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{m.teamClass1}}'), 'not-clicked': (clickTeam != '{{m.teamClass1}}')}">{{m.team1}}</div>
 				<div class="col-md-auto text-center">{{m.score1}} : {{m.score2}} </div>
 				<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{m.teamClass2}}'), 'not-clicked': (clickTeam != '{{m.teamClass2}}')}">{{m.team2}}</div>
 			</div>
 		</div>
+		<br />
 	</div>
-
-	<div class="col-sm-6">
+	<div class="col-sm-5">
 	</div>
+	<div class="col-sm-2">
+	</div>
+</div>
 </div>
 
 <div class="row">
@@ -99,4 +114,3 @@
 		{{ msg }}
 	</div>
 </div>
-

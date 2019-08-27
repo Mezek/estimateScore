@@ -1,7 +1,7 @@
 <!-- main.html -->
 
-<div id="test" class="row" ng-controller="mainCtrl">
-	<div class="col-sm-6">
+<div id="main" class="row" ng-controller="mainCtrl">
+<div class="col-sm-6 mt-4">
 		<h4>{{header}}</h4>
 		{{msg}}
 	</div>
@@ -9,7 +9,7 @@
 		<!-- content -->
 	</div>
 	<div class="col-sm-12">
-		<p>&nbsp;</p>		
+		<p>&nbsp;</p>
 	</div>
 </div>
 
@@ -52,11 +52,11 @@
 									'last-lost': ('L' == '{{row.last[$index]}}'),
 									'last-deuce': ('D' == '{{row.last[$index]}}'),
 									'last-none': ('0' == '{{row.last[$index]}}')}">{{row.last[$index]}}</td>
-								<td><div id={{row.cs}} ng-show="{{row.winner}}"><img src="./pages/trophy_gold.png" width="24"></div></td>
+								<td><div id={{row.cs}} ng-show="{{row.winner}}"><img src="pages/trophy_gold.png" width="24"></div></td>
 								<td>
 									<div class="onoffswitch">
-										<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="tableonoffswitch{{row.tid}}" 
-											ng-model="isToggled[row.tid]" ng-click="toggleTeam(row.tid)">
+										<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="tableonoffswitch{{row.tid}}"
+											   ng-model="isToggled[row.tid]" ng-click="toggleTeam(row.tid)">
 										<label class="onoffswitch-label" for="tableonoffswitch{{row.tid}}">
 											<span class="onoffswitch-inner"></span>
 											<span class="onoffswitch-switch"></span>

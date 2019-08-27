@@ -277,20 +277,22 @@ app.controller('mainCtrl', ['$scope', '$route', '$http', '$routeParams', functio
 }]);
 
 app.controller('mainMatches', function ($scope) {
-	let self = this;
 	$scope.msg = 'Building matches';
 });
 
-app.controller('leagueOpenCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+app.controller('leagueOpenCtrl', ['$scope', function ($scope) {
 	$scope.header = 'Open league:';
-	let currentPar = $routeParams.resultsData;
-	$scope.msg = 'Welcome fan of ' + currentPar + '!';
+	$scope.msg = 'Statistics of running matches';
 }]);
 
-app.controller('leagueClosedCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+app.controller('leagueClosedCtrl', ['$scope', function ($scope) {
 	$scope.header = 'Closed league:';
-	let currentPar = $routeParams.resultsData;
-	$scope.msg = 'Welcome fan of ' + currentPar + '!';
+	$scope.msg = 'Statistics of finished matches';
+}]);
+
+app.controller('historyCtrl', ['$scope', function ($scope) {
+	$scope.header = 'History:';
+	$scope.msg = 'List of historical results';
 }]);
 
 app.controller('nextCtrl', function ($scope) {
@@ -298,11 +300,6 @@ app.controller('nextCtrl', function ($scope) {
     $scope.msg = 'Next Tab message';
 });
 
-app.controller('historyCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
-	$scope.header = 'History:';
-	let controlAs = $routeParams.resultsData;
-	$scope.msg = 'List of historical results ' + controlAs;
-}]);
 
 app.controller('Ctrl', function ($scope, $translate) {
 	$scope.changeLanguage = function (key) {
@@ -333,8 +330,8 @@ app.controller('Click', function ($scope, $http) {
 });
 
 app.controller('tableCtrl', ['$scope', function($scope) {
-	var self = this;
-	
+	let self = this;
+	$scope.msg = 'Table controller';
 	self.user={id:null,username:'',address:'',email:''};
 	self.id = 4;
 	self.scoreRow={tid:null,club:'',z:'',v:'',r:'',p:'',sda:'',sdo:''};
