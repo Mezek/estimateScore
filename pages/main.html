@@ -9,7 +9,7 @@
 		<!-- content -->
 	</div>
 	<div class="col-sm-12">
-		<p>{{ 'MESSAGE' | translate}}&nbsp;</p>
+		<p>{{ 'MESSAGE' | translate}}</p>
 	</div>
 </div>
 
@@ -51,7 +51,7 @@
 								<td ng-repeat="x in [].constructor(5) track by $index" ng-class="{'last-win': ('W' == '{{row.last[$index]}}'), 
 									'last-lost': ('L' == '{{row.last[$index]}}'),
 									'last-deuce': ('D' == '{{row.last[$index]}}'),
-									'last-none': ('0' == '{{row.last[$index]}}')}">{{row.last[$index]}}</td>
+									'last-none': ('0' == '{{row.last[$index]}}')}">{{row.last[$index] | translate}}</td>
 								<td><div id={{row.cs}} ng-show="{{row.winner}}"><img src="pages/trophy_gold.png" width="24"></div></td>
 								<td>
 									<div class="onoffswitch">

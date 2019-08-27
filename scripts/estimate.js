@@ -26,7 +26,11 @@ app.config(function ($translateProvider) {
 		LWON: 'W: won',
 		LDRAWN: 'D: drawn',
 		LLOST: 'L: lost',
-		MUSTPLAY: 'Must play:'
+		MUSTPLAY: 'Must play:',
+		VARIABLE_REPLACEMENT: 'Hi, {{name}}',
+		W: 'XXX',
+		D: 'YYY',
+		L: 'ZZZ'
 	});
 	$translateProvider.translations('sk', {
 		TITLE: 'Ahoj',
@@ -53,7 +57,11 @@ app.config(function ($translateProvider) {
 		LWON: 'W: výhra',
 		LDRAWN: 'D: remíza',
 		LLOST: 'L: prehra',
-		MUSTPLAY: 'Má odohrať:'
+		MUSTPLAY: 'Má odohrať:',
+		VARIABLE_REPLACEMENT: 'Ahoj, {{name}}',
+		W: 'xxx',
+		D: 'yyy',
+		L: 'zzz'
 	});
 	$translateProvider.preferredLanguage('en');
 });
