@@ -2,12 +2,15 @@
 
 <div id="test" class="row" ng-controller="Click">
 	<div class="col-sm-6">
-		<h4>NEXT:</h4>
+		<h4>{{header}}</h4>
 		{{msg}}
 	</div>
 	<div class="col-sm-6">
 		<div class="alert" ng-class="{'testClass':class_status }">{{single_message}}</div>
 			<a class="btn btn-info" ng-click="setClass()">Click Class</a>
+	</div>
+	<div class="col-sm-12">
+		<p>&nbsp;</p>
 	</div>
 </div>
 

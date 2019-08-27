@@ -1,16 +1,23 @@
-<!-- team_wu15.html -->
+<!-- league_closed.html -->
 
-<div id="test" class="row" ng-controller="wuCtrl">
-<div class="col">
+<div id="test" class="row" ng-controller="leagueClosedCtrl">
+	<div class="col-sm-6">
+		<h4>{{header}}</h4>
+		{{msg}}
+	</div>
+	<div class="col-sm-6">
+		<!-- content -->
+	</div>
+	<div class="col-sm-12">
+		<p>&nbsp;</p>
+	</div>
+</div>
 
-<div id="scoreTable" class="row">
+<div id="scoreTable" class="row" ng-controller="mainCtrl">
 	<div class="col">
-		<div class="col-sm-12 text-right">
-			{{msg}}
-		</div>
 		<div>
 			<h3>{{ jdYears }}</h3>
-			<div class="panel panel-default" ng-controller="mainCtrl">
+			<div class="panel panel-default">
 				<div class="panel-heading"><span class="lead">{{ jdCategory }}</span></div>
 				<div class="tablecontainer">
 					<table class="table table-condensed table-hover">
@@ -85,9 +92,6 @@
 
 	<div class="col-sm-6">
 	</div>
-</div>
-
-</div>
 </div>
 
 <div class="row">

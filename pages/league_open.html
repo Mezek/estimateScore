@@ -1,17 +1,23 @@
 <!-- league_open.html -->
 
-<div id="league" class="row" ng-controller="leagueCtrl">
+<div id="league" class="row" ng-controller="leagueOpenCtrl">
 	<div class="col-sm-6">
-		<h4>League open:</h4>
+		<h4>{{header}}</h4>
 			{{msg}}
+	</div>
+	<div class="col-sm-6">
+		<!-- content -->
+	</div>
+	<div class="col-sm-12">
+		<p>&nbsp;</p>
 	</div>
 </div>
 
-<div id="scoreTable" class="row">
+<div id="scoreTable" class="row" ng-controller="mainCtrl">
 	<div class="col">
 		<div>
 			<h3>{{ jdYears }}</h3>
-			<div class="panel panel-default" ng-controller="mainCtrl">
+			<div class="panel panel-default">
 				<div class="panel-heading"><span class="lead">{{ jdCategory }}</span></div>
 				<div class="tablecontainer">
 					<table class="table table-condensed table-hover">

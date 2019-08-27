@@ -1,0 +1,119 @@
+{
+	"authors"  : "mezek",
+	"years"    : "2019/20",
+	"category" : "WU15",
+	"cycles"   : 2,
+	"teams": [{
+			"id": 1,
+			"name": "ŠK Slovan Bratislava futbal",
+			"city": "Slovan"
+		},
+		{
+			"id": 2,
+			"name": "FC Union Nové Zámky",
+			"city": "Nové Zámky"
+		},
+		{
+			"id": 3,
+			"name": "Spartak Myjava",
+			"city": "Myjava"
+		},
+		{
+			"id": 4,
+			"name": "FC Spartak Trnava",
+			"city": "Trnava"
+		},
+		{
+			"id": 5,
+			"name": "FC Nitra",
+			"city": "Nitra"
+		},
+		{
+			"id": 6,
+			"name": "FK DAC 1904 Dunajská Streda",
+			"city": "Dunajská Streda"
+		},
+		{
+			"id": 7,
+			"name": "FK Senica",
+			"city": "Senica"
+		},
+		{
+			"id": 8,
+			"name": "NMŠK 1922 Bratislava",
+			"city": "NMŠK"
+		},
+		{
+			"id": 9,
+			"name": "FC ViOn Zlaté Moravce - Vráble",
+			"city": "Zlaté Moravce"
+		},
+		{
+			"id": 10,
+			"name": "FC Petržalka",
+			"city": "Petržalka"
+		}
+	],
+
+	"scores": [{
+			"cycle": 1,
+			"round": 1,
+			"match": [8, 2],
+			"score": [0, 15]
+		},
+		{
+			"cycle": 1,
+			"round": 1,
+			"match": [3, 10],
+			"score": [7, 1]
+		},
+		{
+			"cycle": 1,
+			"round": 1,
+			"match": [1, 7],
+			"score": [12, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 1,
+			"match": [4, 6],
+			"score": [14, 1]
+		},
+		{
+			"cycle": 1,
+			"round": 1,
+			"match": [5, 9],
+			"score": [0, 7]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [7, 5],
+			"score": [17, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [3, 1],
+			"score": [0, 6]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [9, 4],
+			"score": [1, 13]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [10, 2],
+			"score": [3, 1]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [6, 8],
+			"score": [0, 0]
+		}
+	]
+}

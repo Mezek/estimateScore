@@ -28,11 +28,11 @@ app.config(function($routeProvider) {
 		})
 		.when('/team_WU15', {
 			templateUrl : 'pages/league_open.html',
-			controller  : 'leagueCtrl'
+			controller  : 'leagueOpenCtrl'
 		})
 		.when('/team_WU15old', {
-			templateUrl : 'pages/team_WU15.html',
-			controller  : 'leagueCtrl'
+			templateUrl : 'pages/league_closed.html',
+			controller  : 'leagueClosedCtrl'
 		})
 		.when('/history', {
 			templateUrl : 'pages/history.html',
@@ -46,9 +46,17 @@ app.config(function($routeProvider) {
 
 app.controller('mainCtrl', ['$scope', '$route', '$http', '$routeParams', function ($scope, $route, $http, $routeParams) {
 	let self = this;
+	$scope.header = 'Projection:';
 	$scope.msg = 'Testing functionality of script...';
-	$http.get("scripts/results.json")
-		.then(function (jsonData) {
+
+	let currentDataFile = 'scripts/results.json'; // default
+	let currentPar = $routeParams.resultsData;
+	if (currentPar) {
+		currentDataFile = 'results/res_' + currentPar + '.json';
+	}
+
+	$http.get(currentDataFile)
+		.then(function successCallback(jsonData) {
 			$scope.jdCategory = jsonData.data.category;
 			$scope.jdYears = jsonData.data.years;
 			$scope.nCycles = jsonData.data.cycles;
@@ -65,8 +73,8 @@ app.controller('mainCtrl', ['$scope', '$route', '$http', '$routeParams', functio
 
 			//console.log($scope.finishedMatches);
 
-		}, function (jsonData) {
-			console.warn("Error with reading of data file");
+		}, function errorCallback() {
+			console.warn('Error with reading data file: ' + currentDataFile);
 		});
 
 
@@ -273,16 +281,25 @@ app.controller('mainMatches', function ($scope) {
 	$scope.msg = 'Building matches';
 });
 
-app.controller('leagueCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+app.controller('leagueOpenCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+	$scope.header = 'Open league:';
+	let currentPar = $routeParams.resultsData;
+	$scope.msg = 'Welcome fan of ' + currentPar + '!';
+}]);
+
+app.controller('leagueClosedCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+	$scope.header = 'Closed league:';
 	let currentPar = $routeParams.resultsData;
 	$scope.msg = 'Welcome fan of ' + currentPar + '!';
 }]);
 
 app.controller('nextCtrl', function ($scope) {
+	$scope.header = 'NEXT:';
     $scope.msg = 'Next Tab message';
 });
 
 app.controller('historyCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+	$scope.header = 'History:';
 	let controlAs = $routeParams.resultsData;
 	$scope.msg = 'List of historical results ' + controlAs;
 }]);
@@ -294,6 +311,7 @@ app.controller('Ctrl', function ($scope, $translate) {
 });
 
 app.controller('Click', function ($scope, $http) {
+	$scope.header = 'NEXT & Click:';
 	$scope.class_status = 0;
 	$scope.setClass = function() {
 		$scope.class_status = !$scope.class_status;
@@ -303,13 +321,13 @@ app.controller('Click', function ($scope, $http) {
 	$scope.teamNames = [];
 	$scope.jd = [];
 	$http.get("scripts/results.json")
-		.then(function (jsonData) {
+		.then(function successCallback(jsonData) {
 			//$scope.jnames = JSON.stringify(jsonData.data.teams);
 			jd = jsonData.data.teams;
 			for(var i = 0; i < jd.length; i++){
 				$scope.teamNames.push(jd[i].name);
 			}
-		}, function () {
+		}, function errorCallback() {
 			console.log("There was an error");
 		});
 });
