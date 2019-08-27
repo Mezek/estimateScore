@@ -9,8 +9,24 @@ app.config(function ($translateProvider) {
 		BUTTON_LANG_SK: 'slovensky',
 		BACK_TO_HOME: 'Back to Home',
 		MESSAGE: 'Hello, world!',
+		NUMBER: 'No.',
+		TEAM: 'Team',
+		PLAYED: 'GP',
+		WON: 'W',
+		DRAWN: 'D',
+		LOST: 'L',
+		FORAGAINST: 'F:A',
+		POINTS: 'P',
+		LRESULTS: 'Last 5',
+		HTEAM: 'Home team',
 		FMATCHES: 'Finished matches',
-		PMATCHES: 'Planned matches'
+		PMATCHES: 'Planned matches',
+		LEGEND: 'Match legend',
+		LUNSET: 'U: unset',
+		LWON: 'W: won',
+		LDRAWN: 'D: drawn',
+		LLOST: 'L: lost',
+		MUSTPLAY: 'Must play:'
 	});
 	$translateProvider.translations('sk', {
 		TITLE: 'Ahoj',
@@ -19,7 +35,25 @@ app.config(function ($translateProvider) {
 		BUTTON_LANG_EN: 'english',
 		BUTTON_LANG_SK: 'slovensky',
 		BACK_TO_HOME: 'Naspäť domov',
-		MESSAGE: 'Ahoj, svet!'
+		MESSAGE: 'Ahoj, svet!',
+		NUMBER: 'Por.',
+		TEAM: 'Tím',
+		PLAYED: 'Z',
+		WON: 'V',
+		DRAWN: 'R',
+		LOST: 'P',
+		FORAGAINST: 'Skóre',
+		POINTS: 'B',
+		LRESULTS: '5-ostatných',
+		HTEAM: 'Výber',
+		FMATCHES: 'Skončené zápasy',
+		PMATCHES: 'Plánované zápasy',
+		LEGEND: 'Legenda',
+		LUNSET: 'U: neurčené',
+		LWON: 'W: výhra',
+		LDRAWN: 'D: remíza',
+		LLOST: 'L: prehra',
+		MUSTPLAY: 'Má odohrať:'
 	});
 	$translateProvider.preferredLanguage('en');
 });
@@ -285,7 +319,7 @@ app.controller('mainMatches', function ($scope) {
 });
 
 app.controller('leagueOpenCtrl', ['$scope', function ($scope) {
-	$scope.header = 'Open league:';
+	$scope.header = 'Opened league:';
 	$scope.msg = 'Statistics of running matches';
 }]);
 
