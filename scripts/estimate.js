@@ -7,7 +7,10 @@ app.config(function ($translateProvider) {
 		FOO: 'This is a paragraph.',
 		BUTTON_LANG_EN: 'english',
 		BUTTON_LANG_SK: 'slovensky',
-		BACK_TO_HOME: 'Back to Home'
+		BACK_TO_HOME: 'Back to Home',
+		MESSAGE: 'Hello, world!',
+		FMATCHES: 'Finished matches',
+		PMATCHES: 'Planned matches'
 	});
 	$translateProvider.translations('sk', {
 		TITLE: 'Ahoj',
@@ -15,7 +18,8 @@ app.config(function ($translateProvider) {
 		FOO: 'Toto je paragraf.',
 		BUTTON_LANG_EN: 'english',
 		BUTTON_LANG_SK: 'slovensky',
-		BACK_TO_HOME: 'Naspäť domov'
+		BACK_TO_HOME: 'Naspäť domov',
+		MESSAGE: 'Ahoj, svet!'
 	});
 	$translateProvider.preferredLanguage('en');
 });
