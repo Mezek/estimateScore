@@ -21,6 +21,7 @@ app.config(function ($translateProvider) {
 		U: 'U',
 		Z: '‒',
 		FORAGAINST: 'F:A',
+		GOALDIFF: 'GD',
 		POINTS: 'P',
 		LRESULTS: 'Last 5',
 		HTEAM: 'Home team',
@@ -62,6 +63,7 @@ app.config(function ($translateProvider) {
 		U: 'N',
 		Z: '‒',
 		FORAGAINST: 'Skóre',
+		GOALDIFF: 'BR',
 		POINTS: 'B',
 		LRESULTS: '5 ostatných',
 		HTEAM: 'Výber tímu',
@@ -103,6 +105,10 @@ app.config(function($routeProvider) {
 		.when('/history', {
 			templateUrl : 'pages/history.html',
 			controller  : 'historyCtrl'
+		})
+		.when('/listItem', {
+			templateUrl : 'pages/league_closed.html',
+			controller  : 'leagueClosedCtrl'
 		})
 		.when('/next', {
 			templateUrl : 'pages/next.html',

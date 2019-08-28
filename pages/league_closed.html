@@ -24,20 +24,20 @@
 					<table class="table table-condensed table-hover">
 						<thead>
 							<tr>
-								<th>No.</th>
-								<th>Team</th>
-								<th>GP</th><!-- Played -->
-								<th>W</th><!-- Won -->
-								<th>D</th><!-- Drawn -->
-								<th>L</th><!-- Lost -->
-								<th>F:A</th><!-- For --> <!-- Against -->
-								<th>GD</th><!-- Goal Difference -->
+								<th>{{ 'NUMBER' | translate}}</th>
+								<th class="text-center">{{ 'TEAM' | translate}}</th>
+								<th>{{ 'PLAYED' | translate}}</th>
+								<th>{{ 'W' | translate}}</th>
+								<th>{{ 'D' | translate}}</th>
+								<th>{{ 'L' | translate}}</th>
+								<th>{{ 'FORAGAINST' | translate}}</th>
+								<th>{{ 'GOALDIFF' | translate}}</th>
 								<th>+/-</th>
-								<th>P</th><!-- Points -->
+								<th>{{ 'POINTS' | translate}}</th>
 								<th>&nbsp;</th>
-								<th colspan="5">Last results</th>
+								<th colspan="5" class="text-center">{{ 'LRESULTS' | translate}}&nbsp;&nbsp;&nbsp;&#8614;</th>
 								<th>&nbsp;</th>
-								<th>Home team</th>
+								<th class="text-center">{{ 'HTEAM' | translate}}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -56,7 +56,7 @@
 								<td ng-repeat="x in [].constructor(5) track by $index" ng-class="{'last-win': ('W' == '{{row.last[$index]}}'), 
 									'last-lost': ('L' == '{{row.last[$index]}}'),
 									'last-deuce': ('D' == '{{row.last[$index]}}'),
-									'last-none': ('0' == '{{row.last[$index]}}')}">{{row.last[$index]}}</td>
+									'last-none': ('0' == '{{row.last[$index]}}')}">{{row.last[$index] | translate}}</td>
 								<td><div id={{row.cs}} ng-show="{{row.winner}}"><img src="pages/trophy_gold.png" width="24"></div></td>
 								<td>
 									<div class="onoffswitch">
