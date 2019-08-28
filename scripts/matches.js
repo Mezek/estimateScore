@@ -176,7 +176,7 @@ function createScoreTable (cycles, matches, teams) {
 		let lLSize = lastList[i].length;
 		while (lLSize < nL) {
 			lastList[i].reverse();
-			lastList[i].push(0);
+			lastList[i].push('Z');
 			lastList[i].reverse();
 			lLSize++;
 		}

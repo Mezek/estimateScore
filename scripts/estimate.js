@@ -9,12 +9,17 @@ app.config(function ($translateProvider) {
 		BUTTON_LANG_SK: 'slovensky',
 		BACK_TO_HOME: 'Back to Home',
 		MESSAGE: 'Hello, world!',
+		HOME: 'Home',
+		NEXT: 'Next',
+		MSGNEXT: 'Next Tab message',
 		NUMBER: 'No.',
 		TEAM: 'Team',
 		PLAYED: 'GP',
-		WON: 'W',
-		DRAWN: 'D',
-		LOST: 'L',
+		W: 'W',
+		D: 'D',
+		L: 'L',
+		U: 'U',
+		Z: '‒',
 		FORAGAINST: 'F:A',
 		POINTS: 'P',
 		LRESULTS: 'Last 5',
@@ -22,15 +27,20 @@ app.config(function ($translateProvider) {
 		FMATCHES: 'Finished matches',
 		PMATCHES: 'Planned matches',
 		LEGEND: 'Match legend',
-		LUNSET: 'U: unset',
-		LWON: 'W: won',
-		LDRAWN: 'D: drawn',
-		LLOST: 'L: lost',
+		LUNSET: 'unset',
+		LWON: 'won',
+		LDRAWN: 'drawn',
+		LLOST: 'lost',
 		MUSTPLAY: 'Must play:',
-		VARIABLE_REPLACEMENT: 'Hi, {{name}}',
-		W: 'XXX',
-		D: 'YYY',
-		L: 'ZZZ'
+		VARIABLE: '{{value}}',
+		PROJECTION: 'Projection',
+		MSGPROJECT: 'Testing functionality of script...',
+		OPENLEAGUE: 'Opened league',
+		MSGOPEN: 'Statistics of running matches',
+		CLOSELEAGUE: 'Closed league',
+		MSGCLOSE: 'Statistics of finished matches',
+		HISTORY: 'History',
+		MSGHISTORY: 'List of historical results'
 	});
 	$translateProvider.translations('sk', {
 		TITLE: 'Ahoj',
@@ -40,28 +50,38 @@ app.config(function ($translateProvider) {
 		BUTTON_LANG_SK: 'slovensky',
 		BACK_TO_HOME: 'Naspäť domov',
 		MESSAGE: 'Ahoj, svet!',
+		HOME: 'Domov',
+		NEXT: 'Ďalší',
+		MSGNEXT: 'Next Tab správa',
 		NUMBER: 'Por.',
 		TEAM: 'Tím',
 		PLAYED: 'Z',
-		WON: 'V',
-		DRAWN: 'R',
-		LOST: 'P',
+		W: 'V',
+		D: 'R',
+		L: 'P',
+		U: 'N',
+		Z: '‒',
 		FORAGAINST: 'Skóre',
 		POINTS: 'B',
-		LRESULTS: '5-ostatných',
-		HTEAM: 'Výber',
+		LRESULTS: '5 ostatných',
+		HTEAM: 'Výber tímu',
 		FMATCHES: 'Skončené zápasy',
 		PMATCHES: 'Plánované zápasy',
 		LEGEND: 'Legenda',
-		LUNSET: 'U: neurčené',
-		LWON: 'W: výhra',
-		LDRAWN: 'D: remíza',
-		LLOST: 'L: prehra',
+		LUNSET: 'neurčené',
+		LWON: 'výhra',
+		LDRAWN: 'remíza',
+		LLOST: 'prehra',
 		MUSTPLAY: 'Má odohrať:',
-		VARIABLE_REPLACEMENT: 'Ahoj, {{name}}',
-		W: 'xxx',
-		D: 'yyy',
-		L: 'zzz'
+		VARIABLE: '{{value}}',
+		PROJECTION: 'Projekcia',
+		MSGPROJECT: 'Test funkcionality skriptu...',
+		OPENLEAGUE: 'Prebiehajúca liga',
+		MSGOPEN: 'Štatistika odohraných a budúcich zápasov',
+		CLOSELEAGUE: 'Ukončená liga',
+		MSGCLOSE: 'Štatistika odohraných zápasov',
+		HISTORY: 'História',
+		MSGHISTORY: 'Zoznam historických výsledkov'
 	});
 	$translateProvider.preferredLanguage('en');
 });
@@ -92,8 +112,7 @@ app.config(function($routeProvider) {
 
 app.controller('mainCtrl', ['$scope', '$route', '$http', '$routeParams', function ($scope, $route, $http, $routeParams) {
 	let self = this;
-	$scope.header = 'Projection:';
-	$scope.msg = 'Testing functionality of script...';
+	$scope.msg = 'Testing 1...';
 
 	let currentDataFile = 'scripts/results.json'; // default
 	let currentPar = $routeParams.resultsData;
@@ -327,23 +346,19 @@ app.controller('mainMatches', function ($scope) {
 });
 
 app.controller('leagueOpenCtrl', ['$scope', function ($scope) {
-	$scope.header = 'Opened league:';
-	$scope.msg = 'Statistics of running matches';
+	$scope.msg = 'Testing 2...';
 }]);
 
 app.controller('leagueClosedCtrl', ['$scope', function ($scope) {
-	$scope.header = 'Closed league:';
-	$scope.msg = 'Statistics of finished matches';
+	$scope.msg = 'Testing 3...';
 }]);
 
 app.controller('historyCtrl', ['$scope', function ($scope) {
-	$scope.header = 'History:';
-	$scope.msg = 'List of historical results';
+	$scope.msg = 'Testing 4...';
 }]);
 
 app.controller('nextCtrl', function ($scope) {
-	$scope.header = 'NEXT:';
-    $scope.msg = 'Next Tab message';
+    $scope.msg = 'Testing 5...';
 });
 
 
@@ -354,7 +369,6 @@ app.controller('Ctrl', function ($scope, $translate) {
 });
 
 app.controller('Click', function ($scope, $http) {
-	$scope.header = 'NEXT & Click:';
 	$scope.class_status = 0;
 	$scope.setClass = function() {
 		$scope.class_status = !$scope.class_status;

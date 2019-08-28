@@ -1,15 +1,15 @@
 <!-- main.html -->
 
 <div id="main" class="row" ng-controller="mainCtrl">
-<div class="col-sm-6 mt-4">
-		<h4>{{header}}</h4>
-		{{msg}}
+	<div class="col-sm-6 mt-4">
+		<h4>{{'PROJECTION' | translate}}:</h4>
+		<div>{{'MSGPROJECT' | translate}}</div>
 	</div>
 	<div class="col-sm-6">
 		<!-- content -->
 	</div>
 	<div class="col-sm-12">
-		<p>{{ 'MESSAGE' | translate}}</p>
+		<p>&nbsp;</p>
 	</div>
 </div>
 
@@ -24,17 +24,17 @@
 						<thead>
 							<tr>
 								<th>{{ 'NUMBER' | translate}}</th>
-								<th>{{ 'TEAM' | translate}}</th>
+								<th class="text-center">{{ 'TEAM' | translate}}</th>
 								<th>{{ 'PLAYED' | translate}}</th>
-								<th>{{ 'WON' | translate}}</th>
-								<th>{{ 'DRAWN' | translate}}</th>
-								<th>{{ 'LOST' | translate}}</th>
+								<th>{{ 'W' | translate}}</th>
+								<th>{{ 'D' | translate}}</th>
+								<th>{{ 'L' | translate}}</th>
 								<th>{{ 'FORAGAINST' | translate}}</th>
 								<th>{{ 'POINTS' | translate}}</th>
 								<th>&nbsp;</th>
-								<th colspan="5">{{ 'LRESULTS' | translate}}</th>
+								<th colspan="5" class="text-center">{{ 'LRESULTS' | translate}}&nbsp;&nbsp;&nbsp;↦</th>
 								<th>&nbsp;</th>
-								<th>{{ 'HTEAM' | translate}}</th>
+								<th class="text-center">{{ 'HTEAM' | translate}}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -147,10 +147,10 @@
 		</div>
 		<br />
 		<div class="font-smaller80 mb-1 font-weight-bold">{{ 'LEGEND' | translate}}</div>
-		<div class="border border-dark font-smaller80 p-1 match-unset">{{ 'LUNSET' | translate}}</div>
-		<div class="border-light font-smaller80 p-1 match-win">{{ 'LWON' | translate}}</div>
-		<div class="border-light font-smaller80 p-1 match-deuce">{{ 'LDRAWN' | translate}}</div>
-		<div class="border-light font-smaller80 p-1 match-lost">{{ 'LLOST' | translate}}</div>
+		<div class="border border-dark font-smaller80 p-1 match-unset">{{ 'U' | translate}}: {{ 'LUNSET' | translate}}</div>
+		<div class="border-light font-smaller80 p-1 match-win">{{ 'W' | translate}}: {{ 'LWON' | translate}}</div>
+		<div class="border-light font-smaller80 p-1 match-deuce">{{ 'D' | translate}}: {{ 'LDRAWN' | translate}}</div>
+		<div class="border-light font-smaller80 p-1 match-lost">{{ 'L' | translate}}: {{ 'LLOST' | translate}}</div>
 		<br />
 		<div ng-show="showLeftMatches">
 			<h5>{{checkedName}}</h5>
