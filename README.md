@@ -1,5 +1,5 @@
 estimateScore
--------------
+=============
 
 The ``estimateScore`` script is for creating and displaying leage season tables from match results. It can be used for all kinds of sports, as football, floorball, etc. which are played seasonly. It is written as ``AngularJS`` script.
 
