@@ -1,4 +1,4 @@
-const app = angular.module('estimate', ['pascalprecht.translate', 'ngRoute']);
+const app = angular.module('estimateScore', ['pascalprecht.translate', 'ngRoute']);
 
 app.config(function ($translateProvider) {
 	$translateProvider.translations('en', {
@@ -367,7 +367,6 @@ app.controller('nextCtrl', function ($scope) {
     $scope.msg = 'Testing 5...';
 });
 
-
 app.controller('Ctrl', function ($scope, $translate) {
 	$scope.changeLanguage = function (key) {
 		$translate.use(key);
@@ -394,6 +393,11 @@ app.controller('Click', function ($scope, $http) {
 			console.log("There was an error");
 		});
 });
+
+app.controller('indexCtrl', ['$scope', function($scope) {
+	$scope.currentDate = new Date();
+	$scope.msg = 'Testing 6...';
+}]);
 
 app.controller('tableCtrl', ['$scope', function($scope) {
 	let self = this;
