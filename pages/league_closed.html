@@ -95,9 +95,9 @@
 		<br /><br />
 		<div class="stripRow mx-5">
 			<div ng-repeat="m in finishedMatches" class="row font-smaller80" ng-show="! showFinished">
-				<div class="col text-right" ng-class="{'clicked': (clickTeam == '{{m.teamClass1}}'), 'not-clicked': (clickTeam != '{{m.teamClass1}}')}">{{m.team1}}</div>
-				<div class="col-md-auto text-center">{{m.score1}} : {{m.score2}} </div>
-				<div class="col text-left" ng-class="{'clicked': (clickTeam == '{{m.teamClass2}}'), 'not-clicked': (clickTeam != '{{m.teamClass2}}')}">{{m.team2}}</div>
+				<div class="col float-left py-1 text-right" ng-class="{'clicked': (clickTeam == '{{m.teamClass1}}'), 'not-clicked': (clickTeam != '{{m.teamClass1}}')}">{{m.team1}}</div>
+				<div class="col-md-auto float-left py-1 text-center"><span class="m-number">{{m.score1}}</span> : <span class="m-number">{{m.score2}}</span></div>
+				<div class="col float-left py-1 text-left" ng-class="{'clicked': (clickTeam == '{{m.teamClass2}}'), 'not-clicked': (clickTeam != '{{m.teamClass2}}')}">{{m.team2}}</div>
 			</div>
 		</div>
 		<br />
