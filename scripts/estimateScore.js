@@ -10,6 +10,9 @@ app.config(function ($translateProvider) {
 		BACK_TO_HOME: 'Back to Home',
 		MESSAGE: 'Hello, world!',
 		HOME: 'Home',
+		INTRODUCTION: 'Introduction',
+		MSGINTRODUCTION: 'Set scores for teams and view updated league positions immediately.\n' +
+			'Interesting and easy solution based on',
 		NEXT: 'Next',
 		MSGNEXT: 'Next Tab message',
 		NUMBER: 'No.',
@@ -52,6 +55,9 @@ app.config(function ($translateProvider) {
 		BACK_TO_HOME: 'Naspäť domov',
 		MESSAGE: 'Ahoj, svet!',
 		HOME: 'Domov',
+		INTRODUCTION: 'Na úvod',
+		MSGINTRODUCTION: 'Urči výsledky zápasov tímov a ihneď skontroluj nové umiestnenia.\n' +
+			'Zaujímavé a jednoduché riešenie založené na',
 		NEXT: 'Ďalší',
 		MSGNEXT: 'Next Tab správa',
 		NUMBER: 'Por.',
