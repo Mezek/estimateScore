@@ -12,7 +12,7 @@ The ``estimateScore`` will calculate the positions of the teams itself. You may 
 
 ![Finished](./pages/show_finished.png "Finished")
 
-### 2. Score estimation**
+### 2. Score estimation
 
 As the main feature of the ``estimateScore`` is ''view the future results''. You can simulate the results of planned matches for your favorite team and view the changes in the table immediately.
 
