@@ -6,13 +6,13 @@ The ``estimateScore`` script is for creating and displaying league season tables
 
 ## Key features
 
-**1. Results Summary**
+### 1. Results Summary
 
 The ``estimateScore`` will calculate the positions of the teams itself. You may update the results and view the table changed according to the modifications.
 
 ![Finished](./pages/show_finished.png "Finished")
 
-**2. Score estimation**
+### 2. Score estimation**
 
 As the main feature of the ``estimateScore`` is ''view the future results''. You can simulate the results of planned matches for your favorite team and view the changes in the table immediately.
 
