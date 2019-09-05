@@ -110,9 +110,9 @@ app.config(function($routeProvider) {
 			templateUrl : 'pages/league_closed.html',
 			controller  : 'leagueClosedCtrl'
 		})
-		.when('/next', {
-			templateUrl : 'pages/next.html',
-			controller  : 'nextCtrl'
+		.when('/projection', {
+			templateUrl : 'pages/projection.html',
+			controller  : 'mainCtrl'
 		});
 });
 
@@ -363,10 +363,6 @@ app.controller('historyCtrl', ['$scope', function ($scope) {
 	$scope.msg = 'Testing 4...';
 }]);
 
-app.controller('nextCtrl', function ($scope) {
-    $scope.msg = 'Testing 5...';
-});
-
 app.controller('Ctrl', function ($scope, $translate) {
 	$scope.changeLanguage = function (key) {
 		$translate.use(key);
@@ -396,7 +392,7 @@ app.controller('Click', function ($scope, $http) {
 
 app.controller('indexCtrl', ['$scope', function($scope) {
 	$scope.currentDate = new Date();
-	$scope.msg = 'Testing 6...';
+	$scope.msg = 'Testing 5...';
 }]);
 
 app.controller('tableCtrl', ['$scope', function($scope) {

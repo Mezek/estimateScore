@@ -2,8 +2,9 @@
 
 <div id="main" class="row" ng-controller="mainCtrl">
 	<div class="col-sm-6 mt-4">
-		<h4>{{'PROJECTION' | translate}}:</h4>
-		<div>{{'MSGPROJECT' | translate}}</div>
+		<h4>Introduction:</h4>
+		<div>Set scores for teams and view updated league positions immediately.
+			Interesting and easy solution based on <a href="https://angularjs.org/">AngularJS</a>.</div>
 	</div>
 	<div class="col-sm-6">
 		<!-- content -->
@@ -14,148 +15,25 @@
 </div>
 
 <div id="scoreTable" class="row">
-	<div class="col">
-		<div>
-			<h3>{{ jdYears }}</h3>
-			<div class="panel panel-default">
-				<div class="panel-heading"><span class="lead">{{ jdCategory }}</span></div>
-				<div class="tablecontainer">
-					<table class="table table-condensed table-hover">
-						<thead>
-							<tr>
-								<th>{{ 'NUMBER' | translate}}</th>
-								<th class="text-center">{{ 'TEAM' | translate}}</th>
-								<th>{{ 'PLAYED' | translate}}</th>
-								<th>{{ 'W' | translate}}</th>
-								<th>{{ 'D' | translate}}</th>
-								<th>{{ 'L' | translate}}</th>
-								<th>{{ 'FORAGAINST' | translate}}</th>
-								<th>{{ 'POINTS' | translate}}</th>
-								<th>&nbsp;</th>
-								<th colspan="5" class="text-center">{{ 'LRESULTS' | translate}}&nbsp;&nbsp;&nbsp;↦</th>
-								<th>&nbsp;</th>
-								<th class="text-center">{{ 'HTEAM' | translate}}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="row in scoreTable" ng-class="{'clicked': (clickTeam == '{{row.cs}}'), 'not-clicked': (clickTeam != '{{row.cs}}')}">
-								<td>{{$index + 1}}</td>
-								<td>{{row.club}}</td>
-								<td>{{row.gp}}</td>
-								<td>{{row.w}}</td>
-								<td>{{row.d}}</td>
-								<td>{{row.l}}</td>
-								<td>{{row.f}} : {{row.a}}</td>
-								<td>{{row.pts}}</td>
-								<td>&nbsp;</td>
-								<td ng-repeat="x in [].constructor(5) track by $index" ng-class="{'last-win': ('W' == '{{row.last[$index]}}'), 
-									'last-lost': ('L' == '{{row.last[$index]}}'),
-									'last-deuce': ('D' == '{{row.last[$index]}}'),
-									'last-none': ('0' == '{{row.last[$index]}}')}">{{row.last[$index] | translate}}</td>
-								<td><div id={{row.cs}} ng-show="{{row.winner}}"><img src="pages/trophy_gold.png" width="24"></div></td>
-								<td>
-									<div class="onoffswitch">
-										<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="tableonoffswitch{{row.tid}}"
-											   ng-model="isToggled[row.tid]" ng-click="toggleTeam(row.tid)">
-										<label class="onoffswitch-label" for="tableonoffswitch{{row.tid}}">
-											<span class="onoffswitch-inner"></span>
-											<span class="onoffswitch-switch"></span>
-										</label>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+	<div class="col-sm-8">
+		<h3>Key features</h3>
+		<div class="my-4">
+			<h5>1. Results Summary</h5>
+			Update the results and view the changes in league table.
+			<div class="text-center my-4">
+				<img src="./pages/show_finished.png" alt="showf" title="Finished"/>
+			</div>
+		</div>
+		<div class="my-4">
+			<h5>2. Score estimation</h5>
+			Simulate the results of planned matches for your favorite team(s) and view the changes for the leader position.
+			<div class="text-center my-4">
+				<img src="./pages/show_planned.png" alt="showp" title="Planned"/>
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="row" ng-controller="mainMatches">
-	<div class="col-sm-5">
-		<div class="switches d-inline-block">
-			<b>{{ 'FMATCHES' | translate }}</b>&nbsp;
-			<div class="switch-container">
-				<div class="onoffswitch2">
-					<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="finishedMtch" 
-						ng-init="showFinished = false" ng-click="showFinished = !showFinished" checked>
-					<label class="onoffswitch2-label" for="finishedMtch">
-						<span class="onoffswitch2-inner"></span>
-						<span class="onoffswitch2-switch"></span>
-					</label>
-				</div>
-			</div>
-		</div>
-		<br /><br />
-		<div class="stripRow mx-5">
-			<div ng-repeat="m in finishedMatches" class="row font-smaller80" ng-show="! showFinished">
-				<div class="col float-left py-1 text-right" ng-class="{'clicked': (clickTeam == '{{m.teamClass1}}'), 'not-clicked': (clickTeam != '{{m.teamClass1}}')}">{{m.team1}}</div>
-				<div class="col-md-auto float-left py-1 text-center"><span class="m-number">{{m.score1}}</span> : <span class="m-number">{{m.score2}}</span></div>
-				<div class="col float-left py-1 text-left" ng-class="{'clicked': (clickTeam == '{{m.teamClass2}}'), 'not-clicked': (clickTeam != '{{m.teamClass2}}')}">{{m.team2}}</div>
-			</div>
-		</div>
-		<br />
-	</div>
-	<div class="col-sm-5">
-		<div class="switches d-inline-block">
-			<b>{{ 'PMATCHES' | translate }}</b>
-			<!-- <button type="button" ng-click="showPlanned = ! showPlanned" class="btn btn-success custom-width">On/Off</button>-->
-			<div class="switch-container">
-				<div class="onoffswitch2">
-					<input type="checkbox" name="onoffswitch2" class="onoffswitch2-checkbox" id="plannedMatch"
-						ng-init="showPlanned = false" ng-click="showPlanned = !showPlanned" checked>
-					<label class="onoffswitch2-label" for="plannedMatch">
-						<span class="onoffswitch2-inner"></span>
-						<span class="onoffswitch2-switch"></span>
-					</label>
-				</div>
-			</div>
-		</div>
-		<br /><br />
-		<div class="stripRow mx-3">
-			<div ng-repeat="n in plannedMatches" id="{{n.teamKey}}" class="row font-smaller80" ng-show="! showPlanned">
-				<div class="col float-left py-1 text-right" ng-class="{'clicked': (clickTeam == '{{n.teamClass1}}'), 'not-clicked': (clickTeam != '{{n.teamClass1}}')}">
-					<span>{{n.teamName1}}</span>
-				</div>
-				<div class="col-md-auto py-1 text-right">
-					<span ng-click="setG1Up(n)">&uarr;&nbsp;</span>
-					<span ng-click="setG1Down(n)">&darr;</span>
-				</div>
-				<div class="col-md-auto py-1 float-left text-center match-unset"  ng-click="setFutureMatch($index, n)"
-						ng-class="{'match-win': isResult[$index] == 1,
-							'match-deuce': isResult[$index] == 2,
-							'match-lost': isResult[$index] == 3}">
-					<span class="m-number">{{n.goal1}}</span> &nbsp; : &nbsp; <span class="m-number">{{n.goal2}}</span>
-				</div>
-				<div class="col-md-auto py-1 text-left">
-					<span ng-click="setG2Up(n)">&uarr;</span>
-					<span ng-click="setG2Down(n)">&nbsp;&darr;</span>
-				</div>
-				<div class="col float-left py-1 text-left" ng-class="{'clicked': (clickTeam == '{{n.teamClass2}}'), 'not-clicked': (clickTeam != '{{n.teamClass2}}')}">
-					<span>{{n.teamName2}}</span>
-				</div>
-				<div>
-					<!-- matchLetter() -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-2" ng-show="! showPlanned">
-		<div class="resetButton" ng-click="reloadRoute()">
-			<span>RESET</span>
-		</div>
-		<br />
-		<div class="font-smaller80 mb-1 font-weight-bold">{{ 'LEGEND' | translate}}</div>
-		<div class="border border-dark font-smaller80 p-1 match-unset">{{ 'U' | translate}}: {{ 'LUNSET' | translate}}</div>
-		<div class="border-light font-smaller80 p-1 match-win">{{ 'W' | translate}}: {{ 'LWON' | translate}}</div>
-		<div class="border-light font-smaller80 p-1 match-deuce">{{ 'D' | translate}}: {{ 'LDRAWN' | translate}}</div>
-		<div class="border-light font-smaller80 p-1 match-lost">{{ 'L' | translate}}: {{ 'LLOST' | translate}}</div>
-		<br />
-		<div ng-show="showLeftMatches">
-			<h5>{{checkedName}}</h5>
-			<div>{{ 'MUSTPLAY' | translate}} {{oneTeamLefts}}</div>
-		</div>
+	<div class="col-sm-8">
+		<!-- content -->
 	</div>
 </div>
 
