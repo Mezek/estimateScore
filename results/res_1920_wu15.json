@@ -144,6 +144,42 @@
 			"round": 3,
 			"match": [5, 3],
 			"score": [1, 11]
+		},
+		{
+			"cycle": 1,
+			"round": 4,
+			"match": [3, 4],
+			"score": [0, 8]
+		},
+		{
+			"cycle": 1,
+			"round": 4,
+			"match": [9, 2],
+			"score": [2, 2]
+		},
+		{
+			"cycle": 1,
+			"round": 4,
+			"match": [1, 5],
+			"score": [29, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 4,
+			"match": [10, 6],
+			"score": [4, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 4,
+			"match": [7, 8],
+			"score": [10, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 6,
+			"match": [5, 4],
+			"score": [0, 17]
 		}
 	]
 }
