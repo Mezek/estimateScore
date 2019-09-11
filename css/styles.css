@@ -56,7 +56,15 @@ h2, h1 {
 }
 
 .tablecontainer table td, .tablecontainer table th {
-	padding: 0.35rem;
+	padding: 0.25rem;
+}
+
+.tablecontainer table th {
+    border-bottom: 0;
+}
+
+.tablecontainer label {
+    margin: 0;
 }
 
 .testClass {
