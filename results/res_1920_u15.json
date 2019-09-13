@@ -1,0 +1,172 @@
+{
+	"authors"  : "mezek",
+	"years"    : "2019/20",
+	"category" : "U15",
+	"cycles"   : 2,
+	"teams": [{
+			"id": 1,
+			"name": "MFK Záhorská Bystrica",
+			"city": "Záhorská Bystrica"
+		},
+		{
+			"id": 2,
+			"name": "FK Dúbravka",
+			"city": "Dúbravka"
+		},
+		{
+			"id": 3,
+			"name": "FC Ružinov Bratislava",
+			"city": "Ružinov"
+		},
+		{
+			"id": 4,
+			"name": "MŠK Iskra Petržalka",
+			"city": "Petržalka"
+		},
+		{
+			"id": 5,
+			"name": "MŠK Senec B",
+			"city": "Senec"
+		},
+		{
+			"id": 6,
+			"name": "FK Družstevník Blatné",
+			"city": "Blatné"
+		},
+		{
+			"id": 7,
+			"name": "SDM Domino B",
+			"city": "Domino"
+		},
+		{
+			"id": 8,
+			"name": "FK Lamač Bratislava",
+			"city": "Lamač"
+		},
+		{
+			"id": 9,
+			"name": "Futbalová akadémia Lafranconi FTVŠ UK",
+			"city": "Lafranconi"
+		},
+		{
+			"id": 10,
+			"name": "MŠK Kráľová pri Senci",
+			"city": "Kráľová"
+		},
+		{
+			"id": 11,
+			"name": "ŠK Kaplna",
+			"city": "Kaplna"
+		}
+	],
+
+	"scores": [{
+			"cycle": 1,
+			"round": 1,
+			"match": [10, 1],
+			"score": [0, 5]
+		},
+		{
+			"cycle": 1,
+			"round": 1,
+			"match": [4, 9],
+			"score": [12, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 1,
+			"match": [6, 3],
+			"score": [0, 8]
+		},
+		{
+			"cycle": 1,
+			"round": 1,
+			"match": [8, 11],
+			"score": [6, 4]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [3, 10],
+			"score": [11, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [1, 8],
+			"score": [9, 2]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [9, 2],
+			"score": [3, 7]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [11, 5],
+			"score": [1, 16]
+		},
+		{
+			"cycle": 1,
+			"round": 2,
+			"match": [4, 7],
+			"score": [9, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 14,
+			"match": [4, 6],
+			"score": [3, 2]
+		},
+		{
+			"cycle": 1,
+			"round": 14,
+			"match": [3, 8],
+			"score": [11, 1]
+		},
+		{
+			"cycle": 1,
+			"round": 14,
+			"match": [1, 5],
+			"score": [2, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 14,
+			"match": [11, 2],
+			"score": [0, 14]
+		},
+		{
+			"cycle": 1,
+			"round": 14,
+			"match": [9, 7],
+			"score": [2, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 3,
+			"match": [2, 11],
+			"score": [28, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 3,
+			"match": [7, 9],
+			"score": [4, 3]
+		},
+		{
+			"cycle": 1,
+			"round": 3,
+			"match": [6, 4],
+			"score": [6, 2]
+		},
+		{
+			"cycle": 1,
+			"round": 3,
+			"match": [5, 1],
+			"score": [0, 0]
+		}
+	]
+}

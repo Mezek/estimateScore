@@ -104,6 +104,10 @@ app.config(function($routeProvider) {
 			templateUrl : 'pages/league_open.html',
 			controller  : 'leagueOpenCtrl'
 		})
+		.when('/team_U15', {
+			templateUrl : 'pages/league_open.html',
+			controller  : 'leagueOpenCtrl'
+		})
 		.when('/team_WU15old', {
 			templateUrl : 'pages/league_closed.html',
 			controller  : 'leagueClosedCtrl'
