@@ -167,6 +167,18 @@
 			"round": 3,
 			"match": [5, 1],
 			"score": [0, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 4,
+			"match": [3, 5],
+			"score": [2, 1]
+		},
+		{
+			"cycle": 1,
+			"round": 4,
+			"match": [1, 2],
+			"score": [8, 2]
 		}
 	]
 }
