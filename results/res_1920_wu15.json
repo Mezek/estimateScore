@@ -177,9 +177,63 @@
 		},
 		{
 			"cycle": 1,
+			"round": 5,
+			"match": [8, 3],
+			"score": [2, 4]
+		},
+		{
+			"cycle": 1,
+			"round": 5,
+			"match": [2, 7],
+			"score": [0, 5]
+		},
+		{
+			"cycle": 1,
+			"round": 5,
+			"match": [6, 9],
+			"score": [3, 1]
+		},
+		{
+			"cycle": 1,
+			"round": 5,
+			"match": [5, 10],
+			"score": [1, 15]
+		},
+		{
+			"cycle": 1,
+			"round": 5,
+			"match": [4, 1],
+			"score": [3, 1]
+		},
+		{
+			"cycle": 1,
 			"round": 6,
 			"match": [5, 4],
 			"score": [0, 17]
+		},
+		{
+			"cycle": 1,
+			"round": 6,
+			"match": [3, 2],
+			"score": [3, 2]
+		},
+		{
+			"cycle": 1,
+			"round": 6,
+			"match": [1, 8],
+			"score": [15, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 6,
+			"match": [10, 9],
+			"score": [0, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 6,
+			"match": [7, 6],
+			"score": [6, 0]
 		}
 	]
 }
