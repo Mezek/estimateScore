@@ -290,6 +290,126 @@
 		},
 		{
 			"cycle": 1,
+			"round": 8,
+			"match": [6, 5],
+			"score": [1, 2]
+		},
+		{
+			"cycle": 1,
+			"round": 8,
+			"match": [9, 3],
+			"score": [1, 20]
+		},
+		{
+			"cycle": 1,
+			"round": 8,
+			"match": [4, 11],
+			"score": [3, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 8,
+			"match": [7, 2],
+			"score": [0, 1]
+		},
+		{
+			"cycle": 1,
+			"round": 8,
+			"match": [10, 8],
+			"score": [3, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 9,
+			"match": [2, 6],
+			"score": [2, 4]
+		},
+		{
+			"cycle": 1,
+			"round": 9,
+			"match": [1, 4],
+			"score": [6, 4]
+		},
+		{
+			"cycle": 1,
+			"round": 9,
+			"match": [8, 9],
+			"score": [8, 2]
+		},
+		{
+			"cycle": 1,
+			"round": 9,
+			"match": [11, 7],
+			"score": [5, 7]
+		},
+		{
+			"cycle": 1,
+			"round": 9,
+			"match": [5, 10],
+			"score": [12, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 10,
+			"match": [10, 2],
+			"score": [3, 2]
+		},
+		{
+			"cycle": 1,
+			"round": 10,
+			"match": [8, 5],
+			"score": [1, 9]
+		},
+		{
+			"cycle": 1,
+			"round": 10,
+			"match": [6, 11],
+			"score": [11, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 10,
+			"match": [4, 3],
+			"score": [0, 3]
+		},
+		{
+			"cycle": 1,
+			"round": 10,
+			"match": [7, 1],
+			"score": [2, 4]
+		},
+		{
+			"cycle": 1,
+			"round": 11,
+			"match": [3, 7],
+			"score": [9, 1]
+		},
+		{
+			"cycle": 1,
+			"round": 11,
+			"match": [1, 6],
+			"score": [7, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 11,
+			"match": [11, 10],
+			"score": [0, 9]
+		},
+		{
+			"cycle": 1,
+			"round": 11,
+			"match": [5, 9],
+			"score": [15, 0]
+		},
+		{
+			"cycle": 1,
+			"round": 11,
+			"match": [2, 8],
+			"score": [13, 0]
+		},
+		{
+			"cycle": 1,
 			"round": 12,
 			"match": [9, 4],
 			"score": [0, 9]
@@ -314,6 +434,12 @@
 		},
 		{
 			"cycle": 1,
+			"round": 12,
+			"match": [1, 10],
+			"score": [6, 0]
+		},
+		{
+			"cycle": 1,
 			"round": 13,
 			"match": [2, 9],
 			"score": [13, 1]
@@ -322,7 +448,7 @@
 			"cycle": 1,
 			"round": 13,
 			"match": [5, 11],
-			"score": [0, 0]
+			"score": [18, 0]
 		},
 		{
 			"cycle": 1,
