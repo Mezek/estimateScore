@@ -231,6 +231,12 @@
 		},
 		{
 			"cycle": 1,
+			"round": 6,
+			"match": [7, 6],
+			"score": [6, 0]
+		},
+		{
+			"cycle": 1,
 			"round": 7,
 			"match": [8, 5],
 			"score": [2, 1]
